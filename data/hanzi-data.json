@@ -1,0 +1,5995 @@
+{
+ "generated": "2026-09-21",
+ "source": "Mandarin notes, Weeks 1-6 + Class Notes + My Own Phrases + Practice Translations",
+ "vocab": [
+  {
+   "id": "v001",
+   "h": "搬去",
+   "p": "bānqù",
+   "e": "to move to (a place)",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v002",
+   "h": "行李",
+   "p": "xíngli",
+   "e": "luggage",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v003",
+   "h": "收拾行李",
+   "p": "shōushi xíngli",
+   "e": "to pack one's bags",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v004",
+   "h": "别人",
+   "p": "biérén",
+   "e": "other people, someone else",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v005",
+   "h": "面试",
+   "p": "miànshì",
+   "e": "interview",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v006",
+   "h": "实习生",
+   "p": "shíxíshēng",
+   "e": "intern",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v007",
+   "h": "跨国公司",
+   "p": "kuàguó gōngsī",
+   "e": "multinational company",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v008",
+   "h": "机会",
+   "p": "jīhuì",
+   "e": "opportunity, chance",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v009",
+   "h": "没事吧",
+   "p": "méishì ba",
+   "e": "everything alright?",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v010",
+   "h": "当时",
+   "p": "dāngshí",
+   "e": "at that time, back then",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v011",
+   "h": "马上",
+   "p": "mǎshàng",
+   "e": "immediately, right away",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v012",
+   "h": "兴奋",
+   "p": "xīngfèn",
+   "e": "excited",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v013",
+   "h": "耐心",
+   "p": "nàixīn",
+   "e": "patience; patient",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v014",
+   "h": "高尔夫",
+   "p": "gāo'ěrfū",
+   "e": "golf",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v015",
+   "h": "中文",
+   "p": "Zhōngwén",
+   "e": "Chinese (language)",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v016",
+   "h": "一点",
+   "p": "yìdiǎn",
+   "e": "a little, a bit",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v017",
+   "h": "效劳",
+   "p": "xiàoláo",
+   "e": "to be of service",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v018",
+   "h": "曾",
+   "p": "céng",
+   "e": "once, formerly (past experience)",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "v019",
+   "h": "我叫",
+   "p": "wǒ jiào",
+   "e": "my name is / I'm called",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v020",
+   "h": "岁",
+   "p": "suì",
+   "e": "years of age",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v021",
+   "h": "是",
+   "p": "shì",
+   "e": "to be",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v022",
+   "h": "学生",
+   "p": "xuéshēng",
+   "e": "student",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v023",
+   "h": "名字",
+   "p": "míngzi",
+   "e": "name",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v024",
+   "h": "香港人",
+   "p": "Xiānggǎng rén",
+   "e": "Hong Kong person",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v025",
+   "h": "公园",
+   "p": "gōngyuán",
+   "e": "park",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v026",
+   "h": "因为",
+   "p": "yīnwèi",
+   "e": "because",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v027",
+   "h": "功课",
+   "p": "gōngkè",
+   "e": "homework",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v028",
+   "h": "睡觉",
+   "p": "shuìjiào",
+   "e": "to sleep",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v029",
+   "h": "自己",
+   "p": "zìjǐ",
+   "e": "oneself, by oneself",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v030",
+   "h": "吃饭",
+   "p": "chīfàn",
+   "e": "to eat (a meal)",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v031",
+   "h": "外卖",
+   "p": "wàimài",
+   "e": "takeout",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v032",
+   "h": "帮",
+   "p": "bāng",
+   "e": "to help",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v033",
+   "h": "苹果",
+   "p": "píngguǒ",
+   "e": "apple",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v034",
+   "h": "出去",
+   "p": "chūqù",
+   "e": "to go out",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v035",
+   "h": "餐厅",
+   "p": "cāntīng",
+   "e": "restaurant",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v036",
+   "h": "月",
+   "p": "yuè",
+   "e": "month",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v037",
+   "h": "容易",
+   "p": "róngyì",
+   "e": "easy",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v038",
+   "h": "已经",
+   "p": "yǐjīng",
+   "e": "already",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v039",
+   "h": "好玩",
+   "p": "hǎowán",
+   "e": "fun, enjoyable",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v040",
+   "h": "小时",
+   "p": "xiǎoshí",
+   "e": "hour",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v041",
+   "h": "以前",
+   "p": "yǐqián",
+   "e": "before, previously",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v042",
+   "h": "以后",
+   "p": "yǐhòu",
+   "e": "later, afterwards",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v043",
+   "h": "好看",
+   "p": "hǎokàn",
+   "e": "good-looking",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v044",
+   "h": "下雨",
+   "p": "xiàyǔ",
+   "e": "to rain",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v045",
+   "h": "大学",
+   "p": "dàxué",
+   "e": "university",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v046",
+   "h": "机场",
+   "p": "jīchǎng",
+   "e": "airport",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v047",
+   "h": "时间",
+   "p": "shíjiān",
+   "e": "time",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v048",
+   "h": "前天",
+   "p": "qiántiān",
+   "e": "the day before yesterday",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v049",
+   "h": "平时",
+   "p": "píngshí",
+   "e": "usually, normally",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v050",
+   "h": "然后",
+   "p": "ránhòu",
+   "e": "then, afterwards",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v051",
+   "h": "上班",
+   "p": "shàngbān",
+   "e": "to go to work",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v052",
+   "h": "父母",
+   "p": "fùmǔ",
+   "e": "parents",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v053",
+   "h": "孩子",
+   "p": "háizi",
+   "e": "child",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v054",
+   "h": "哥哥",
+   "p": "gēge",
+   "e": "older brother",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v055",
+   "h": "结婚",
+   "p": "jiéhūn",
+   "e": "to get married",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v056",
+   "h": "儿子",
+   "p": "érzi",
+   "e": "son",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v057",
+   "h": "爷爷",
+   "p": "yéye",
+   "e": "paternal grandfather",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v058",
+   "h": "奶奶",
+   "p": "nǎinai",
+   "e": "paternal grandmother",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v059",
+   "h": "还在",
+   "p": "hái zài",
+   "e": "still there / still alive",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v060",
+   "h": "去世",
+   "p": "qùshì",
+   "e": "to pass away",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v061",
+   "h": "很久",
+   "p": "hěn jiǔ",
+   "e": "a long time",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v062",
+   "h": "现在",
+   "p": "xiànzài",
+   "e": "now",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v063",
+   "h": "多大",
+   "p": "duō dà",
+   "e": "how old",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v064",
+   "h": "不过",
+   "p": "búguò",
+   "e": "but, however",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v065",
+   "h": "但是",
+   "p": "dànshì",
+   "e": "but",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v066",
+   "h": "身体",
+   "p": "shēntǐ",
+   "e": "body, health",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v067",
+   "h": "不错",
+   "p": "búcuò",
+   "e": "not bad, pretty good",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v068",
+   "h": "食物",
+   "p": "shíwù",
+   "e": "food",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v069",
+   "h": "很",
+   "p": "hěn",
+   "e": "very",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v070",
+   "h": "家",
+   "p": "jiā",
+   "e": "home, house",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v071",
+   "h": "家人",
+   "p": "jiārén",
+   "e": "family members",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v072",
+   "h": "假",
+   "p": "jiǎ",
+   "e": "fake",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v073",
+   "h": "钱包",
+   "p": "qiánbāo",
+   "e": "wallet",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v074",
+   "h": "衣服",
+   "p": "yīfu",
+   "e": "clothes",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v075",
+   "h": "女朋友",
+   "p": "nǚpéngyou",
+   "e": "girlfriend",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v076",
+   "h": "礼拜",
+   "p": "lǐbài",
+   "e": "week (colloquial)",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v077",
+   "h": "耳机",
+   "p": "ěrjī",
+   "e": "headphones",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v078",
+   "h": "居住",
+   "p": "jūzhù",
+   "e": "to reside, to live (in)",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v079",
+   "h": "游泳",
+   "p": "yóuyǒng",
+   "e": "to swim",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v080",
+   "h": "洗碗机",
+   "p": "xǐwǎnjī",
+   "e": "dishwasher",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v081",
+   "h": "问题",
+   "p": "wèntí",
+   "e": "question, problem",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v082",
+   "h": "电脑",
+   "p": "diànnǎo",
+   "e": "computer",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v083",
+   "h": "非常",
+   "p": "fēicháng",
+   "e": "extremely, very",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v084",
+   "h": "歌曲",
+   "p": "gēqǔ",
+   "e": "song",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v085",
+   "h": "房间",
+   "p": "fángjiān",
+   "e": "room",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v086",
+   "h": "属于",
+   "p": "shǔyú",
+   "e": "to belong to",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v087",
+   "h": "地方",
+   "p": "dìfang",
+   "e": "place",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "v088",
+   "h": "欢迎光临",
+   "p": "huānyíng guānglín",
+   "e": "welcome (to a shop/restaurant)",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v089",
+   "h": "请问",
+   "p": "qǐngwèn",
+   "e": "excuse me / may I ask",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v090",
+   "h": "几位",
+   "p": "jǐ wèi",
+   "e": "how many people (party size)",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v091",
+   "h": "订位",
+   "p": "dìngwèi",
+   "e": "table reservation",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v092",
+   "h": "也",
+   "p": "yě",
+   "e": "also",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v093",
+   "h": "可能",
+   "p": "kěnéng",
+   "e": "maybe, possibly",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v094",
+   "h": "需要",
+   "p": "xūyào",
+   "e": "to need",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v095",
+   "h": "等",
+   "p": "děng",
+   "e": "to wait",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v096",
+   "h": "分钟",
+   "p": "fēnzhōng",
+   "e": "minute",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v097",
+   "h": "不好意思",
+   "p": "bù hǎoyìsi",
+   "e": "sorry / excuse me (mild)",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v098",
+   "h": "对不起",
+   "p": "duìbuqǐ",
+   "e": "sorry (stronger)",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v099",
+   "h": "让",
+   "p": "ràng",
+   "e": "to let, to make (someone do)",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v100",
+   "h": "久等",
+   "p": "jiǔ děng",
+   "e": "to be kept waiting",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v101",
+   "h": "菜单",
+   "p": "càidān",
+   "e": "menu",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v102",
+   "h": "推荐",
+   "p": "tuījiàn",
+   "e": "recommendation, to recommend",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v103",
+   "h": "炸酱面",
+   "p": "zhájiàngmiàn",
+   "e": "zhajiangmian (noodles in bean sauce)",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v104",
+   "h": "菜",
+   "p": "cài",
+   "e": "dish; vegetable",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v105",
+   "h": "招牌菜",
+   "p": "zhāopáicài",
+   "e": "signature dish",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v106",
+   "h": "尝试",
+   "p": "chángshì",
+   "e": "to try, to give it a go",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v107",
+   "h": "一下",
+   "p": "yíxià",
+   "e": "a bit, briefly (softens a verb)",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v108",
+   "h": "味道",
+   "p": "wèidào",
+   "e": "taste, flavour",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v109",
+   "h": "花生",
+   "p": "huāshēng",
+   "e": "peanut",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v110",
+   "h": "过敏",
+   "p": "guòmǐn",
+   "e": "allergy, to be allergic",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v111",
+   "h": "明白",
+   "p": "míngbai",
+   "e": "to understand",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v112",
+   "h": "加",
+   "p": "jiā",
+   "e": "to add",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v113",
+   "h": "点菜",
+   "p": "diǎn cài",
+   "e": "to order food",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v114",
+   "h": "其他",
+   "p": "qítā",
+   "e": "other, anything else",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v115",
+   "h": "吃素",
+   "p": "chī sù",
+   "e": "to be vegetarian",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v116",
+   "h": "适合",
+   "p": "shìhé",
+   "e": "suitable",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v117",
+   "h": "当然",
+   "p": "dāngrán",
+   "e": "of course",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v118",
+   "h": "等等",
+   "p": "děngděng",
+   "e": "etc., and so on",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v119",
+   "h": "份",
+   "p": "fèn",
+   "e": "portion (measure word)",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v120",
+   "h": "炒",
+   "p": "chǎo",
+   "e": "to stir-fry",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v121",
+   "h": "西兰花",
+   "p": "xīlánhuā",
+   "e": "broccoli",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v122",
+   "h": "麻婆豆腐",
+   "p": "mápó dòufu",
+   "e": "mapo tofu",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v123",
+   "h": "饮料",
+   "p": "yǐnliào",
+   "e": "drink, beverage",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v124",
+   "h": "杯",
+   "p": "bēi",
+   "e": "cup (measure word)",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v125",
+   "h": "冰水",
+   "p": "bīngshuǐ",
+   "e": "iced water",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v126",
+   "h": "就好",
+   "p": "jiù hǎo",
+   "e": "…is fine, that'll do",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v127",
+   "h": "比较",
+   "p": "bǐjiào",
+   "e": "comparatively, more",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v128",
+   "h": "喜欢",
+   "p": "xǐhuan",
+   "e": "to like",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v129",
+   "h": "牛排",
+   "p": "niúpái",
+   "e": "steak",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v130",
+   "h": "好吃",
+   "p": "hǎochī",
+   "e": "tasty, delicious",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v131",
+   "h": "没问题",
+   "p": "méi wèntí",
+   "e": "no problem",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v132",
+   "h": "在",
+   "p": "zài",
+   "e": "at, in; marks an action in progress",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v133",
+   "h": "打游戏",
+   "p": "dǎ yóuxì",
+   "e": "to play video games",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v134",
+   "h": "表哥",
+   "p": "biǎogē",
+   "e": "older male cousin",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v135",
+   "h": "表弟",
+   "p": "biǎodì",
+   "e": "younger male cousin",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v136",
+   "h": "分手",
+   "p": "fēnshǒu",
+   "e": "to break up",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v137",
+   "h": "和",
+   "p": "hé",
+   "e": "and, with",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v138",
+   "h": "到",
+   "p": "dào",
+   "e": "to arrive, to reach",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v139",
+   "h": "拿",
+   "p": "ná",
+   "e": "to take, to hold",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v140",
+   "h": "书包",
+   "p": "shūbāo",
+   "e": "backpack, school bag",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v141",
+   "h": "过来",
+   "p": "guòlái",
+   "e": "to come over",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v142",
+   "h": "穿",
+   "p": "chuān",
+   "e": "to wear, to put on",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "v143",
+   "h": "听说",
+   "p": "tīngshuō",
+   "e": "to hear that, it is said",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v144",
+   "h": "读",
+   "p": "dú",
+   "e": "to read; to study (a subject)",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v145",
+   "h": "专业",
+   "p": "zhuānyè",
+   "e": "major, field of study",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v146",
+   "h": "金融",
+   "p": "jīnróng",
+   "e": "finance",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v147",
+   "h": "科学",
+   "p": "kēxué",
+   "e": "science",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v148",
+   "h": "听起来",
+   "p": "tīng qǐlái",
+   "e": "sounds like",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v149",
+   "h": "难",
+   "p": "nán",
+   "e": "difficult",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v150",
+   "h": "有时候",
+   "p": "yǒu shíhou",
+   "e": "sometimes",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v151",
+   "h": "有趣",
+   "p": "yǒuqù",
+   "e": "interesting",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v152",
+   "h": "对",
+   "p": "duì",
+   "e": "correct, right (agreement)",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v153",
+   "h": "年级",
+   "p": "niánjí",
+   "e": "school/university year",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v154",
+   "h": "完成",
+   "p": "wánchéng",
+   "e": "to complete, to finish",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v155",
+   "h": "感觉",
+   "p": "gǎnjué",
+   "e": "feeling, to feel",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v156",
+   "h": "还有",
+   "p": "hái yǒu",
+   "e": "still have; and also",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v157",
+   "h": "毕业",
+   "p": "bìyè",
+   "e": "to graduate",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v158",
+   "h": "之后",
+   "p": "zhīhòu",
+   "e": "after, afterwards",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v159",
+   "h": "或",
+   "p": "huò",
+   "e": "or",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v160",
+   "h": "数据",
+   "p": "shùjù",
+   "e": "data",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v161",
+   "h": "这样",
+   "p": "zhèyàng",
+   "e": "like this, such",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v162",
+   "h": "工作",
+   "p": "gōngzuò",
+   "e": "job, work",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v163",
+   "h": "广东话",
+   "p": "Guǎngdōnghuà",
+   "e": "Cantonese",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v164",
+   "h": "没有",
+   "p": "méiyǒu",
+   "e": "not have; did not",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v165",
+   "h": "好久不见",
+   "p": "hǎojiǔ bújiàn",
+   "e": "long time no see",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v166",
+   "h": "一定",
+   "p": "yídìng",
+   "e": "definitely, must",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v167",
+   "h": "外套",
+   "p": "wàitào",
+   "e": "jacket, coat",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v168",
+   "h": "今晚",
+   "p": "jīnwǎn",
+   "e": "tonight",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v169",
+   "h": "妹妹",
+   "p": "mèimei",
+   "e": "younger sister",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v170",
+   "h": "觉得",
+   "p": "juéde",
+   "e": "to feel, to think",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v171",
+   "h": "超级市场",
+   "p": "chāojí shìchǎng",
+   "e": "supermarket",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v172",
+   "h": "里",
+   "p": "lǐ",
+   "e": "inside, in",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v173",
+   "h": "看",
+   "p": "kàn",
+   "e": "to look, to watch, to read",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v174",
+   "h": "玩",
+   "p": "wán",
+   "e": "to play, to hang out",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v175",
+   "h": "还没",
+   "p": "hái méi",
+   "e": "not yet",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "v176",
+   "h": "服务员",
+   "p": "fúwùyuán",
+   "e": "waiter, server",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v177",
+   "h": "打包",
+   "p": "dǎbāo",
+   "e": "to pack leftovers, to take away",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v178",
+   "h": "麻烦",
+   "p": "máfan",
+   "e": "to trouble (someone); troublesome",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v179",
+   "h": "盒子",
+   "p": "hézi",
+   "e": "box",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v180",
+   "h": "顺便",
+   "p": "shùnbiàn",
+   "e": "by the way, while you're at it",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v181",
+   "h": "买单",
+   "p": "mǎidān",
+   "e": "to pay the bill",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v182",
+   "h": "刷卡",
+   "p": "shuākǎ",
+   "e": "to pay by card",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v183",
+   "h": "还是",
+   "p": "háishi",
+   "e": "or (in a question)",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v184",
+   "h": "现金",
+   "p": "xiànjīn",
+   "e": "cash",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v185",
+   "h": "结账",
+   "p": "jiézhàng",
+   "e": "to settle the bill, to check out",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v186",
+   "h": "信用卡",
+   "p": "xìnyòngkǎ",
+   "e": "credit card",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v187",
+   "h": "支付",
+   "p": "zhīfù",
+   "e": "to pay",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v188",
+   "h": "用",
+   "p": "yòng",
+   "e": "to use",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v189",
+   "h": "总共",
+   "p": "zǒnggòng",
+   "e": "in total, altogether",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v190",
+   "h": "全部",
+   "p": "quánbù",
+   "e": "all, the whole lot",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v191",
+   "h": "元",
+   "p": "yuán",
+   "e": "yuan (formal currency unit)",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v192",
+   "h": "这里",
+   "p": "zhèlǐ",
+   "e": "here",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v193",
+   "h": "下次",
+   "p": "xiàcì",
+   "e": "next time",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v194",
+   "h": "再来",
+   "p": "zàilái",
+   "e": "to come again",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v195",
+   "h": "请慢走",
+   "p": "qǐng màn zǒu",
+   "e": "take care (said to a departing guest)",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "v196",
+   "h": "什么",
+   "p": "shénme",
+   "e": "what",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v197",
+   "h": "干嘛",
+   "p": "gànmá",
+   "e": "what are you up to? (casual)",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v198",
+   "h": "喝",
+   "p": "hē",
+   "e": "to drink",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v199",
+   "h": "水",
+   "p": "shuǐ",
+   "e": "water",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v200",
+   "h": "知道",
+   "p": "zhīdào",
+   "e": "to know",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v201",
+   "h": "看见",
+   "p": "kànjiàn",
+   "e": "to catch sight of, to see",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v202",
+   "h": "东西",
+   "p": "dōngxi",
+   "e": "thing, stuff (tangible)",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v203",
+   "h": "做",
+   "p": "zuò",
+   "e": "to do, to make",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v204",
+   "h": "星期",
+   "p": "xīngqī",
+   "e": "week",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v205",
+   "h": "给",
+   "p": "gěi",
+   "e": "to give",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v206",
+   "h": "酒",
+   "p": "jiǔ",
+   "e": "alcohol",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v207",
+   "h": "都",
+   "p": "dōu",
+   "e": "all, both",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v208",
+   "h": "小朋友",
+   "p": "xiǎopéngyou",
+   "e": "child, kid",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v209",
+   "h": "电视",
+   "p": "diànshì",
+   "e": "television",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v210",
+   "h": "看书",
+   "p": "kàn shū",
+   "e": "to read (a book)",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "v211",
+   "h": "最",
+   "p": "zuì",
+   "e": "most, -est",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v212",
+   "h": "越南菜",
+   "p": "Yuènán cài",
+   "e": "Vietnamese food",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v213",
+   "h": "日本菜",
+   "p": "Rìběn cài",
+   "e": "Japanese food",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v214",
+   "h": "中餐",
+   "p": "zhōngcān",
+   "e": "Chinese food",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v215",
+   "h": "每天",
+   "p": "měitiān",
+   "e": "every day",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v216",
+   "h": "会",
+   "p": "huì",
+   "e": "would, will; to know how to",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v217",
+   "h": "辣",
+   "p": "là",
+   "e": "spicy",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v218",
+   "h": "有点",
+   "p": "yǒudiǎn",
+   "e": "a bit, somewhat",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v219",
+   "h": "太",
+   "p": "tài",
+   "e": "too, excessively",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v220",
+   "h": "点心",
+   "p": "diǎnxin",
+   "e": "dim sum",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v221",
+   "h": "糖醋排骨",
+   "p": "tángcù páigǔ",
+   "e": "sweet and sour pork ribs",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v222",
+   "h": "烤鸭",
+   "p": "kǎoyā",
+   "e": "roast duck",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v223",
+   "h": "有空",
+   "p": "yǒukòng",
+   "e": "to have free time",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v224",
+   "h": "煮",
+   "p": "zhǔ",
+   "e": "to cook, to boil",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v225",
+   "h": "只",
+   "p": "zhǐ",
+   "e": "only",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v226",
+   "h": "这",
+   "p": "zhè",
+   "e": "this",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v227",
+   "h": "那",
+   "p": "nà",
+   "e": "that",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v228",
+   "h": "哪",
+   "p": "nǎ",
+   "e": "which",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v229",
+   "h": "谁",
+   "p": "shéi",
+   "e": "who",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v230",
+   "h": "洗碗",
+   "p": "xǐ wǎn",
+   "e": "to wash the dishes",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v231",
+   "h": "个",
+   "p": "gè",
+   "e": "general measure word",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v232",
+   "h": "本",
+   "p": "běn",
+   "e": "measure word for books",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v233",
+   "h": "只",
+   "p": "zhī",
+   "e": "measure word for animals",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v234",
+   "h": "些",
+   "p": "xiē",
+   "e": "measure word for 'some / several'",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v235",
+   "h": "狗",
+   "p": "gǒu",
+   "e": "dog",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v236",
+   "h": "书",
+   "p": "shū",
+   "e": "book",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v237",
+   "h": "招待",
+   "p": "zhāodài",
+   "e": "to host, hospitality",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "v238",
+   "h": "酱油",
+   "p": "jiàngyóu",
+   "e": "soy sauce",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "v239",
+   "h": "哪里",
+   "p": "nǎlǐ",
+   "e": "where",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "v240",
+   "h": "排",
+   "p": "pái",
+   "e": "row, aisle",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "v241",
+   "h": "米",
+   "p": "mǐ",
+   "e": "rice (uncooked)",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "v242",
+   "h": "包",
+   "p": "bāo",
+   "e": "bag, pack",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "v243",
+   "h": "多少钱",
+   "p": "duōshao qián",
+   "e": "how much (money)",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "v244",
+   "h": "块",
+   "p": "kuài",
+   "e": "dollar / unit of money (colloquial)",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "v245",
+   "h": "磅",
+   "p": "bàng",
+   "e": "pound (weight)",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "v246",
+   "h": "鸡胸肉",
+   "p": "jīxiōngròu",
+   "e": "chicken breast",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "v247",
+   "h": "牛肉",
+   "p": "niúròu",
+   "e": "beef",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "v248",
+   "h": "站",
+   "p": "zhàn",
+   "e": "to stand; station",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v249",
+   "h": "前面",
+   "p": "qiánmiàn",
+   "e": "in front",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v250",
+   "h": "后面",
+   "p": "hòumiàn",
+   "e": "behind",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v251",
+   "h": "上面",
+   "p": "shàngmiàn",
+   "e": "above, on top",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v252",
+   "h": "下面",
+   "p": "xiàmiàn",
+   "e": "below, underneath",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v253",
+   "h": "对面",
+   "p": "duìmiàn",
+   "e": "opposite, across from",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v254",
+   "h": "里面",
+   "p": "lǐmiàn",
+   "e": "inside",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v255",
+   "h": "外面",
+   "p": "wàimiàn",
+   "e": "outside",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v256",
+   "h": "停",
+   "p": "tíng",
+   "e": "to stop, to park",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v257",
+   "h": "学校",
+   "p": "xuéxiào",
+   "e": "school",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v258",
+   "h": "见",
+   "p": "jiàn",
+   "e": "to see, to meet",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v259",
+   "h": "坐",
+   "p": "zuò",
+   "e": "to sit",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v260",
+   "h": "接",
+   "p": "jiē",
+   "e": "to pick (someone) up",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v261",
+   "h": "这边",
+   "p": "zhèbiān",
+   "e": "this side, over here",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v262",
+   "h": "那边",
+   "p": "nàbiān",
+   "e": "that side, over there",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v263",
+   "h": "哪边",
+   "p": "nǎbiān",
+   "e": "which side",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v264",
+   "h": "身边",
+   "p": "shēnbiān",
+   "e": "at one's side",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v265",
+   "h": "路边",
+   "p": "lùbiān",
+   "e": "roadside, kerb",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v266",
+   "h": "左手边",
+   "p": "zuǒshǒubiān",
+   "e": "left-hand side",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v267",
+   "h": "右手边",
+   "p": "yòushǒubiān",
+   "e": "right-hand side",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v268",
+   "h": "红绿灯",
+   "p": "hónglǜdēng",
+   "e": "traffic light",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v269",
+   "h": "向",
+   "p": "xiàng",
+   "e": "towards",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v270",
+   "h": "走",
+   "p": "zǒu",
+   "e": "to walk, to go",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v271",
+   "h": "放",
+   "p": "fàng",
+   "e": "to put, to place",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v272",
+   "h": "车",
+   "p": "chē",
+   "e": "car, vehicle",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v273",
+   "h": "车位",
+   "p": "chēwèi",
+   "e": "parking space; seat in a car",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v274",
+   "h": "旁边",
+   "p": "pángbiān",
+   "e": "beside, next to",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v275",
+   "h": "冷",
+   "p": "lěng",
+   "e": "cold",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v276",
+   "h": "间",
+   "p": "jiān",
+   "e": "measure word for rooms and shops",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "v277",
+   "h": "迷路",
+   "p": "mílù",
+   "e": "to get lost",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v278",
+   "h": "找",
+   "p": "zhǎo",
+   "e": "to look for, to search",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v279",
+   "h": "找到",
+   "p": "zhǎodào",
+   "e": "to find",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v280",
+   "h": "路",
+   "p": "lù",
+   "e": "road, way",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v281",
+   "h": "不用",
+   "p": "búyòng",
+   "e": "no need to",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v282",
+   "h": "担心",
+   "p": "dānxīn",
+   "e": "to worry",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v283",
+   "h": "沿着",
+   "p": "yánzhe",
+   "e": "along",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v284",
+   "h": "条",
+   "p": "tiáo",
+   "e": "measure word for roads, rivers, fish",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v285",
+   "h": "直走",
+   "p": "zhí zǒu",
+   "e": "go straight ahead",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v286",
+   "h": "路口",
+   "p": "lùkǒu",
+   "e": "intersection, junction",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v287",
+   "h": "右转",
+   "p": "yòu zhuǎn",
+   "e": "turn right",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v288",
+   "h": "左转",
+   "p": "zuǒ zhuǎn",
+   "e": "turn left",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v289",
+   "h": "陪",
+   "p": "péi",
+   "e": "to accompany",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v290",
+   "h": "一起",
+   "p": "yìqǐ",
+   "e": "together",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v291",
+   "h": "真是",
+   "p": "zhēn shì",
+   "e": "truly, really (is)",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v292",
+   "h": "真的",
+   "p": "zhēn de",
+   "e": "really, genuinely",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "v293",
+   "h": "傻瓜",
+   "p": "shǎguā",
+   "e": "idiot, fool",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v294",
+   "h": "回",
+   "p": "huí",
+   "e": "to return, to go back",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v295",
+   "h": "回家",
+   "p": "huí jiā",
+   "e": "to go home",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v296",
+   "h": "回来",
+   "p": "huílái",
+   "e": "to come back",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v297",
+   "h": "就是",
+   "p": "jiùshì",
+   "e": "precisely, exactly",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v298",
+   "h": "爱",
+   "p": "ài",
+   "e": "to love",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v299",
+   "h": "女人",
+   "p": "nǚrén",
+   "e": "woman",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v300",
+   "h": "坏人",
+   "p": "huàirén",
+   "e": "bad person, villain",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v301",
+   "h": "老师",
+   "p": "lǎoshī",
+   "e": "teacher",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v302",
+   "h": "美国",
+   "p": "Měiguó",
+   "e": "America, the USA",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v303",
+   "h": "件",
+   "p": "jiàn",
+   "e": "measure word for clothing and matters",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v304",
+   "h": "部",
+   "p": "bù",
+   "e": "measure word for phones, films, machines",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v305",
+   "h": "手机",
+   "p": "shǒujī",
+   "e": "mobile phone",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v306",
+   "h": "认为",
+   "p": "rènwéi",
+   "e": "to think, to hold the view (formal)",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v307",
+   "h": "几点",
+   "p": "jǐ diǎn",
+   "e": "what time",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "v308",
+   "h": "今天",
+   "p": "jīntiān",
+   "e": "today",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v309",
+   "h": "昨天",
+   "p": "zuótiān",
+   "e": "yesterday",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v310",
+   "h": "明天",
+   "p": "míngtiān",
+   "e": "tomorrow",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v311",
+   "h": "后天",
+   "p": "hòutiān",
+   "e": "the day after tomorrow",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v312",
+   "h": "聪明",
+   "p": "cōngmíng",
+   "e": "clever, smart",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v313",
+   "h": "同事",
+   "p": "tóngshì",
+   "e": "colleague, coworker",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v314",
+   "h": "医生",
+   "p": "yīshēng",
+   "e": "doctor",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v315",
+   "h": "下班",
+   "p": "xiàbān",
+   "e": "to finish work, to clock off",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v316",
+   "h": "应该",
+   "p": "yīnggāi",
+   "e": "should, ought to",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v317",
+   "h": "老板",
+   "p": "lǎobǎn",
+   "e": "boss",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v318",
+   "h": "放假",
+   "p": "fàngjià",
+   "e": "to take a holiday / be off",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v319",
+   "h": "上个月",
+   "p": "shàng ge yuè",
+   "e": "last month",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v320",
+   "h": "这个月",
+   "p": "zhè ge yuè",
+   "e": "this month",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v321",
+   "h": "下个月",
+   "p": "xià ge yuè",
+   "e": "next month",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v322",
+   "h": "所以",
+   "p": "suǒyǐ",
+   "e": "so, therefore",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v323",
+   "h": "旅游",
+   "p": "lǚyóu",
+   "e": "to travel, tourism",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v324",
+   "h": "点",
+   "p": "diǎn",
+   "e": "o'clock",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v325",
+   "h": "分",
+   "p": "fēn",
+   "e": "minute",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v326",
+   "h": "半",
+   "p": "bàn",
+   "e": "half (past)",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v327",
+   "h": "夜晚",
+   "p": "yèwǎn",
+   "e": "night-time",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v328",
+   "h": "白天",
+   "p": "báitiān",
+   "e": "daytime",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v329",
+   "h": "上午",
+   "p": "shàngwǔ",
+   "e": "morning (a.m.)",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v330",
+   "h": "下午",
+   "p": "xiàwǔ",
+   "e": "afternoon (p.m.)",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v331",
+   "h": "早上",
+   "p": "zǎoshang",
+   "e": "morning, early morning",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v332",
+   "h": "晚上",
+   "p": "wǎnshang",
+   "e": "evening, night",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v333",
+   "h": "休息",
+   "p": "xiūxi",
+   "e": "to rest",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v334",
+   "h": "起床",
+   "p": "qǐchuáng",
+   "e": "to get up, to get out of bed",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v335",
+   "h": "今年",
+   "p": "jīnnián",
+   "e": "this year",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v336",
+   "h": "去年",
+   "p": "qùnián",
+   "e": "last year",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v337",
+   "h": "明年",
+   "p": "míngnián",
+   "e": "next year",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v338",
+   "h": "上周",
+   "p": "shàng zhōu",
+   "e": "last week",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v339",
+   "h": "这周",
+   "p": "zhè zhōu",
+   "e": "this week",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v340",
+   "h": "本周",
+   "p": "běn zhōu",
+   "e": "this week (formal)",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v341",
+   "h": "下周",
+   "p": "xià zhōu",
+   "e": "next week",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "v342",
+   "h": "准备",
+   "p": "zhǔnbèi",
+   "e": "to prepare, to get ready",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "v343",
+   "h": "顿",
+   "p": "dùn",
+   "e": "measure word for meals",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "v344",
+   "h": "饭",
+   "p": "fàn",
+   "e": "rice, meal",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "v345",
+   "h": "青菜",
+   "p": "qīngcài",
+   "e": "green vegetables",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "v346",
+   "h": "鸡肉",
+   "p": "jīròu",
+   "e": "chicken (meat)",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "v347",
+   "h": "炒面",
+   "p": "chǎomiàn",
+   "e": "fried noodles",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "v348",
+   "h": "帮忙",
+   "p": "bāngmáng",
+   "e": "to help out",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "v349",
+   "h": "收",
+   "p": "shōu",
+   "e": "to clear away, to tidy",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "v350",
+   "h": "碗",
+   "p": "wǎn",
+   "e": "bowl",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "v351",
+   "h": "饱",
+   "p": "bǎo",
+   "e": "full (from eating)",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "v352",
+   "h": "这次",
+   "p": "zhècì",
+   "e": "this time",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "v353",
+   "h": "房子",
+   "p": "fángzi",
+   "e": "house",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v354",
+   "h": "租",
+   "p": "zū",
+   "e": "to rent",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v355",
+   "h": "早点",
+   "p": "zǎodiǎn",
+   "e": "earlier, sooner",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v356",
+   "h": "房价",
+   "p": "fángjià",
+   "e": "house prices",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v357",
+   "h": "升",
+   "p": "shēng",
+   "e": "to rise, to go up",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v358",
+   "h": "贷款",
+   "p": "dàikuǎn",
+   "e": "loan, mortgage",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v359",
+   "h": "利率",
+   "p": "lìlǜ",
+   "e": "interest rate",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v360",
+   "h": "高",
+   "p": "gāo",
+   "e": "high, tall",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v361",
+   "h": "压力",
+   "p": "yālì",
+   "e": "pressure, stress",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v362",
+   "h": "打算",
+   "p": "dǎsuàn",
+   "e": "to plan, to intend",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v363",
+   "h": "多久",
+   "p": "duōjiǔ",
+   "e": "how long (duration)",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v364",
+   "h": "希望",
+   "p": "xīwàng",
+   "e": "to hope",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v365",
+   "h": "稳定",
+   "p": "wěndìng",
+   "e": "stable",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v366",
+   "h": "银行",
+   "p": "yínháng",
+   "e": "bank",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "v367",
+   "h": "选",
+   "p": "xuǎn",
+   "e": "to choose, to pick",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v368",
+   "h": "怎么",
+   "p": "zěnme",
+   "e": "how",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v369",
+   "h": "楼梯",
+   "p": "lóutī",
+   "e": "stairs",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v370",
+   "h": "下去",
+   "p": "xiàqù",
+   "e": "to go down",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v371",
+   "h": "上去",
+   "p": "shàngqù",
+   "e": "to go up",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v372",
+   "h": "多少",
+   "p": "duōshao",
+   "e": "how many, how much",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v373",
+   "h": "少",
+   "p": "shǎo",
+   "e": "few, little",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v374",
+   "h": "带",
+   "p": "dài",
+   "e": "to bring, to carry",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v375",
+   "h": "医院",
+   "p": "yīyuàn",
+   "e": "hospital",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v376",
+   "h": "还",
+   "p": "hái",
+   "e": "still, yet",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v377",
+   "h": "几",
+   "p": "jǐ",
+   "e": "how many (small numbers)",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v378",
+   "h": "点钟",
+   "p": "diǎnzhōng",
+   "e": "o'clock",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v379",
+   "h": "或者",
+   "p": "huòzhě",
+   "e": "or (in a statement)",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v380",
+   "h": "篮球",
+   "p": "lánqiú",
+   "e": "basketball",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v381",
+   "h": "足球",
+   "p": "zúqiú",
+   "e": "football, soccer",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v382",
+   "h": "白色",
+   "p": "báisè",
+   "e": "white",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v383",
+   "h": "红色",
+   "p": "hóngsè",
+   "e": "red",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v384",
+   "h": "留",
+   "p": "liú",
+   "e": "to stay, to remain",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v385",
+   "h": "电影",
+   "p": "diànyǐng",
+   "e": "film, movie",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v386",
+   "h": "粥",
+   "p": "zhōu",
+   "e": "congee, rice porridge",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "v387",
+   "h": "做完",
+   "p": "zuòwán",
+   "e": "to finish doing",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "v388",
+   "h": "开",
+   "p": "kāi",
+   "e": "to open, to turn on",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "v389",
+   "h": "打开",
+   "p": "dǎkāi",
+   "e": "to open up",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "v390",
+   "h": "司机",
+   "p": "sījī",
+   "e": "driver",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "v391",
+   "h": "这些",
+   "p": "zhèxiē",
+   "e": "these",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "v392",
+   "h": "开会",
+   "p": "kāihuì",
+   "e": "to hold / attend a meeting",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "v393",
+   "h": "男朋友",
+   "p": "nánpéngyou",
+   "e": "boyfriend",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "v394",
+   "h": "什么时候",
+   "p": "shénme shíhou",
+   "e": "when",
+   "w": 6,
+   "l": "How Do You Ask Questions"
+  },
+  {
+   "id": "v395",
+   "h": "女儿",
+   "p": "nǚ'ér",
+   "e": "daughter",
+   "w": 6,
+   "l": "How Do You Ask Questions"
+  },
+  {
+   "id": "v396",
+   "h": "说",
+   "p": "shuō",
+   "e": "to say, to speak",
+   "w": 6,
+   "l": "How Do You Ask Questions"
+  },
+  {
+   "id": "v397",
+   "h": "门",
+   "p": "mén",
+   "e": "door",
+   "w": 6,
+   "l": "How Do You Ask Questions"
+  },
+  {
+   "id": "v398",
+   "h": "称呼",
+   "p": "chēnghu",
+   "e": "to address (someone); a form of address",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v399",
+   "h": "漂亮",
+   "p": "piàoliang",
+   "e": "beautiful, pretty",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v400",
+   "h": "装修",
+   "p": "zhuāngxiū",
+   "e": "interior decoration, renovation",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v401",
+   "h": "品味",
+   "p": "pǐnwèi",
+   "e": "taste (aesthetic)",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v402",
+   "h": "小时候",
+   "p": "xiǎoshíhou",
+   "e": "when one was young, childhood",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v403",
+   "h": "长大",
+   "p": "zhǎngdà",
+   "e": "to grow up",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v404",
+   "h": "英国",
+   "p": "Yīngguó",
+   "e": "the UK, Britain",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v405",
+   "h": "从",
+   "p": "cóng",
+   "e": "from",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v406",
+   "h": "普通话",
+   "p": "pǔtōnghuà",
+   "e": "Mandarin (standard Chinese)",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v407",
+   "h": "一些",
+   "p": "yìxiē",
+   "e": "some, a few",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v408",
+   "h": "刚刚",
+   "p": "gānggāng",
+   "e": "just now, only just",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v409",
+   "h": "学",
+   "p": "xué",
+   "e": "to learn, to study",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v410",
+   "h": "科技",
+   "p": "kējì",
+   "e": "technology",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v411",
+   "h": "公司",
+   "p": "gōngsī",
+   "e": "company",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v412",
+   "h": "负责",
+   "p": "fùzé",
+   "e": "to be responsible for",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v413",
+   "h": "市场推广",
+   "p": "shìchǎng tuīguǎng",
+   "e": "marketing",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v414",
+   "h": "市场",
+   "p": "shìchǎng",
+   "e": "market",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v415",
+   "h": "爱好",
+   "p": "àihào",
+   "e": "hobby",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v416",
+   "h": "打篮球",
+   "p": "dǎ lánqiú",
+   "e": "to play basketball",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "v417",
+   "h": "最近",
+   "p": "zuìjìn",
+   "e": "recently, lately",
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "v418",
+   "h": "怎么样",
+   "p": "zěnmeyàng",
+   "e": "how is it? how about it?",
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "v419",
+   "h": "忙",
+   "p": "máng",
+   "e": "busy",
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "v420",
+   "h": "事情",
+   "p": "shìqing",
+   "e": "matter, affair (intangible things)",
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "v421",
+   "h": "处理",
+   "p": "chǔlǐ",
+   "e": "to handle, to deal with",
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "v422",
+   "h": "顺利",
+   "p": "shùnlì",
+   "e": "smooth, going well",
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "v423",
+   "h": "应付",
+   "p": "yìngfu",
+   "e": "to cope with, to manage",
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "v424",
+   "h": "生孩子",
+   "p": "shēng háizi",
+   "e": "to have a child",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "v425",
+   "h": "年轻",
+   "p": "niánqīng",
+   "e": "young",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "v426",
+   "h": "读书",
+   "p": "dúshū",
+   "e": "to study, to be in education",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "v427",
+   "h": "其实",
+   "p": "qíshí",
+   "e": "actually, in fact",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "v428",
+   "h": "影响",
+   "p": "yǐngxiǎng",
+   "e": "to affect, influence",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "v429",
+   "h": "照顾",
+   "p": "zhàogù",
+   "e": "to look after, to take care of",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "v430",
+   "h": "决定",
+   "p": "juédìng",
+   "e": "decision; to decide",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "v431",
+   "h": "能",
+   "p": "néng",
+   "e": "to be able to, can",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "v432",
+   "h": "理解",
+   "p": "lǐjiě",
+   "e": "understanding; to understand",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "v433",
+   "h": "支持",
+   "p": "zhīchí",
+   "e": "support; to support",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "v434",
+   "h": "再",
+   "p": "zài",
+   "e": "again; then (later)",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  }
+ ],
+ "sentences": [
+  {
+   "id": "s001",
+   "h": "我叫Ivan，你呢？",
+   "p": "Wǒ jiào Ivan, nǐ ne?",
+   "e": "My name is Ivan — and you?",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s002",
+   "h": "我今年二十二岁。",
+   "p": "Wǒ jīnnián èrshí'èr suì.",
+   "e": "I'm twenty-two this year.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s003",
+   "h": "我是香港人。",
+   "p": "Wǒ shì Xiānggǎng rén.",
+   "e": "I'm from Hong Kong.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s004",
+   "h": "我是一个学生。",
+   "p": "Wǒ shì yí ge xuéshēng.",
+   "e": "I am a student.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s005",
+   "h": "你叫什么名字？",
+   "p": "Nǐ jiào shénme míngzi?",
+   "e": "What's your name?",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s006",
+   "h": "我要去公园。",
+   "p": "Wǒ yào qù gōngyuán.",
+   "e": "I'm going to the park.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s007",
+   "h": "因为他要做功课。",
+   "p": "Yīnwèi tā yào zuò gōngkè.",
+   "e": "Because he has to do his homework.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s008",
+   "h": "他们要去睡觉。",
+   "p": "Tāmen yào qù shuìjiào.",
+   "e": "They need to go to sleep.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s009",
+   "h": "他们可以自己吃饭。",
+   "p": "Tāmen kěyǐ zìjǐ chīfàn.",
+   "e": "They can eat by themselves.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s010",
+   "h": "我想自己吃饭。",
+   "p": "Wǒ xiǎng zìjǐ chīfàn.",
+   "e": "I want to eat by myself.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s011",
+   "h": "你们要帮我们买外卖。",
+   "p": "Nǐmen yào bāng wǒmen mǎi wàimài.",
+   "e": "You have to help us buy takeout.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s012",
+   "h": "因为我想跟他去公园。",
+   "p": "Yīnwèi wǒ xiǎng gēn tā qù gōngyuán.",
+   "e": "Because I want to go to the park with him.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s013",
+   "h": "你可以自己出去吃饭。",
+   "p": "Nǐ kěyǐ zìjǐ chūqù chīfàn.",
+   "e": "You can go out and eat by yourself.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s014",
+   "h": "我下个星期要出去买苹果。",
+   "p": "Wǒ xià ge xīngqī yào chūqù mǎi píngguǒ.",
+   "e": "I need to go out and buy apples next week.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s015",
+   "h": "你父母有几个孩子？",
+   "p": "Nǐ fùmǔ yǒu jǐ ge háizi?",
+   "e": "How many children do your parents have?",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s016",
+   "h": "他们有两个孩子，我有一个哥哥。",
+   "p": "Tāmen yǒu liǎng ge háizi, wǒ yǒu yí ge gēge.",
+   "e": "They have two children; I have one older brother.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s017",
+   "h": "你哥哥几岁了？",
+   "p": "Nǐ gēge jǐ suì le?",
+   "e": "How old is your brother?",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s018",
+   "h": "你哥哥结婚了吗？",
+   "p": "Nǐ gēge jiéhūn le ma?",
+   "e": "Is your brother married?",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s019",
+   "h": "结婚了，他有一个儿子。",
+   "p": "Jiéhūn le, tā yǒu yí ge érzi.",
+   "e": "He's married, and he has a son.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s020",
+   "h": "你爷爷奶奶还在吗？",
+   "p": "Nǐ yéye nǎinai hái zài ma?",
+   "e": "Are your grandparents still with us?",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s021",
+   "h": "我爷爷很久以前去世了，我奶奶还在。",
+   "p": "Wǒ yéye hěn jiǔ yǐqián qùshì le, wǒ nǎinai hái zài.",
+   "e": "My grandfather passed away a long time ago; my grandmother is still alive.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s022",
+   "h": "你奶奶现在多大？",
+   "p": "Nǐ nǎinai xiànzài duō dà?",
+   "e": "How old is your grandmother now?",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s023",
+   "h": "这里的食物还不错。",
+   "p": "Zhèlǐ de shíwù hái búcuò.",
+   "e": "The food here is pretty good.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s024",
+   "h": "他们的家很大。",
+   "p": "Tāmen de jiā hěn dà.",
+   "e": "Their home is very big.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s025",
+   "h": "我有很多新衣服。",
+   "p": "Wǒ yǒu hěn duō xīn yīfu.",
+   "e": "I have a lot of new clothes.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s026",
+   "h": "我朋友下个礼拜可以帮我。",
+   "p": "Wǒ péngyou xià ge lǐbài kěyǐ bāng wǒ.",
+   "e": "My friend can help me next week.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s027",
+   "h": "现在我和我的家人住在一起。",
+   "p": "Xiànzài wǒ hé wǒ de jiārén zhù zài yìqǐ.",
+   "e": "Right now I live with my family.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s028",
+   "h": "爸爸想听他自己的歌。",
+   "p": "Bàba xiǎng tīng tā zìjǐ de gē.",
+   "e": "Dad wants to listen to his own songs.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s029",
+   "h": "我想用我们的洗碗机。",
+   "p": "Wǒ xiǎng yòng wǒmen de xǐwǎnjī.",
+   "e": "I want to use our dishwasher.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s030",
+   "h": "我的女朋友有很多问题要问。",
+   "p": "Wǒ de nǚpéngyou yǒu hěn duō wèntí yào wèn.",
+   "e": "My girlfriend has a lot of questions to ask.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s031",
+   "h": "我们的电脑非常好。",
+   "p": "Wǒmen de diànnǎo fēicháng hǎo.",
+   "e": "Our computer is very good.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s032",
+   "h": "他们的爸爸想出去。",
+   "p": "Tāmen de bàba xiǎng chūqù.",
+   "e": "Their dad wants to go out.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s033",
+   "h": "我想听我妈妈的新歌。",
+   "p": "Wǒ xiǎng tīng wǒ māma de xīn gē.",
+   "e": "I want to listen to my mum's new songs.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s034",
+   "h": "我很想出去。",
+   "p": "Wǒ hěn xiǎng chūqù.",
+   "e": "I really want to go out.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s035",
+   "h": "我喜欢自己住，因为我喜欢有属于自己的地方。",
+   "p": "Wǒ xǐhuan zìjǐ zhù, yīnwèi wǒ xǐhuan yǒu shǔyú zìjǐ de dìfang.",
+   "e": "I like living by myself because I like having my own place.",
+   "w": 1,
+   "l": "Canto 2 Mando Intro"
+  },
+  {
+   "id": "s036",
+   "h": "欢迎光临，请问几位？",
+   "p": "Huānyíng guānglín, qǐngwèn jǐ wèi?",
+   "e": "Welcome — how many in your party?",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s037",
+   "h": "两位，谢谢。",
+   "p": "Liǎng wèi, xièxie.",
+   "e": "Two, thank you.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s038",
+   "h": "请问有订位吗？",
+   "p": "Qǐngwèn yǒu dìngwèi ma?",
+   "e": "Do you have a reservation?",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s039",
+   "h": "那可能需要您等十几分钟，可以吗？",
+   "p": "Nà kěnéng xūyào nín děng shí jǐ fēnzhōng, kěyǐ ma?",
+   "e": "Then you may need to wait ten-odd minutes — is that alright?",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s040",
+   "h": "不好意思，让你们久等了。",
+   "p": "Bù hǎoyìsi, ràng nǐmen jiǔ děng le.",
+   "e": "Sorry to have kept you waiting.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s041",
+   "h": "这边请。这是我们的菜单。",
+   "p": "Zhèbiān qǐng. Zhè shì wǒmen de càidān.",
+   "e": "This way please. Here is our menu.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s042",
+   "h": "请问有什么推荐？",
+   "p": "Qǐngwèn yǒu shénme tuījiàn?",
+   "e": "Do you have any recommendations?",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s043",
+   "h": "炸酱面是我们的招牌菜。",
+   "p": "Zhájiàngmiàn shì wǒmen de zhāopáicài.",
+   "e": "Zhajiangmian is our signature dish.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s044",
+   "h": "你们可以尝试一下，味道不错。",
+   "p": "Nǐmen kěyǐ chángshì yíxià, wèidào búcuò.",
+   "e": "You can give it a try — it tastes pretty good.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s045",
+   "h": "请问这道炸酱面有花生吗？我对花生过敏。",
+   "p": "Qǐngwèn zhè dào zhájiàngmiàn yǒu huāshēng ma? Wǒ duì huāshēng guòmǐn.",
+   "e": "Does this zhajiangmian have peanuts? I'm allergic to peanuts.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s046",
+   "h": "明白，我们可以不加花生。",
+   "p": "Míngbai, wǒmen kěyǐ bù jiā huāshēng.",
+   "e": "Understood, we can make it without peanuts.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s047",
+   "h": "还要点其他菜吗？",
+   "p": "Hái yào diǎn qítā cài ma?",
+   "e": "Would you like to order anything else?",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s048",
+   "h": "我朋友是吃素的，有没有适合他的菜？",
+   "p": "Wǒ péngyou shì chī sù de, yǒu méiyǒu shìhé tā de cài?",
+   "e": "My friend is vegetarian — do you have any dishes suitable for him?",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s049",
+   "h": "当然有，我们有素食菜单：麻婆豆腐、炒西兰花等等。",
+   "p": "Dāngrán yǒu, wǒmen yǒu sùshí càidān: mápó dòufu, chǎo xīlánhuā děngděng.",
+   "e": "Of course — we have a vegetarian menu: mapo tofu, stir-fried broccoli and so on.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s050",
+   "h": "来一份炒西兰花。",
+   "p": "Lái yí fèn chǎo xīlánhuā.",
+   "e": "One portion of stir-fried broccoli, please.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s051",
+   "h": "好的，请问你要饮料吗？",
+   "p": "Hǎo de, qǐngwèn nǐ yào yǐnliào ma?",
+   "e": "Alright — would you like anything to drink?",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s052",
+   "h": "两杯冰水就好，谢谢。",
+   "p": "Liǎng bēi bīngshuǐ jiù hǎo, xièxie.",
+   "e": "Two glasses of iced water will be fine, thanks.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s053",
+   "h": "牛排比较好吃。",
+   "p": "Niúpái bǐjiào hǎochī.",
+   "e": "The steak tastes better.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s054",
+   "h": "我在做功课。",
+   "p": "Wǒ zài zuò gōngkè.",
+   "e": "I'm doing my homework.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s055",
+   "h": "表哥在吃饭。",
+   "p": "Biǎogē zài chīfàn.",
+   "e": "My cousin is eating.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s056",
+   "h": "他已经毕业了。",
+   "p": "Tā yǐjīng bìyè le.",
+   "e": "He's already graduated.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s057",
+   "h": "表弟和他的女朋友已经分手了。",
+   "p": "Biǎodì hé tā de nǚpéngyou yǐjīng fēnshǒu le.",
+   "e": "My cousin and his girlfriend have already broken up.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s058",
+   "h": "你可不可以和我出去？",
+   "p": "Nǐ kě bu kěyǐ hé wǒ chūqù?",
+   "e": "Can you come out with me?",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s059",
+   "h": "我到家了。",
+   "p": "Wǒ dào jiā le.",
+   "e": "I've arrived home.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s060",
+   "h": "他和我已经穿好衣服了。",
+   "p": "Tā hé wǒ yǐjīng chuān hǎo yīfu le.",
+   "e": "He and I are already dressed.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s061",
+   "h": "因为我在拿你的书包。",
+   "p": "Yīnwèi wǒ zài ná nǐ de shūbāo.",
+   "e": "Because I'm grabbing your backpack.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s062",
+   "h": "你要等我！我在过来。",
+   "p": "Nǐ yào děng wǒ! Wǒ zài guòlái.",
+   "e": "Wait for me! I'm on my way.",
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "s063",
+   "h": "听说你还在读大学，你在读什么专业？",
+   "p": "Tīngshuō nǐ hái zài dú dàxué, nǐ zài dú shénme zhuānyè?",
+   "e": "I heard you're still at university — what are you majoring in?",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s064",
+   "h": "我现在读金融。",
+   "p": "Wǒ xiànzài dú jīnróng.",
+   "e": "I'm studying finance at the moment.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s065",
+   "h": "啊，金融，听起来很难啊。",
+   "p": "A, jīnróng, tīng qǐlái hěn nán a.",
+   "e": "Ah, finance — that sounds hard.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s066",
+   "h": "是啊，有时候挺难的，但是也很有趣。",
+   "p": "Shì a, yǒu shíhou tǐng nán de, dànshì yě hěn yǒuqù.",
+   "e": "Yes, sometimes it's quite hard, but it's also very interesting.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s067",
+   "h": "那你现在读几年级了？",
+   "p": "Nà nǐ xiànzài dú jǐ niánjí le?",
+   "e": "So what year are you in now?",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s068",
+   "h": "我现在在读大四。",
+   "p": "Wǒ xiànzài zài dú dà sì.",
+   "e": "I'm in my fourth year.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s069",
+   "h": "是的，我还有一年就毕业了。",
+   "p": "Shì de, wǒ hái yǒu yì nián jiù bìyè le.",
+   "e": "Yes, I have one more year until I graduate.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s070",
+   "h": "那你毕业之后想做什么呢？",
+   "p": "Nà nǐ bìyè zhīhòu xiǎng zuò shénme ne?",
+   "e": "So what do you want to do after you graduate?",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s071",
+   "h": "听起来挺不错的。",
+   "p": "Tīng qǐlái tǐng búcuò de.",
+   "e": "That sounds pretty good.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s072",
+   "h": "你的广东话不错。",
+   "p": "Nǐ de Guǎngdōnghuà búcuò.",
+   "e": "Your Cantonese isn't bad.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s073",
+   "h": "哥哥没有出去。",
+   "p": "Gēge méiyǒu chūqù.",
+   "e": "My brother didn't go out.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s074",
+   "h": "有没有问题？",
+   "p": "Yǒu méiyǒu wèntí?",
+   "e": "Is there a problem?",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s075",
+   "h": "帮我拿。",
+   "p": "Bāng wǒ ná.",
+   "e": "Help me carry it.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s076",
+   "h": "你一定要穿一件外套。",
+   "p": "Nǐ yídìng yào chuān yí jiàn wàitào.",
+   "e": "You must wear a jacket.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s077",
+   "h": "妹妹今晚不想过来。",
+   "p": "Mèimei jīnwǎn bù xiǎng guòlái.",
+   "e": "My sister doesn't want to come over tonight.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s078",
+   "h": "我在超级市场里。",
+   "p": "Wǒ zài chāojí shìchǎng lǐ.",
+   "e": "I'm inside the supermarket.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s079",
+   "h": "我还没去过你家。",
+   "p": "Wǒ hái méi qù guo nǐ jiā.",
+   "e": "I haven't been to your place yet.",
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "s080",
+   "h": "服务员，我想打包，麻烦帮我拿一个盒子过来。",
+   "p": "Fúwùyuán, wǒ xiǎng dǎbāo, máfan bāng wǒ ná yí ge hézi guòlái.",
+   "e": "Waiter, I'd like to pack this up — could you bring me a box?",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "s081",
+   "h": "顺便买单，谢谢。",
+   "p": "Shùnbiàn mǎidān, xièxie.",
+   "e": "And the bill while you're at it, thanks.",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "s082",
+   "h": "请问您想刷卡还是现金结账？",
+   "p": "Qǐngwèn nín xiǎng shuākǎ háishi xiànjīn jiézhàng?",
+   "e": "Would you like to pay by card or cash?",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "s083",
+   "h": "我用信用卡支付。",
+   "p": "Wǒ yòng xìnyòngkǎ zhīfù.",
+   "e": "I'll pay by credit card.",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "s084",
+   "h": "好的，总共是三百元，请在这里拍卡。",
+   "p": "Hǎo de, zǒnggòng shì sānbǎi yuán, qǐng zài zhèlǐ pāi kǎ.",
+   "e": "Alright, that's 300 yuan in total — please tap your card here.",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "s085",
+   "h": "欢迎下次再来。请慢走。",
+   "p": "Huānyíng xiàcì zài lái. Qǐng màn zǒu.",
+   "e": "Please come again. Take care.",
+   "w": 3,
+   "l": "Getting the Bill"
+  },
+  {
+   "id": "s086",
+   "h": "你在做什么？",
+   "p": "Nǐ zài zuò shénme?",
+   "e": "What are you doing?",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "s087",
+   "h": "你们今晚想喝什么？",
+   "p": "Nǐmen jīnwǎn xiǎng hē shénme?",
+   "e": "What do you want to drink tonight?",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "s088",
+   "h": "我不知道我今晚想吃什么。",
+   "p": "Wǒ bù zhīdào wǒ jīnwǎn xiǎng chī shénme.",
+   "e": "I don't know what I want to eat tonight.",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "s089",
+   "h": "看什么电视？你要去看书。",
+   "p": "Kàn shénme diànshì? Nǐ yào qù kàn shū.",
+   "e": "What are you watching TV for? You need to go and study.",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "s090",
+   "h": "我有东西要去做。",
+   "p": "Wǒ yǒu dōngxi yào qù zuò.",
+   "e": "I have something to do.",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "s091",
+   "h": "我上个星期买了东西。",
+   "p": "Wǒ shàng ge xīngqī mǎi le dōngxi.",
+   "e": "I bought something last week.",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "s092",
+   "h": "他有东西要给你。",
+   "p": "Tā yǒu dōngxi yào gěi nǐ.",
+   "e": "He has something to give you.",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "s093",
+   "h": "我给你一杯水。",
+   "p": "Wǒ gěi nǐ yì bēi shuǐ.",
+   "e": "I'll give you a glass of water.",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "s094",
+   "h": "我今晚什么都不想做。",
+   "p": "Wǒ jīnwǎn shénme dōu bù xiǎng zuò.",
+   "e": "I don't want to do anything tonight.",
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "s095",
+   "h": "你最喜欢吃什么菜？",
+   "p": "Nǐ zuì xǐhuan chī shénme cài?",
+   "e": "What's your favourite kind of food?",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "s096",
+   "h": "我最喜欢吃越南菜和日本菜。",
+   "p": "Wǒ zuì xǐhuan chī Yuènán cài hé Rìběn cài.",
+   "e": "I like Vietnamese and Japanese food the most.",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "s097",
+   "h": "你平时吃中餐吗？",
+   "p": "Nǐ píngshí chī zhōngcān ma?",
+   "e": "Do you usually eat Chinese food?",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "s098",
+   "h": "有时候会吃中餐，但是不会每天都吃。",
+   "p": "Yǒu shíhou huì chī zhōngcān, dànshì bú huì měitiān dōu chī.",
+   "e": "Sometimes I eat Chinese food, but not every day.",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "s099",
+   "h": "我喜欢吃有点辣的东西，不过不可以吃太辣的。",
+   "p": "Wǒ xǐhuan chī yǒudiǎn là de dōngxi, búguò bù kěyǐ chī tài là de.",
+   "e": "I like slightly spicy food, but I can't handle it too spicy.",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "s100",
+   "h": "我喜欢吃点心、糖醋排骨和烤鸭。",
+   "p": "Wǒ xǐhuan chī diǎnxin, tángcù páigǔ hé kǎoyā.",
+   "e": "I like dim sum, sweet and sour pork ribs and roast duck.",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "s101",
+   "h": "那我有空煮一下给你吃吧。",
+   "p": "Nà wǒ yǒukòng zhǔ yíxià gěi nǐ chī ba.",
+   "e": "Then I'll cook some for you when I have time.",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "s102",
+   "h": "谁还没洗碗？",
+   "p": "Shéi hái méi xǐ wǎn?",
+   "e": "Who hasn't washed the dishes yet?",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "s103",
+   "h": "谢谢妈妈，你对我太好了。",
+   "p": "Xièxie māma, nǐ duì wǒ tài hǎo le.",
+   "e": "Thanks Mum, you're too good to me.",
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "s104",
+   "h": "有什么可以帮到你？",
+   "p": "Yǒu shénme kěyǐ bāng dào nǐ?",
+   "e": "What can I help you with?",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "s105",
+   "h": "请问，酱油在哪里？",
+   "p": "Qǐngwèn, jiàngyóu zài nǎlǐ?",
+   "e": "Excuse me, where's the soy sauce?",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "s106",
+   "h": "在第五排。",
+   "p": "Zài dì wǔ pái.",
+   "e": "It's on aisle five.",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "s107",
+   "h": "这包米多少钱？",
+   "p": "Zhè bāo mǐ duōshao qián?",
+   "e": "How much is this bag of rice?",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "s108",
+   "h": "这包十块。",
+   "p": "Zhè bāo shí kuài.",
+   "e": "This bag is ten dollars.",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "s109",
+   "h": "麻烦你，我想要一磅鸡胸肉，多少钱？",
+   "p": "Máfan nǐ, wǒ xiǎng yào yí bàng jīxiōngròu, duōshao qián?",
+   "e": "Excuse me, I'd like a pound of chicken breast — how much is it?",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "s110",
+   "h": "还要其他东西吗？",
+   "p": "Hái yào qítā dōngxi ma?",
+   "e": "Would you like anything else?",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "s111",
+   "h": "再加一磅牛肉。",
+   "p": "Zài jiā yí bàng niúròu.",
+   "e": "Add another pound of beef.",
+   "w": 4,
+   "l": "Grocery Shopping"
+  },
+  {
+   "id": "s112",
+   "h": "我会在餐厅等你。",
+   "p": "Wǒ huì zài cāntīng děng nǐ.",
+   "e": "I'll wait for you at the restaurant.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s113",
+   "h": "我在家里。",
+   "p": "Wǒ zài jiā lǐ.",
+   "e": "I'm at home.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s114",
+   "h": "我站在机场里。",
+   "p": "Wǒ zhàn zài jīchǎng lǐ.",
+   "e": "I'm standing in the airport.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s115",
+   "h": "我会在餐厅前面等你。",
+   "p": "Wǒ huì zài cāntīng qiánmiàn děng nǐ.",
+   "e": "I'll wait for you in front of the restaurant.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s116",
+   "h": "你要去学校后面见他。",
+   "p": "Nǐ yào qù xuéxiào hòumiàn jiàn tā.",
+   "e": "You need to go behind the school to meet him.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s117",
+   "h": "我坐在你对面。",
+   "p": "Wǒ zuò zài nǐ duìmiàn.",
+   "e": "I'm sitting opposite you.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s118",
+   "h": "我会在机场里面接你。",
+   "p": "Wǒ huì zài jīchǎng lǐmiàn jiē nǐ.",
+   "e": "I'll pick you up inside the airport.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s119",
+   "h": "爸爸看到那边有一个红绿灯。",
+   "p": "Bàba kàn dào nàbiān yǒu yí ge hónglǜdēng.",
+   "e": "Dad sees there's a traffic light over there.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s120",
+   "h": "你想要我向哪边走？",
+   "p": "Nǐ xiǎng yào wǒ xiàng nǎbiān zǒu?",
+   "e": "Which way do you want me to go?",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s121",
+   "h": "你站在我身边。",
+   "p": "Nǐ zhàn zài wǒ shēnbiān.",
+   "e": "You're standing beside me.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s122",
+   "h": "放你的书包在我车的右手边。",
+   "p": "Fàng nǐ de shūbāo zài wǒ chē de yòushǒubiān.",
+   "e": "Put your backpack on the right-hand side of my car.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s123",
+   "h": "请坐在我左手边的车位。",
+   "p": "Qǐng zuò zài wǒ zuǒshǒubiān de chēwèi.",
+   "e": "Please sit in the seat on my left.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s124",
+   "h": "我在路边走路。",
+   "p": "Wǒ zài lùbiān zǒulù.",
+   "e": "I'm walking along the roadside.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s125",
+   "h": "我在学校外面接你。",
+   "p": "Wǒ zài xuéxiào wàimiàn jiē nǐ.",
+   "e": "I'll pick you up outside the school.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s126",
+   "h": "我要在学校里面等！外面很冷。",
+   "p": "Wǒ yào zài xuéxiào lǐmiàn děng! Wàimiàn hěn lěng.",
+   "e": "I want to wait inside the school! It's cold outside.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s127",
+   "h": "在这间餐厅外面等我。",
+   "p": "Zài zhè jiān cāntīng wàimiàn děng wǒ.",
+   "e": "Wait for me outside this restaurant.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s128",
+   "h": "那里旁边有很多人。",
+   "p": "Nàlǐ pángbiān yǒu hěn duō rén.",
+   "e": "There are a lot of people next to that place.",
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "s129",
+   "h": "我迷路了，可不可以帮我找到去公园的路？",
+   "p": "Wǒ mílù le, kě bu kěyǐ bāng wǒ zhǎodào qù gōngyuán de lù?",
+   "e": "I'm lost — could you help me find the way to the park?",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "s130",
+   "h": "老奶奶，不用担心。",
+   "p": "Lǎo nǎinai, búyòng dānxīn.",
+   "e": "Grandma, don't worry.",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "s131",
+   "h": "你可以沿着这条路直走。",
+   "p": "Nǐ kěyǐ yánzhe zhè tiáo lù zhí zǒu.",
+   "e": "You can go straight along this road.",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "s132",
+   "h": "到左边的路口就右转。",
+   "p": "Dào zuǒbiān de lùkǒu jiù yòu zhuǎn.",
+   "e": "At the junction on the left, turn right.",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "s133",
+   "h": "直走然后右转。",
+   "p": "Zhí zǒu ránhòu yòu zhuǎn.",
+   "e": "Go straight and then turn right.",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "s134",
+   "h": "要不要我陪你一起走过去？",
+   "p": "Yào bu yào wǒ péi nǐ yìqǐ zǒu guòqù?",
+   "e": "Would you like me to walk over there with you?",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "s135",
+   "h": "你真是太好了。",
+   "p": "Nǐ zhēn shì tài hǎo le.",
+   "e": "You're too kind.",
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "s136",
+   "h": "你是一个傻瓜。",
+   "p": "Nǐ shì yí ge shǎguā.",
+   "e": "You're an idiot.",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "s137",
+   "h": "但是我想去这间餐厅。",
+   "p": "Dànshì wǒ xiǎng qù zhè jiān cāntīng.",
+   "e": "But I want to go to this restaurant.",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "s138",
+   "h": "但是我今晚八点要回家。",
+   "p": "Dànshì wǒ jīnwǎn bā diǎn yào huí jiā.",
+   "e": "But I have to go home at eight tonight.",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "s139",
+   "h": "我爱的女人就是你。",
+   "p": "Wǒ ài de nǚrén jiùshì nǐ.",
+   "e": "The woman I love is precisely you.",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "s140",
+   "h": "坏人就是坐在老师旁边的人。",
+   "p": "Huàirén jiùshì zuò zài lǎoshī pángbiān de rén.",
+   "e": "The villain is precisely the person sitting next to the teacher.",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "s141",
+   "h": "我是上个星期回家的。",
+   "p": "Wǒ shì shàng ge xīngqī huí jiā de.",
+   "e": "It was last week that I went home.",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "s142",
+   "h": "这件外套我是在美国买的。",
+   "p": "Zhè jiàn wàitào wǒ shì zài Měiguó mǎi de.",
+   "e": "I bought this jacket in America.",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "s143",
+   "h": "但是你今晚几点回来？",
+   "p": "Dànshì nǐ jīnwǎn jǐ diǎn huílái?",
+   "e": "But what time are you coming back tonight?",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "s144",
+   "h": "我想这部手机是我的。",
+   "p": "Wǒ xiǎng zhè bù shǒujī shì wǒ de.",
+   "e": "I think this phone is mine.",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "s145",
+   "h": "我觉得她是想喝水的。",
+   "p": "Wǒ juéde tā shì xiǎng hē shuǐ de.",
+   "e": "I think she wants to drink some water.",
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "s146",
+   "h": "我今天觉得自己很聪明。",
+   "p": "Wǒ jīntiān juéde zìjǐ hěn cōngmíng.",
+   "e": "Today I feel very clever.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s147",
+   "h": "我昨天买了三部新手机。",
+   "p": "Wǒ zuótiān mǎi le sān bù xīn shǒujī.",
+   "e": "Yesterday I bought three new phones.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s148",
+   "h": "我的同事明天要去见医生。",
+   "p": "Wǒ de tóngshì míngtiān yào qù jiàn yīshēng.",
+   "e": "My colleague has to go and see the doctor tomorrow.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s149",
+   "h": "我后天要去上班。",
+   "p": "Wǒ hòutiān yào qù shàngbān.",
+   "e": "I have to go to work the day after tomorrow.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s150",
+   "h": "我很想下班。",
+   "p": "Wǒ hěn xiǎng xiàbān.",
+   "e": "I really want to finish work.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s151",
+   "h": "我觉得我上个星期应该要去帮我的老板。",
+   "p": "Wǒ juéde wǒ shàng ge xīngqī yīnggāi yào qù bāng wǒ de lǎobǎn.",
+   "e": "I feel I should have gone to help my boss last week.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s152",
+   "h": "我想我下个星期要去帮我的同事。",
+   "p": "Wǒ xiǎng wǒ xià ge xīngqī yào qù bāng wǒ de tóngshì.",
+   "e": "I think next week I have to go and help my colleague.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s153",
+   "h": "我们这个星期可以放假。",
+   "p": "Wǒmen zhè ge xīngqī kěyǐ fàngjià.",
+   "e": "We can take time off this week.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s154",
+   "h": "我上个月没有放假，所以我下个月要去旅游。",
+   "p": "Wǒ shàng ge yuè méiyǒu fàngjià, suǒyǐ wǒ xià ge yuè yào qù lǚyóu.",
+   "e": "I didn't take a holiday last month, so next month I'm going travelling.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s155",
+   "h": "我这个月没有时间放假。",
+   "p": "Wǒ zhè ge yuè méiyǒu shíjiān fàngjià.",
+   "e": "I don't have time for a holiday this month.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s156",
+   "h": "我下午十点半会下班。",
+   "p": "Wǒ xiàwǔ shí diǎn bàn huì xiàbān.",
+   "e": "I'll finish work at half past ten.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s157",
+   "h": "我明天上午七点要去上班。",
+   "p": "Wǒ míngtiān shàngwǔ qī diǎn yào qù shàngbān.",
+   "e": "Tomorrow I have to go to work at 7am.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s158",
+   "h": "我晚上要去休息。",
+   "p": "Wǒ wǎnshang yào qù xiūxi.",
+   "e": "I need to rest tonight.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s159",
+   "h": "他明天早上要五点起床。",
+   "p": "Tā míngtiān zǎoshang yào wǔ diǎn qǐchuáng.",
+   "e": "He has to get up at five tomorrow morning.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s160",
+   "h": "我昨天晚上上班上到十点。",
+   "p": "Wǒ zuótiān wǎnshang shàngbān shàng dào shí diǎn.",
+   "e": "Last night I worked until ten.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s161",
+   "h": "我明天想早上五点起床。",
+   "p": "Wǒ míngtiān xiǎng zǎoshang wǔ diǎn qǐchuáng.",
+   "e": "Tomorrow I want to get up at five in the morning.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s162",
+   "h": "我下个星期可以晚上七点下班。",
+   "p": "Wǒ xià ge xīngqī kěyǐ wǎnshang qī diǎn xiàbān.",
+   "e": "Next week I can finish work at seven in the evening.",
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "s163",
+   "h": "谢谢你准备这顿饭。",
+   "p": "Xièxie nǐ zhǔnbèi zhè dùn fàn.",
+   "e": "Thank you for preparing this meal.",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "s164",
+   "h": "这个菜很好吃。",
+   "p": "Zhè ge cài hěn hǎochī.",
+   "e": "This dish is delicious.",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "s165",
+   "h": "这个是用什么做的？",
+   "p": "Zhè ge shì yòng shénme zuò de?",
+   "e": "What is this made with?",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "s166",
+   "h": "这个是用鸡肉和青菜做的。",
+   "p": "Zhè ge shì yòng jīròu hé qīngcài zuò de.",
+   "e": "It's made with chicken and greens.",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "s167",
+   "h": "你平时最喜欢吃什么菜？",
+   "p": "Nǐ píngshí zuì xǐhuan chī shénme cài?",
+   "e": "What's your usual favourite dish?",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "s168",
+   "h": "我也喜欢吃麻婆豆腐，还有炒面。",
+   "p": "Wǒ yě xǐhuan chī mápó dòufu, hái yǒu chǎomiàn.",
+   "e": "I like mapo tofu too, and fried noodles as well.",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "s169",
+   "h": "需要帮忙收碗吗？",
+   "p": "Xūyào bāngmáng shōu wǎn ma?",
+   "e": "Do you need help clearing the dishes?",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "s170",
+   "h": "不用不用。",
+   "p": "Búyòng búyòng.",
+   "e": "No need, no need.",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "s171",
+   "h": "谢谢你的招待，这次真的吃得好饱。",
+   "p": "Xièxie nǐ de zhāodài, zhè cì zhēn de chī de hǎo bǎo.",
+   "e": "Thank you for having me — I'm really full this time.",
+   "w": 5,
+   "l": "Light Dinner Conversations"
+  },
+  {
+   "id": "s172",
+   "h": "你们买了房子了吗？",
+   "p": "Nǐmen mǎi le fángzi le ma?",
+   "e": "Have you bought a house yet?",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "s173",
+   "h": "还没买，我们现在还在租房子。",
+   "p": "Hái méi mǎi, wǒmen xiànzài hái zài zū fángzi.",
+   "e": "Not yet — we're still renting at the moment.",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "s174",
+   "h": "租房子也不错，不过你们应该早点买房子。",
+   "p": "Zū fángzi yě búcuò, búguò nǐmen yīnggāi zǎodiǎn mǎi fángzi.",
+   "e": "Renting is fine too, but you should buy a house sooner.",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "s175",
+   "h": "我知道，但是我想等我毕业之后再买。",
+   "p": "Wǒ zhīdào, dànshì wǒ xiǎng děng wǒ bìyè zhīhòu zài mǎi.",
+   "e": "I know, but I want to wait until after I graduate to buy.",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "s176",
+   "h": "现在买房子比较好，因为房价可能会升。",
+   "p": "Xiànzài mǎi fángzi bǐjiào hǎo, yīnwèi fángjià kěnéng huì shēng.",
+   "e": "It's better to buy now, because house prices may rise.",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "s177",
+   "h": "但是现在的贷款利率很高，压力太大了。",
+   "p": "Dànshì xiànzài de dàikuǎn lìlǜ hěn gāo, yālì tài dà le.",
+   "e": "But mortgage rates are very high right now — the pressure is too much.",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "s178",
+   "h": "那你们打算等多久呢？",
+   "p": "Nà nǐmen dǎsuàn děng duōjiǔ ne?",
+   "e": "So how long are you planning to wait?",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "s179",
+   "h": "我希望等工作稳定之后再买房子。",
+   "p": "Wǒ xīwàng děng gōngzuò wěndìng zhīhòu zài mǎi fángzi.",
+   "e": "I hope to buy a house once my job is stable.",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "s180",
+   "h": "我在银行工作。",
+   "p": "Wǒ zài yínháng gōngzuò.",
+   "e": "I work at a bank.",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "s181",
+   "h": "我九点上班。",
+   "p": "Wǒ jiǔ diǎn shàngbān.",
+   "e": "I start work at nine.",
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "s182",
+   "h": "你可以过来帮忙吗？",
+   "p": "Nǐ kěyǐ guòlái bāngmáng ma?",
+   "e": "Can you come over and help?",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s183",
+   "h": "我不知道怎么用中文讲。",
+   "p": "Wǒ bù zhīdào zěnme yòng Zhōngwén jiǎng.",
+   "e": "I don't know how to say this in Chinese.",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s184",
+   "h": "我的朋友不知道怎么上去。",
+   "p": "Wǒ de péngyou bù zhīdào zěnme shàngqù.",
+   "e": "My friend doesn't know how to get up there.",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s185",
+   "h": "没有楼梯，我不知道怎么下去。",
+   "p": "Méiyǒu lóutī, wǒ bù zhīdào zěnme xiàqù.",
+   "e": "There are no stairs — I don't know how to get down.",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s186",
+   "h": "请问这个是多少钱？",
+   "p": "Qǐngwèn zhè ge shì duōshao qián?",
+   "e": "Excuse me, how much is this?",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s187",
+   "h": "你带了多少钱出来？",
+   "p": "Nǐ dài le duōshao qián chūlái?",
+   "e": "How much money did you bring out?",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s188",
+   "h": "医院里面还有多少人？",
+   "p": "Yīyuàn lǐmiàn hái yǒu duōshao rén?",
+   "e": "How many people are still in the hospital?",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s189",
+   "h": "我还没有吃饭。",
+   "p": "Wǒ hái méiyǒu chīfàn.",
+   "e": "I haven't eaten yet.",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s190",
+   "h": "现在是几点钟？",
+   "p": "Xiànzài shì jǐ diǎnzhōng?",
+   "e": "What time is it now?",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s191",
+   "h": "你身边有几个人喜欢你？",
+   "p": "Nǐ shēnbiān yǒu jǐ ge rén xǐhuan nǐ?",
+   "e": "How many people around you like you?",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s192",
+   "h": "你想看篮球还是足球？",
+   "p": "Nǐ xiǎng kàn lánqiú háishi zúqiú?",
+   "e": "Do you want to watch basketball or football?",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s193",
+   "h": "他在前面还是后面？",
+   "p": "Tā zài qiánmiàn háishi hòumiàn?",
+   "e": "Is he in front or behind?",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s194",
+   "h": "你喜欢吃鸡肉还是牛肉？",
+   "p": "Nǐ xǐhuan chī jīròu háishi niúròu?",
+   "e": "Do you prefer chicken or beef?",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s195",
+   "h": "我不知道这个是我的篮球还是他的篮球。",
+   "p": "Wǒ bù zhīdào zhè ge shì wǒ de lánqiú háishi tā de lánqiú.",
+   "e": "I don't know whether this is my basketball or his.",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s196",
+   "h": "我想知道她喜欢白色还是红色。",
+   "p": "Wǒ xiǎng zhīdào tā xǐhuan báisè háishi hóngsè.",
+   "e": "I want to know whether she likes white or red.",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s197",
+   "h": "我们现在可以上去或者留在这里。",
+   "p": "Wǒmen xiànzài kěyǐ shàngqù huòzhě liú zài zhèlǐ.",
+   "e": "We can go up now or stay here.",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s198",
+   "h": "我们今天可以看书或者看电影。",
+   "p": "Wǒmen jīntiān kěyǐ kàn shū huòzhě kàn diànyǐng.",
+   "e": "Today we can read a book or watch a film.",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s199",
+   "h": "你为什么要选这间餐厅？",
+   "p": "Nǐ wèishénme yào xuǎn zhè jiān cāntīng?",
+   "e": "Why did you pick this restaurant?",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s200",
+   "h": "我在上班，我怎么可以下来？",
+   "p": "Wǒ zài shàngbān, wǒ zěnme kěyǐ xiàlái?",
+   "e": "I'm at work — how can I come down?",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s201",
+   "h": "妈妈，你想煮饭还是粥？",
+   "p": "Māma, nǐ xiǎng zhǔ fàn háishi zhōu?",
+   "e": "Mum, do you want to make rice or congee?",
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "s202",
+   "h": "你去过中国了吗？",
+   "p": "Nǐ qù guo Zhōngguó le ma?",
+   "e": "Have you been to China?",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "s203",
+   "h": "他们做完功课了吗？",
+   "p": "Tāmen zuò wán gōngkè le ma?",
+   "e": "Have they finished their homework?",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "s204",
+   "h": "你开过这个盒子了吗？",
+   "p": "Nǐ kāi guo zhè ge hézi le ma?",
+   "e": "Have you opened this box before?",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "s205",
+   "h": "他是我们的司机吗？",
+   "p": "Tā shì wǒmen de sījī ma?",
+   "e": "Is he our driver?",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "s206",
+   "h": "他昨天回到家吗？",
+   "p": "Tā zuótiān huí dào jiā ma?",
+   "e": "Did he get home yesterday?",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "s207",
+   "h": "你还没想好吗？",
+   "p": "Nǐ hái méi xiǎng hǎo ma?",
+   "e": "Haven't you made up your mind yet?",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "s208",
+   "h": "这些东西都是你的吗？",
+   "p": "Zhèxiē dōngxi dōu shì nǐ de ma?",
+   "e": "Are all these things yours?",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "s209",
+   "h": "妈妈是昨天来的吗？",
+   "p": "Māma shì zuótiān lái de ma?",
+   "e": "Did Mum come yesterday?",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "s210",
+   "h": "你是很喜欢看书的吗？",
+   "p": "Nǐ shì hěn xǐhuan kàn shū de ma?",
+   "e": "Do you really like reading?",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "s211",
+   "h": "你现在要过来开会吗？",
+   "p": "Nǐ xiànzài yào guòlái kāihuì ma?",
+   "e": "Are you coming over for the meeting now?",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "s212",
+   "h": "他是你的男朋友吗？",
+   "p": "Tā shì nǐ de nánpéngyou ma?",
+   "e": "Is he your boyfriend?",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "s213",
+   "h": "你打开那个盒子了吗？",
+   "p": "Nǐ dǎkāi nà ge hézi le ma?",
+   "e": "Have you opened that box?",
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "s214",
+   "h": "这个是谁的钱包？",
+   "p": "Zhè ge shì shéi de qiánbāo?",
+   "e": "Whose wallet is this?",
+   "w": 6,
+   "l": "How Do You Ask Questions"
+  },
+  {
+   "id": "s215",
+   "h": "这个门是谁打开的？",
+   "p": "Zhè ge mén shì shéi dǎkāi de?",
+   "e": "Who opened this door?",
+   "w": 6,
+   "l": "How Do You Ask Questions"
+  },
+  {
+   "id": "s216",
+   "h": "这个是什么？",
+   "p": "Zhè ge shì shénme?",
+   "e": "What is this?",
+   "w": 6,
+   "l": "How Do You Ask Questions"
+  },
+  {
+   "id": "s217",
+   "h": "你找到什么？",
+   "p": "Nǐ zhǎodào shénme?",
+   "e": "What did you find?",
+   "w": 6,
+   "l": "How Do You Ask Questions"
+  },
+  {
+   "id": "s218",
+   "h": "现在有谁想开门进来？",
+   "p": "Xiànzài yǒu shéi xiǎng kāi mén jìnlái?",
+   "e": "Who wants to open the door and come in now?",
+   "w": 6,
+   "l": "How Do You Ask Questions"
+  },
+  {
+   "id": "s219",
+   "h": "妈妈跟你说了什么？",
+   "p": "Māma gēn nǐ shuō le shénme?",
+   "e": "What did Mum say to you?",
+   "w": 6,
+   "l": "How Do You Ask Questions"
+  },
+  {
+   "id": "s220",
+   "h": "所以女儿会什么时候出去？",
+   "p": "Suǒyǐ nǚ'ér huì shénme shíhou chūqù?",
+   "e": "So when will your daughter go out?",
+   "w": 6,
+   "l": "How Do You Ask Questions"
+  },
+  {
+   "id": "s221",
+   "h": "你好，你叫什么名字？",
+   "p": "Nǐ hǎo, nǐ jiào shénme míngzi?",
+   "e": "Hello, what's your name?",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "s222",
+   "h": "你好，叫我小…就可以了。",
+   "p": "Nǐ hǎo, jiào wǒ Xiǎo… jiù kěyǐ le.",
+   "e": "Hello, you can just call me Xiao-…",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "s223",
+   "h": "你的家好漂亮啊，装修得很有品味。",
+   "p": "Nǐ de jiā hǎo piàoliang a, zhuāngxiū de hěn yǒu pǐnwèi.",
+   "e": "Your home is lovely — it's decorated very tastefully.",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "s224",
+   "h": "谢谢，你是哪里人？",
+   "p": "Xièxie, nǐ shì nǎlǐ rén?",
+   "e": "Thanks — where are you from?",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "s225",
+   "h": "我是香港人，但是我小时候在英国长大。",
+   "p": "Wǒ shì Xiānggǎng rén, dànshì wǒ xiǎoshíhou zài Yīngguó zhǎngdà.",
+   "e": "I'm from Hong Kong, but I grew up in the UK.",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "s226",
+   "h": "我是英国人，家里人是从香港来的。",
+   "p": "Wǒ shì Yīngguó rén, jiālǐ rén shì cóng Xiānggǎng lái de.",
+   "e": "I'm British; my family originally came from Hong Kong.",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "s227",
+   "h": "听说你会一些普通话。",
+   "p": "Tīngshuō nǐ huì yìxiē pǔtōnghuà.",
+   "e": "I hear you know some Mandarin.",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "s228",
+   "h": "是啊，刚刚开始学，还有很多东西要学！",
+   "p": "Shì a, gānggāng kāishǐ xué, hái yǒu hěn duō dōngxi yào xué!",
+   "e": "Yes, I've only just started learning — there's still a lot to learn!",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "s229",
+   "h": "现在在哪里工作？",
+   "p": "Xiànzài zài nǎlǐ gōngzuò?",
+   "e": "Where do you work now?",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "s230",
+   "h": "我在一家科技公司工作，负责市场推广。",
+   "p": "Wǒ zài yì jiā kējì gōngsī gōngzuò, fùzé shìchǎng tuīguǎng.",
+   "e": "I work at a tech company, in marketing.",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "s231",
+   "h": "你平时有什么爱好？",
+   "p": "Nǐ píngshí yǒu shénme àihào?",
+   "e": "What are your hobbies?",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "s232",
+   "h": "我喜欢睡觉和打篮球。",
+   "p": "Wǒ xǐhuan shuìjiào hé dǎ lánqiú.",
+   "e": "I like sleeping and playing basketball.",
+   "w": 6,
+   "l": "Meeting a Friend's Parent"
+  },
+  {
+   "id": "s233",
+   "h": "爸爸，最近工作怎么样？",
+   "p": "Bàba, zuìjìn gōngzuò zěnmeyàng?",
+   "e": "Dad, how's work been lately?",
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "s234",
+   "h": "有点忙，有很多事情要处理。你呢？",
+   "p": "Yǒudiǎn máng, yǒu hěn duō shìqing yào chǔlǐ. Nǐ ne?",
+   "e": "A bit busy — there's a lot to deal with. And you?",
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "s235",
+   "h": "我也很忙，不过还算顺利。",
+   "p": "Wǒ yě hěn máng, búguò hái suàn shùnlì.",
+   "e": "I'm busy too, but it's going reasonably smoothly.",
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "s236",
+   "h": "那就好，压力大吗？",
+   "p": "Nà jiù hǎo, yālì dà ma?",
+   "e": "That's good — is the pressure heavy?",
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "s237",
+   "h": "有点大，不过我还可以应付。",
+   "p": "Yǒudiǎn dà, búguò wǒ hái kěyǐ yìngfu.",
+   "e": "A bit heavy, but I can still manage.",
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "s238",
+   "h": "最近身体怎么样？",
+   "p": "Zuìjìn shēntǐ zěnmeyàng?",
+   "e": "How's your health been recently?",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "s239",
+   "h": "你们打算什么时候生孩子啊？",
+   "p": "Nǐmen dǎsuàn shénme shíhou shēng háizi a?",
+   "e": "When are you planning to have children?",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "s240",
+   "h": "我觉得我们可以再等一下，晚点再生孩子。",
+   "p": "Wǒ juéde wǒmen kěyǐ zài děng yíxià, wǎndiǎn zài shēng háizi.",
+   "e": "I think we can wait a bit longer and have children later.",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "s241",
+   "h": "为什么呀？你现在年轻。",
+   "p": "Wèishénme ya? Nǐ xiànzài niánqīng.",
+   "e": "Why? You're young now.",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "s242",
+   "h": "早点生孩子对身体好。",
+   "p": "Zǎodiǎn shēng háizi duì shēntǐ hǎo.",
+   "e": "Having children earlier is better for your health.",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "s243",
+   "h": "不过我还在读书。",
+   "p": "Búguò wǒ hái zài dúshū.",
+   "e": "But I'm still studying.",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "s244",
+   "h": "我想毕业之后再生孩子。",
+   "p": "Wǒ xiǎng bìyè zhīhòu zài shēng háizi.",
+   "e": "I want to have children after I graduate.",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "s245",
+   "h": "生孩子其实不会影响你读书的。",
+   "p": "Shēng háizi qíshí bú huì yǐngxiǎng nǐ dúshū de.",
+   "e": "Having a child actually won't affect your studies.",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "s246",
+   "h": "我们也会帮忙照顾的。",
+   "p": "Wǒmen yě huì bāngmáng zhàogù de.",
+   "e": "We'll help take care of them too.",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "s247",
+   "h": "我们希望能准备好再生孩子。",
+   "p": "Wǒmen xīwàng néng zhǔnbèi hǎo zài shēng háizi.",
+   "e": "We hope to be properly ready before having children.",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "s248",
+   "h": "谢谢你的理解。",
+   "p": "Xièxie nǐ de lǐjiě.",
+   "e": "Thank you for understanding.",
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "s249",
+   "h": "准备搬去香港。",
+   "p": "Zhǔnbèi bān qù Xiānggǎng.",
+   "e": "Getting ready to move to Hong Kong.",
+   "w": 0,
+   "l": "Class Notes"
+  },
+  {
+   "id": "s250",
+   "h": "你可不可以给我一个机会？",
+   "p": "Nǐ kě bu kěyǐ gěi wǒ yí ge jīhuì?",
+   "e": "Could you give me a chance?",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "s251",
+   "h": "我会说一点中文。",
+   "p": "Wǒ huì shuō yìdiǎn Zhōngwén.",
+   "e": "I can speak a little Chinese.",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "s252",
+   "h": "没有没有，我的中文不太好。",
+   "p": "Méiyǒu méiyǒu, wǒ de Zhōngwén bú tài hǎo.",
+   "e": "No no, my Chinese isn't very good.",
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "s253",
+   "h": "我不知道这个地方。",
+   "p": "Wǒ bù zhīdào zhè ge dìfang.",
+   "e": "I don't know this place.",
+   "w": 0,
+   "l": "Practice Translations"
+  },
+  {
+   "id": "s254",
+   "h": "这个老师很聪明。",
+   "p": "Zhè ge lǎoshī hěn cōngmíng.",
+   "e": "This teacher is very smart.",
+   "w": 0,
+   "l": "Practice Translations"
+  },
+  {
+   "id": "s255",
+   "h": "你要看那部电影！很好看。",
+   "p": "Nǐ yào kàn nà bù diànyǐng! Hěn hǎokàn.",
+   "e": "You have to watch that film! It's really good.",
+   "w": 0,
+   "l": "Practice Translations"
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g001",
+   "t": "在 before a verb = ongoing action",
+   "s": "Cantonese 緊 (gan2) becomes 在 (zài), but it goes BEFORE the verb, not after it.",
+   "ex": [
+    {
+     "h": "我在做功课。",
+     "p": "Wǒ zài zuò gōngkè.",
+     "e": "I am doing homework."
+    },
+    {
+     "h": "表哥在吃饭。",
+     "p": "Biǎogē zài chīfàn.",
+     "e": "My cousin is eating."
+    }
+   ],
+   "w": 2,
+   "l": "Verb Actions"
+  },
+  {
+   "id": "g002",
+   "t": "了 marks a completed action",
+   "s": "Cantonese 咗 (zo2) becomes 了 (le). It attaches to the verb or sits at the end of the clause.",
+   "ex": [
+    {
+     "h": "他已经毕业了。",
+     "p": "Tā yǐjīng bìyè le.",
+     "e": "He has already graduated."
+    },
+    {
+     "h": "我到家了。",
+     "p": "Wǒ dào jiā le.",
+     "e": "I've arrived home."
+    }
+   ],
+   "w": 2,
+   "l": "Verb Actions"
+  },
+  {
+   "id": "g003",
+   "t": "和 = with / and — verb comes after",
+   "s": "和 (hé) replaces Cantonese 同 (tung4). The verb follows the 和-phrase, not before it.",
+   "ex": [
+    {
+     "h": "你可不可以和我出去？",
+     "p": "Nǐ kě bu kěyǐ hé wǒ chūqù?",
+     "e": "Can you come out with me?"
+    }
+   ],
+   "w": 2,
+   "l": "Verb Actions"
+  },
+  {
+   "id": "g004",
+   "t": "是…的 states an established fact",
+   "s": "Cantonese 係…㗎 becomes 是…的 (shì…de). Used to emphasise when, where or how something happened.",
+   "ex": [
+    {
+     "h": "我是上个星期回家的。",
+     "p": "Wǒ shì shàng ge xīngqī huí jiā de.",
+     "e": "It was last week that I went home."
+    },
+    {
+     "h": "这件外套我是在美国买的。",
+     "p": "Zhè jiàn wàitào wǒ shì zài Měiguó mǎi de.",
+     "e": "I bought this jacket in America."
+    }
+   ],
+   "w": 4,
+   "l": "To Be or Not To Be"
+  },
+  {
+   "id": "g005",
+   "t": "给: indirect object comes first",
+   "s": "Cantonese is 畀 + direct object + indirect object. Mandarin reverses it: 给 + person + thing.",
+   "ex": [
+    {
+     "h": "我给你一杯水。",
+     "p": "Wǒ gěi nǐ yì bēi shuǐ.",
+     "e": "I give you a glass of water."
+    }
+   ],
+   "w": 3,
+   "l": "Lesson 5"
+  },
+  {
+   "id": "g006",
+   "t": "还是 vs 或者 — two kinds of 'or'",
+   "s": "还是 (háishi) is for questions offering a choice. 或者 (huòzhě) is for statements.",
+   "ex": [
+    {
+     "h": "你想看篮球还是足球？",
+     "p": "Nǐ xiǎng kàn lánqiú háishi zúqiú?",
+     "e": "Do you want to watch basketball or football?"
+    },
+    {
+     "h": "我们今天可以看书或者看电影。",
+     "p": "Wǒmen jīntiān kěyǐ kàn shū huòzhě kàn diànyǐng.",
+     "e": "Today we can read or watch a film."
+    }
+   ],
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "g007",
+   "t": "是 vs 对 — two kinds of 'yes'",
+   "s": "是 (shì) answers a yes/no question. 对 (duì) confirms that something is correct or agrees with it.",
+   "ex": [],
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "g008",
+   "t": "这 / 那 / 哪 — this, that, which",
+   "s": "Cantonese 呢/嗰/邊 map to 这 (zhè) / 那 (nà) / 哪 (nǎ). Note 那 and 哪 differ only by tone.",
+   "ex": [
+    {
+     "h": "我不知道这个地方。",
+     "p": "Wǒ bù zhīdào zhè ge dìfang.",
+     "e": "I don't know this place."
+    }
+   ],
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "g009",
+   "t": "里 for location",
+   "s": "Cantonese 度 (dou6) becomes 里 (lǐ): 这里 here, 那里 there, 哪里 where. Also used for being inside something.",
+   "ex": [
+    {
+     "h": "我在家里。",
+     "p": "Wǒ zài jiā lǐ.",
+     "e": "I'm at home."
+    }
+   ],
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "g010",
+   "t": "面 — positional suffix",
+   "s": "前面 in front · 后面 behind · 上面 above · 下面 below · 对面 opposite · 里面 inside · 外面 outside.",
+   "ex": [
+    {
+     "h": "我坐在你对面。",
+     "p": "Wǒ zuò zài nǐ duìmiàn.",
+     "e": "I'm sitting opposite you."
+    }
+   ],
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "g011",
+   "t": "边 — side suffix",
+   "s": "这边 this side · 那边 that side · 身边 at one's side · 路边 roadside · 左手边 left · 右手边 right · 旁边 beside.",
+   "ex": [
+    {
+     "h": "你站在我身边。",
+     "p": "Nǐ zhàn zài wǒ shēnbiān.",
+     "e": "You're standing beside me."
+    }
+   ],
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "g012",
+   "t": "Measure words differ from Cantonese",
+   "s": "个 (gè) general · 本 (běn) books · 只 (zhī) animals · 件 (jiàn) clothing · 部 (bù) phones and films · 条 (tiáo) roads · 间 (jiān) rooms and shops · 些 (xiē) several.",
+   "ex": [
+    {
+     "h": "这本书",
+     "p": "zhè běn shū",
+     "e": "this book"
+    },
+    {
+     "h": "那只狗",
+     "p": "nà zhī gǒu",
+     "e": "that dog"
+    }
+   ],
+   "w": 3,
+   "l": "Talking About Diet"
+  },
+  {
+   "id": "g013",
+   "t": "怎么 = how",
+   "s": "Cantonese 點 (dim2) becomes 怎么 (zěnme).",
+   "ex": [
+    {
+     "h": "我不知道怎么用中文讲。",
+     "p": "Wǒ bù zhīdào zěnme yòng Zhōngwén jiǎng.",
+     "e": "I don't know how to say it in Chinese."
+    }
+   ],
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "g014",
+   "t": "多少 vs 几",
+   "s": "多少 (duōshao) for open-ended or large quantities. 几 (jǐ) when the answer is expected to be small, and for telling the time.",
+   "ex": [
+    {
+     "h": "你带了多少钱出来？",
+     "p": "Nǐ dài le duōshao qián chūlái?",
+     "e": "How much money did you bring?"
+    },
+    {
+     "h": "现在是几点钟？",
+     "p": "Xiànzài shì jǐ diǎnzhōng?",
+     "e": "What time is it now?"
+    }
+   ],
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "g015",
+   "t": "Question words: 谁 / 什么 / 哪里 / 什么时候",
+   "s": "谁 (shéi) who · 什么 (shénme) what · 哪里 (nǎlǐ) where · 什么时候 (shénme shíhou) when.",
+   "ex": [
+    {
+     "h": "这个是谁的钱包？",
+     "p": "Zhè ge shì shéi de qiánbāo?",
+     "e": "Whose wallet is this?"
+    }
+   ],
+   "w": 6,
+   "l": "How Do You Ask Questions"
+  },
+  {
+   "id": "g016",
+   "t": "Asking without 吗: 了吗 and 的吗",
+   "s": "Cantonese 未呀 becomes 了吗 (le ma) for 'have you yet?'. 㗎 becomes 的吗 (de ma) for confirming a characteristic.",
+   "ex": [
+    {
+     "h": "你去过中国了吗？",
+     "p": "Nǐ qù guo Zhōngguó le ma?",
+     "e": "Have you been to China?"
+    },
+    {
+     "h": "这些东西都是你的吗？",
+     "p": "Zhèxiē dōngxi dōu shì nǐ de ma?",
+     "e": "Are all these things yours?"
+    }
+   ],
+   "w": 6,
+   "l": "Asking Even More Questions"
+  },
+  {
+   "id": "g017",
+   "t": "Telling the time",
+   "s": "Number + 点 + number + 分. 半 (bàn) for half past. Add 上午 / 下午 / 早上 / 晚上 before it for am/pm.",
+   "ex": [
+    {
+     "h": "十点二十五分",
+     "p": "shí diǎn èrshíwǔ fēn",
+     "e": "10:25"
+    },
+    {
+     "h": "八点半",
+     "p": "bā diǎn bàn",
+     "e": "8:30"
+    }
+   ],
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "g018",
+   "t": "Last vs next: 上/下 vs 昨/明 vs 去/明",
+   "s": "Day uses 昨 / 明. Week and month use 上 / 下. Year uses 去 / 明. Mixing these up is the most common slip.",
+   "ex": [
+    {
+     "h": "上个月 · 这个月 · 下个月",
+     "p": "shàng ge yuè · zhè ge yuè · xià ge yuè",
+     "e": "last · this · next month"
+    },
+    {
+     "h": "去年 · 今年 · 明年",
+     "p": "qùnián · jīnnián · míngnián",
+     "e": "last · this · next year"
+    }
+   ],
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "g019",
+   "t": "周 vs 星期 vs 礼拜",
+   "s": "周 (zhōu) takes no 个: 上周, 这周, 下周. 星期 and 礼拜 take 个: 上个星期, 下个礼拜.",
+   "ex": [],
+   "w": 5,
+   "l": "Indicating Time"
+  },
+  {
+   "id": "g020",
+   "t": "前 vs 上",
+   "s": "前 (qián) means 'ago' looking backwards from now — 两周前 two weeks ago. 上 (shàng) means the previous one — 上周 last week.",
+   "ex": [],
+   "w": 0,
+   "l": "My Own Phrases"
+  },
+  {
+   "id": "g021",
+   "t": "对 vs 的 with 过敏",
+   "s": "Use 对 (duì) for 'allergic to X': 我对花生过敏. 的 (de) is for describing possession, not the target of a reaction.",
+   "ex": [
+    {
+     "h": "我对花生过敏。",
+     "p": "Wǒ duì huāshēng guòmǐn.",
+     "e": "I'm allergic to peanuts."
+    }
+   ],
+   "w": 2,
+   "l": "Ordering at a Restaurant"
+  },
+  {
+   "id": "g022",
+   "t": "就 vs 然后 — two kinds of 'then'",
+   "s": "就 (jiù) means 'then, as an immediate result'. 然后 (ránhòu) means 'and afterwards' in a sequence.",
+   "ex": [
+    {
+     "h": "到左边的路口就右转。",
+     "p": "Dào zuǒbiān de lùkǒu jiù yòu zhuǎn.",
+     "e": "At the left junction, turn right."
+    },
+    {
+     "h": "直走然后右转。",
+     "p": "Zhí zǒu ránhòu yòu zhuǎn.",
+     "e": "Go straight and then turn right."
+    }
+   ],
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "g023",
+   "t": "觉得 vs 想 vs 认为",
+   "s": "觉得 (juéde) is the everyday 'I think / it feels to me'. 想 (xiǎng) mostly means 'want to' or 'miss'. 认为 (rènwéi) is formal 'hold the view that'.",
+   "ex": [
+    {
+     "h": "我觉得我们可以再等一下。",
+     "p": "Wǒ juéde wǒmen kěyǐ zài děng yíxià.",
+     "e": "I think we can wait a bit longer."
+    }
+   ],
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "g024",
+   "t": "不会 vs 不是",
+   "s": "不会 (bú huì) expresses a prediction or likelihood. 不是 (bú shì) denies an identity or a fact.",
+   "ex": [
+    {
+     "h": "生孩子其实不会影响你读书的。",
+     "p": "Shēng háizi qíshí bú huì yǐngxiǎng nǐ dúshū de.",
+     "e": "Having a child won't affect your studies."
+    }
+   ],
+   "w": 6,
+   "l": "When Elders Ask About Kids"
+  },
+  {
+   "id": "g025",
+   "t": "东西 vs 事情",
+   "s": "东西 (dōngxi) is for tangible things you can hold. 事情 (shìqing) is for matters, tasks and abstract things.",
+   "ex": [
+    {
+     "h": "有很多事情要处理。",
+     "p": "Yǒu hěn duō shìqing yào chǔlǐ.",
+     "e": "There's a lot to deal with."
+    }
+   ],
+   "w": 6,
+   "l": "Work and Stress"
+  },
+  {
+   "id": "g026",
+   "t": "工作 vs 上班",
+   "s": "工作 (gōngzuò) is your job — what you do and where. 上班 (shàngbān) is the act of going to work, about schedule.",
+   "ex": [
+    {
+     "h": "我在银行工作。",
+     "p": "Wǒ zài yínháng gōngzuò.",
+     "e": "I work at a bank."
+    },
+    {
+     "h": "我九点上班。",
+     "p": "Wǒ jiǔ diǎn shàngbān.",
+     "e": "I start work at nine."
+    }
+   ],
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "g027",
+   "t": "看 vs 见",
+   "s": "看 (kàn) is to look at or watch. 见 (jiàn) is to see or meet someone.",
+   "ex": [
+    {
+     "h": "你要去学校后面见他。",
+     "p": "Nǐ yào qù xuéxiào hòumiàn jiàn tā.",
+     "e": "Go behind the school to meet him."
+    }
+   ],
+   "w": 4,
+   "l": "Lesson 7"
+  },
+  {
+   "id": "g028",
+   "t": "找 vs 在",
+   "s": "找 (zhǎo) is to look for or search. 在 (zài) is to be located at.",
+   "ex": [],
+   "w": 4,
+   "l": "Ordering Directions"
+  },
+  {
+   "id": "g029",
+   "t": "放假 vs 房价 — mind the tones",
+   "s": "放假 fàngjià = to take a holiday. 房价 fángjià = house prices. Same syllables, different first tone.",
+   "ex": [],
+   "w": 6,
+   "l": "Finances & Nosy Elders"
+  },
+  {
+   "id": "g030",
+   "t": "没有 replaces Cantonese 冇",
+   "s": "冇 (mou5) becomes 没有 (méiyǒu). Used both for 'don't have' and to negate a past action.",
+   "ex": [
+    {
+     "h": "哥哥没有出去。",
+     "p": "Gēge méiyǒu chūqù.",
+     "e": "My brother didn't go out."
+    }
+   ],
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  },
+  {
+   "id": "g031",
+   "t": "还 replaces Cantonese 仲",
+   "s": "仲 (zung6) becomes 还 (hái): 还在 still there, 还没 not yet, 还有 still have.",
+   "ex": [
+    {
+     "h": "我还没有吃饭。",
+     "p": "Wǒ hái méiyǒu chīfàn.",
+     "e": "I haven't eaten yet."
+    }
+   ],
+   "w": 6,
+   "l": "Asking More Questions"
+  },
+  {
+   "id": "g032",
+   "t": "在读 — 'ing' goes in front",
+   "s": "在读 (zài dú) literally reads 'ing-study'. The aspect marker leads in Mandarin, the opposite of the Cantonese order.",
+   "ex": [
+    {
+     "h": "我现在在读大四。",
+     "p": "Wǒ xiànzài zài dú dà sì.",
+     "e": "I'm in my fourth year."
+    }
+   ],
+   "w": 2,
+   "l": "Sharing Your Field of Study"
+  }
+ ]
+}

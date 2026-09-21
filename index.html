@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+<title>Hanzi</title>
+<meta name="theme-color" content="#F6F1E6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Hanzi">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Noto+Serif+SC:wght@400;500&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <div id="screens">
+    <section class="screen on" id="today"></section>
+    <section class="screen" id="library"></section>
+    <section class="screen" id="review"></section>
+    <section class="screen" id="progress"></section>
+    <section class="screen" id="settings"></section>
+  </div>
+  <nav id="tabs"></nav>
+</div>
+<div id="sheet"><div class="scrim"></div><div class="panel"></div></div>
+<div id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
