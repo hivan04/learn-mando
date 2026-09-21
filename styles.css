@@ -224,3 +224,42 @@ input{font:inherit;color:inherit;background:none;border:0;outline:0;user-select:
   font:500 13px/1 var(--sans);opacity:0;pointer-events:none;transition:.24s;z-index:80;white-space:nowrap}
 #toast.on{opacity:1;transform:translateX(-50%)}
 .sect h4.sp{margin-top:26px}
+
+/* ── jyutping & hints ──────────────────────────────────────── */
+.jyut{font:400 14px/1.4 var(--mono);color:var(--teal);
+  display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap}
+.jyut.mt{margin-top:14px}
+.jlab{font:500 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink5);background:var(--wash);padding:4px 7px;border-radius:4px}
+.jsmall{font:400 12.5px/1 var(--mono);color:var(--teal);margin-left:10px}
+.hintwrap{text-align:center}
+.hintbtn{font:500 12px/1 var(--sans);color:var(--teal);background:var(--card);
+  border:1px dashed var(--teal);padding:9px 16px;border-radius:999px}
+.vtag{font:500 9px/1 var(--han);font-style:normal;color:var(--ink5);
+  position:absolute;bottom:-9px;left:50%;transform:translateX(-50%)}
+.acts button,.iconbtn{position:relative}
+.rowbtns{margin-top:16px;display:flex;justify-content:center;gap:26px}
+.iconbtn svg{stroke:var(--ink4);fill:none}
+.iconbtn.busy svg{stroke:var(--red)}
+
+/* ── test ──────────────────────────────────────────────────── */
+.lede{margin:0;font:400 14.5px/1.65 var(--sans);color:var(--ink3);max-width:34em;text-wrap:pretty}
+#test .prompt{font:500 54px/1.15 var(--han);word-break:break-all}
+#test .prompt.small{font:400 22px/1.45 var(--sans)}
+.playbig{width:76px;height:76px;border-radius:999px;background:var(--ink);
+  display:inline-flex;align-items:center;justify-content:center}
+.playbig:active{opacity:.82}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{width:100%;padding:16px 16px;border-radius:14px;background:var(--card);
+  border:1px solid var(--line2);text-align:left;font:400 15px/1.4 var(--sans);
+  color:var(--ink);transition:border-color .15s,background .15s}
+.opt:disabled{opacity:1}
+.opt.right{border:1.5px solid var(--sage);background:color-mix(in srgb,var(--sage) 12%,var(--card))}
+.opt.wrong{border:1.5px solid var(--red);background:color-mix(in srgb,var(--red) 10%,var(--card))}
+.feed{margin-top:18px;padding:16px;border-radius:16px;border:1px solid var(--line)}
+.feed.ok{background:color-mix(in srgb,var(--sage) 10%,var(--card))}
+.feed.no{background:color-mix(in srgb,var(--red) 8%,var(--card))}
+.fhead{font:500 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
+.feed.ok .fhead{color:var(--sage)} .feed.no .fhead{color:var(--red)}
+#tabs button{min-width:0}
+#tabs span{white-space:nowrap}

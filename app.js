@@ -8,7 +8,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const DEF={deck:'notes',hsk:1,pyIdx:'All',week:'all',kind:'vocab',rotate:3,tones:true,theme:'auto',
            newPerDay:8,reviewLimit:60,libMode:'chars'};
 let S=load('hanzi.settings',DEF);
-let P=load('hanzi.progress',{cards:{},log:{},streak:{n:0,last:null},seen:[]});
+let P=load('hanzi.progress',{cards:{},log:{},streak:{n:0,last:null},seen:[],tests:[]});
 function load(k,d){try{return Object.assign(structuredClone(d),JSON.parse(localStorage.getItem(k)||'{}'))}catch(e){return structuredClone(d)}}
 function saveS(){try{localStorage.setItem('hanzi.settings',JSON.stringify(S))}catch(e){}}
 function saveP(){try{localStorage.setItem('hanzi.progress',JSON.stringify(P))}catch(e){}}
@@ -75,17 +75,17 @@ function nextRotation(hours){
 /* ── card pool ─────────────────────────────────────────────── */
 function pool(){
   if(S.deck==='hsk'){
-    return D.hsk.words.filter(w=>w.lv<=S.hsk).map(w=>({id:'h:'+w.h,h:w.h,p:w.p,e:w.e,meta:'HSK '+w.lv}));
+    return D.hsk.words.filter(w=>w.lv<=S.hsk).map(w=>({id:'h:'+w.h,h:w.h,p:w.p,e:w.e,j:w.j,meta:'HSK '+w.lv}));
   }
   const out=[];
-  for(const v of D.notes.vocab) out.push({id:'v:'+v.id,h:v.h,p:v.p,e:v.e,meta:v.l,w:v.w});
-  for(const s of D.notes.sentences) out.push({id:'s:'+s.id,h:s.h,p:s.p,e:s.e,meta:s.l,w:s.w,long:1});
+  for(const v of D.notes.vocab) out.push({id:'v:'+v.id,h:v.h,p:v.p,e:v.e,j:v.j,meta:v.l,w:v.w});
+  for(const s of D.notes.sentences) out.push({id:'s:'+s.id,h:s.h,p:s.p,e:s.e,j:s.j,meta:s.l,w:s.w,long:1});
   return out;
 }
 function cotdPool(){
   return S.deck==='hsk'
-    ? D.hsk.words.filter(w=>w.lv<=S.hsk).map(w=>({h:w.h,p:w.p,e:w.e}))
-    : D.notes.vocab.map(v=>({h:v.h,p:v.p,e:v.e,w:v.w,l:v.l}));
+    ? D.hsk.words.filter(w=>w.lv<=S.hsk).map(w=>({h:w.h,p:w.p,e:w.e,j:w.j}))
+    : D.notes.vocab.map(v=>({h:v.h,p:v.p,e:v.e,j:v.j,w:v.w,l:v.l}));
 }
 function exampleFor(h){
   const hits=D.notes.sentences.filter(x=>x.h.includes(h)).sort((a,b)=>a.h.length-b.h.length);
@@ -179,17 +179,21 @@ function drawChar(host,ch,{animate=true,radical=true}={}){
 
 /* ── speech ────────────────────────────────────────────────── */
 let voices=[];
-function pickVoice(){
-  voices=speechSynthesis.getVoices();
-  return voices.find(v=>/^zh[-_]CN/i.test(v.lang))||voices.find(v=>/^zh/i.test(v.lang));
+function refreshVoices(){ try{voices=speechSynthesis.getVoices()}catch(e){voices=[]} }
+speechSynthesis&&(speechSynthesis.onvoiceschanged=refreshVoices);
+function pickVoice(lang){
+  if(!voices.length) refreshVoices();
+  const tag=lang==='yue'?/^zh[-_](HK|YUE)|^yue/i:/^zh[-_](CN|Hans)|^cmn/i;
+  return voices.find(v=>tag.test(v.lang))||voices.find(v=>/^zh/i.test(v.lang));
 }
-speechSynthesis&&(speechSynthesis.onvoiceschanged=pickVoice);
-function say(text,btn){
-  if(!window.speechSynthesis) return toast('Speech not available');
+const hasCanto=()=>{ if(!voices.length) refreshVoices();
+  return voices.some(v=>/^zh[-_](HK|YUE)|^yue/i.test(v.lang)) }
+function say(text,btn,lang){
+  if(!window.speechSynthesis) return toast('Speech not available on this device');
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(text);
-  const v=pickVoice(); if(v) u.voice=v;
-  u.lang='zh-CN'; u.rate=.82;
+  const v=pickVoice(lang); if(v) u.voice=v;
+  u.lang=lang==='yue'?'zh-HK':'zh-CN'; u.rate=.8;
   if(btn){btn.classList.add('busy'); u.onend=u.onerror=()=>btn.classList.remove('busy')}
   speechSynthesis.speak(u);
 }
@@ -206,6 +210,7 @@ const I={
   review:'<rect x="3.5" y="5.5" width="15" height="11" rx="2.5"/><path d="M7.5 11h7" stroke-linecap="round"/>',
   progress:'<rect x="4" y="12" width="3.4" height="6" rx="1"/><rect x="9.3" y="8" width="3.4" height="10" rx="1"/><rect x="14.6" y="4.5" width="3.4" height="13.5" rx="1"/>',
   settings:'<circle cx="11" cy="11" r="3"/><circle cx="11" cy="11" r="7.5" stroke-dasharray="3 3"/>',
+  test:'<path d="M5 3.5h12v15H5z"/><path d="M8 8h6M8 11.5h6M8 15h3.5" stroke-linecap="round"/>',
   speak:'<path d="M3 7h3.5L11 3v13L6.5 12H3V7z" fill="currentColor" stroke="none"/><path d="M14 6a5 5 0 010 7" stroke-linecap="round"/>',
   star:'<path d="M9 1.6l2.1 4.4 4.8.7-3.5 3.4.8 4.8L9 12.6 4.8 14.9l.8-4.8L2.1 6.7l4.8-.7L9 1.6z" stroke-linejoin="round"/>',
   replay:'<path d="M3 9a6 6 0 106-6" stroke-linecap="round"/><path d="M3 3v3.2h3.2" stroke-linecap="round" stroke-linejoin="round"/>',
@@ -262,7 +267,7 @@ function renderToday(){
     <div class="tile out">
       <div class="num">${learned()}</div>
       <div class="lab">characters learned</div>
-      <div class="go" style="color:var(--ink4)">${S.deck==='hsk'?'HSK 1–'+S.hsk:'My notes'}</div>
+      <div class="go" style="color:var(--ink4)">${S.deck==='hsk'?'HSK '+(S.hsk>1?'1–'+S.hsk:'1'):'My notes'}</div>
     </div>
   </div>
   ${P.seen.length?`<div class="eyebrow" style="margin:18px 0 10px 2px">Recently seen</div>
@@ -358,10 +363,10 @@ function libItems(){
           return two.includes(L)?b.startsWith(L)
             :(b.startsWith(L)&&!two.some(t=>b.startsWith(t)&&t[0]===L))})
         .filter(c=>!q||c.c.includes(libQuery.trim())||stripTone(c.p||'').includes(q)||(c.e||'').toLowerCase().includes(q))
-        .map(c=>({kind:'char',h:c.c,p:c.p,e:c.e,n:c.n,lv:c.lv}));
+        .map(c=>({kind:'char',h:c.c,p:c.p,e:c.e,j:c.j,n:c.n,lv:c.lv}));
     }
     return D.hsk.words.filter(w=>w.lv===S.hsk).filter(match)
-      .map(w=>({kind:'word',h:w.h,p:w.p,e:w.e,tag:'HSK '+w.lv}));
+      .map(w=>({kind:'word',h:w.h,p:w.p,e:w.e,j:w.j,tag:'HSK '+w.lv}));
   }
   const wk=S.week;
   const inWeek=o=>wk==='all'||String(o.w)===String(wk);
@@ -372,7 +377,7 @@ function libItems(){
   }
   const src=S.kind==='vocab'?D.notes.vocab:D.notes.sentences;
   return src.filter(inWeek).filter(match)
-    .map(o=>({kind:S.kind==='vocab'?'word':'sent',h:o.h,p:o.p,e:o.e,tag:o.w?'W'+o.w:'Extra',meta:o.l}));
+    .map(o=>({kind:S.kind==='vocab'?'word':'sent',h:o.h,p:o.p,e:o.e,j:o.j,tag:o.w?'W'+o.w:'Extra',meta:o.l}));
 }
 function fillLib(){
   const items=libItems(), body=$('#libBody');
@@ -432,6 +437,9 @@ async function openChar(h,ctx){
   const en=(ctx&&ctx.e)||(word&&word.e)||info.e||'';
   const tone=toneOf((py||'').split(' ')[0]||'');
   const one=single.length===1&&[...h].length===1;
+  const noteHit=D.notes.vocab.find(v=>v.h===h)||D.notes.sentences.find(x=>x.h===h);
+  const jy=(ctx&&ctx.j)||(word&&word.j)||(noteHit&&noteHit.j)||(one?info.j:'')||'';
+
   const inNotes=D.notes.vocab.some(v=>v.h===h)||D.notes.sentences.some(x=>x.h===h)||(one&&info.mine);
   const appears=D.hsk.words.filter(w=>w.h!==h&&w.h.includes(single[0])).slice(0,8);
   const mine=D.notes.vocab.filter(v=>v.h!==h&&v.h.includes(single[0])).slice(0,6);
@@ -447,6 +455,7 @@ async function openChar(h,ctx){
     <div class="hero">
       <div class="big han">${esc(h)}</div>
       <div class="py">${colorPy(py)}</div>
+      ${jy?`<div class="jyut"><span class="jlab">Cantonese</span>${esc(jy)}</div>`:''}
       <div class="metas">
         ${word?`<span class="tag">HSK ${word.lv}</span>`
           :(one&&info.lv?`<span class="tag">HSK ${info.lv}</span>`:'')}
@@ -455,7 +464,8 @@ async function openChar(h,ctx){
         ${inNotes?`<span class="tag" style="color:var(--sage)">IN MY NOTES</span>`:''}
       </div>
       <div class="acts">
-        <button id="actSay">${svg('speak',20)}</button>
+        <button id="actSay" title="Mandarin">${svg('speak',20)}<em class="vtag">普</em></button>
+        ${hasCanto()?`<button id="actSayYue" title="Cantonese">${svg('speak',20)}<em class="vtag">粵</em></button>`:''}
         <button id="actReplay">${svg('replay',18)}</button>
       </div>
     </div>
@@ -485,6 +495,7 @@ async function openChar(h,ctx){
   $('#sheetBack').onclick=closeSheet;
   $('#sheet .scrim').onclick=closeSheet;
   $('#actSay').onclick=e=>say(h,e.currentTarget);
+  const yb=$('#actSayYue'); if(yb) yb.onclick=e=>say(h,e.currentTarget,'yue');
   $('#sheetAdd').onclick=()=>{card((S.deck==='hsk'?'h:':'v:')+h);saveP();toast('Added to review deck')};
   $('#sheetStudy').onclick=()=>{closeSheet();go('review')};
   $$('.jump',$('#sheet')).forEach(b=>b.onclick=()=>openChar(b.dataset.h));
@@ -504,10 +515,10 @@ async function openChar(h,ctx){
 function closeSheet(){$('#sheet').classList.remove('on');sheetChar=null;speechSynthesis&&speechSynthesis.cancel()}
 
 /* ── REVIEW ────────────────────────────────────────────────── */
-let R={queue:[],i:0,shown:false,ok:0,miss:0,mode:'h2e'};
+let R={queue:[],i:0,shown:false,hinted:false,ok:0,miss:0,mode:'h2e'};
 const MODES={h2e:'Hanzi → meaning',e2h:'Meaning → hanzi',p2h:'Pinyin → hanzi'};
 function startReview(){
-  R.queue=dueCards(); R.i=0; R.ok=0; R.miss=0; R.shown=false;
+  R.queue=dueCards(); R.i=0; R.ok=0; R.miss=0; R.shown=false; R.hinted=false;
   renderReview();
 }
 function renderReview(){
@@ -563,7 +574,13 @@ function renderReview(){
       <div class="eyebrow">${MODES[R.mode]}</div>
       <div style="margin-top:22px">${front}</div>
       ${R.shown?`<div class="reveal">${back}
-        <div style="margin-top:14px"><button id="revSay">${svg('speak',20,'var(--ink4)')}</button></div></div>`:''}
+        ${c.j?`<div class="jyut mt" id="revJyut" hidden><span class="jlab">Cantonese</span>${esc(c.j)}</div>`:''}
+        <div class="rowbtns">
+          <button id="revSay" class="iconbtn">${svg('speak',20,'var(--ink4)')}</button>
+          ${hasCanto()?`<button id="revSayYue" class="iconbtn">${svg('speak',20,'var(--ink4)')}<em class="vtag">粵</em></button>`:''}
+        </div></div>`
+      :(c.j?`<div class="hintwrap"><button id="revHint" class="hintbtn">Hint · Cantonese</button>
+             <div class="jyut mt" id="revJyut" hidden><span class="jlab">Cantonese</span>${esc(c.j)}</div></div>`:'')}
     </div>
     ${R.shown?'':'<div class="tapme">tap the card to reveal</div>'}
   </div>
@@ -580,10 +597,218 @@ function renderReview(){
   $('#qcard').onclick=()=>{if(!R.shown)reveal()};
   const sb=$('#revShow'); if(sb) sb.onclick=reveal;
   const sy=$('#revSay'); if(sy) sy.onclick=e=>{e.stopPropagation();say(c.h,e.currentTarget)};
+  const syy=$('#revSayYue'); if(syy) syy.onclick=e=>{e.stopPropagation();say(c.h,e.currentTarget,'yue')};
+  const hb=$('#revHint'); if(hb) hb.onclick=e=>{e.stopPropagation();
+    $('#revJyut').hidden=false; hb.hidden=true; R.hinted=true;
+    if(hasCanto())say(c.h,null,'yue')};
+  if(R.shown&&R.hinted&&$('#revJyut')) $('#revJyut').hidden=false;
   $$('.grades button').forEach(b=>b.onclick=()=>{
     const g=b.dataset.g; grade(c.id,g);
     g==='again'?R.miss++:R.ok++;
-    R.i++; R.shown=false; renderReview();
+    R.i++; R.shown=false; R.hinted=false; renderReview();
+  });
+}
+
+
+/* ── TEST ──────────────────────────────────────────────────── */
+let T={stage:'setup',qs:[],i:0,picked:null,hinted:false,wrong:[],
+       kind:'mixed',len:15,src:'all'};
+const TKINDS={listening:'Listening',reading:'Reading',mixed:'Mixed'};
+const TSRC={notes:'My notes',hsk:'HSK',all:'Everything'};
+
+function testPool(){
+  const out=[];
+  if(T.src!=='hsk')
+    for(const v of D.notes.vocab)
+      if(v.h.length<=6) out.push({id:'v:'+v.id,h:v.h,p:v.p,e:v.e,j:v.j,tag:v.w?'Week '+v.w:'Notes'});
+  if(T.src!=='notes')
+    for(const w of D.hsk.words)
+      if(w.lv<=S.hsk&&w.h.length<=6) out.push({id:'h:'+w.h,h:w.h,p:w.p,e:w.e,j:w.j,tag:'HSK '+w.lv});
+  // de-duplicate on the characters, keeping the notes copy
+  const seen=new Set(); return out.filter(o=>seen.has(o.h)?false:(seen.add(o.h),true));
+}
+const shuffle=a=>{const b=a.slice();
+  for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}
+  return b};
+const firstEn=e=>(e||'').split(/[;·]/)[0].trim().slice(0,46);
+
+function distractors(pool,answer,key,n=3){
+  const want=String(answer[key]||'');
+  const same=o=>String(o[key]||'');
+  // prefer words that start with the same pinyin letter — harder, fairer
+  const initial=stripTone(answer.p||'')[0];
+  const near=shuffle(pool.filter(o=>o.h!==answer.h&&same(o)&&same(o)!==want
+    &&stripTone(o.p||'')[0]===initial));
+  const rest=shuffle(pool.filter(o=>o.h!==answer.h&&same(o)&&same(o)!==want));
+  const out=[],used=new Set([want]);
+  for(const o of [...near,...rest]){
+    if(out.length>=n) break;
+    if(used.has(same(o))) continue;
+    used.add(same(o)); out.push(o);
+  }
+  return out;
+}
+function buildTest(){
+  const pool=testPool();
+  if(pool.length<6){T.qs=[];return}
+  const canto=hasCanto();
+  const picks=shuffle(pool).slice(0,T.len);
+  T.qs=picks.map(a=>{
+    let type;
+    if(T.kind==='listening') type='hear';
+    else if(T.kind==='reading') type=Math.random()<.5?'read':'toHanzi';
+    else type=['hear','read','toHanzi','hear'][Math.floor(Math.random()*4)];
+    // listening in both languages, labelled — Cantonese only if a voice exists
+    const lang=(type==='hear'&&canto&&Math.random()<.4)?'yue':'cmn';
+    const key=type==='read'?'e':'h';
+    const opts=shuffle([a,...distractors(pool,a,key)]);
+    return {a,type,lang,opts,key};
+  });
+  T.i=0;T.picked=null;T.hinted=false;T.wrong=[];T.stage='run';
+}
+
+function renderTest(){
+  const s=$('#test');
+  if(T.stage==='setup'){
+    const pool=testPool();
+    const canto=hasCanto();
+    const seg=(id,obj,val)=>`<div class="seg" id="${id}">${Object.entries(obj).map(([k,l])=>
+      `<button data-v="${k}" class="${val===k?'on':''}">${l}</button>`).join('')}</div>`;
+    s.innerHTML=`
+    <div class="h1" style="margin-bottom:8px">Test</div>
+    <p class="lede">Multiple choice, drawn from every word you have. No timer, no streak —
+      just a score at the end and a list of what to go back over.</p>
+    <div class="eyebrow" style="margin:22px 0 9px 2px">What to test</div>
+    ${seg('tKind',TKINDS,T.kind)}
+    <div class="eyebrow" style="margin:20px 0 9px 2px">Draw from</div>
+    ${seg('tSrc',TSRC,T.src)}
+    <div class="eyebrow" style="margin:20px 0 9px 2px">Length</div>
+    ${seg('tLen',{10:'10',15:'15',25:'25',40:'40'},String(T.len))}
+    <div class="card" style="padding:15px 16px;margin-top:22px">
+      <div style="font:400 13.5px/1.6 var(--sans);color:var(--ink3)">
+        ${pool.length} words in the pool${T.src!=='notes'?` · HSK ${S.hsk>1?'1–'+S.hsk:'1'}`:''}.
+        ${T.kind!=='reading'
+          ? (canto?'Listening questions play in Mandarin and Cantonese, each one labelled.'
+                 :'Listening plays in Mandarin only — no Cantonese voice is installed on this device.')
+          :''}
+      </div>
+    </div>
+    <button class="btn" id="tStart" style="margin-top:16px">Start test</button>
+    ${P.tests&&P.tests.length?`<div class="eyebrow" style="margin:26px 0 9px 2px">Recent tests</div>
+      <div class="card" style="overflow:hidden">${P.tests.slice(0,5).map(t=>
+        `<div class="row"><span class="k" style="font-size:14px">${TKINDS[t.k]||t.k} · ${t.n} questions</span>
+         <span class="tag" style="color:${t.s/t.n>=.8?'var(--sage)':t.s/t.n>=.6?'var(--ink3)':'var(--red)'}">${t.s}/${t.n}</span></div>`
+      ).join('')}</div>`:''}
+    <div style="height:20px"></div>`;
+    const bind=(id,fn)=>$$('#'+id+' button').forEach(b=>b.onclick=()=>{fn(b.dataset.v);renderTest()});
+    bind('tKind',v=>T.kind=v); bind('tSrc',v=>T.src=v); bind('tLen',v=>T.len=+v);
+    $('#tStart').onclick=()=>{buildTest();
+      if(!T.qs.length)return toast('Not enough words in that pool');renderTest()};
+    return;
+  }
+  if(T.stage==='done'){
+    const score=T.qs.length-T.wrong.length;
+    const pct=Math.round(score/T.qs.length*100);
+    s.innerHTML=`
+    <div class="h1" style="margin-bottom:6px">Results</div>
+    <div class="card" style="padding:26px 20px;text-align:center;margin:14px 0 18px">
+      <div style="font:400 54px/1 var(--serif);color:${pct>=80?'var(--sage)':pct>=60?'var(--ink)':'var(--red)'}">${score}<span style="color:var(--ink4);font-size:26px">/${T.qs.length}</span></div>
+      <div class="eyebrow" style="margin-top:12px">${pct}% · ${TKINDS[T.kind]}</div>
+    </div>
+    ${T.wrong.length?`<div class="eyebrow" style="margin:0 0 10px 2px">Go back over these</div>
+      <div class="card" style="overflow:hidden">${T.wrong.map(w=>
+        `<button class="row jump3" data-h="${esc(w.a.h)}" style="width:100%;text-align:left">
+          <span class="han" style="font-size:22px;min-width:48px">${esc(w.a.h)}</span>
+          <span class="k"><span style="font:400 14px/1.3 var(--serif)">${colorPy(w.a.p)}</span>
+            <span style="display:block;font-size:12.5px;color:var(--ink3);margin-top:3px">${esc(firstEn(w.a.e))}</span></span>
+          <span class="tag">${esc(w.a.tag)}</span></button>`).join('')}</div>`
+      :`<div class="card" style="padding:20px;text-align:center;font:400 14px/1.6 var(--sans);color:var(--ink3)">
+          Everything correct. Nothing to revisit.</div>`}
+    <div style="display:flex;gap:10px;margin-top:18px">
+      <button class="btn ghost" id="tAgain">Test again</button>
+      <button class="btn" id="tBack">Done</button>
+    </div>
+    <div style="height:20px"></div>`;
+    $$('.jump3').forEach(b=>b.onclick=()=>openChar(b.dataset.h));
+    $('#tAgain').onclick=()=>{buildTest();renderTest()};
+    $('#tBack').onclick=()=>{T.stage='setup';renderTest()};
+    return;
+  }
+
+  const q=T.qs[T.i], a=q.a;
+  const pct=Math.round(T.i/T.qs.length*100);
+  const isCanto=q.lang==='yue';
+  const prompt =
+    q.type==='hear'
+      ? `<button class="playbig" id="tPlay">${svg('speak',30,'var(--onInk)')}</button>
+         <div class="eyebrow" style="margin-top:14px">${isCanto?'Cantonese 粵語':'Mandarin 普通話'} · tap to replay</div>`
+    : q.type==='read'
+      ? `<div class="prompt han">${esc(a.h)}</div>`
+      : `<div class="prompt small">${esc(firstEn(a.e))}</div>`;
+  const ask = q.type==='hear' ? 'Which word did you hear?'
+            : q.type==='read' ? 'What does this mean?'
+            : 'Which word is this?';
+  const label=o=>q.key==='e'
+    ? esc(firstEn(o.e))
+    : `<span class="han" style="font-size:24px">${esc(o.h)}</span>`;
+
+  s.innerHTML=`
+  <div class="rbar" style="margin-bottom:14px">
+    <button id="tQuit">${svg('close',15,'var(--ink)')}</button>
+    <div class="track"><i style="width:${pct}%"></i></div>
+    <span class="mono" style="font-size:12px;color:var(--ink3)">${T.i+1}/${T.qs.length}</span>
+  </div>
+  <div class="card" style="padding:26px 20px;text-align:center">
+    ${prompt}
+  </div>
+  <div class="eyebrow" style="margin:18px 0 10px 2px">${ask}</div>
+  <div class="opts" id="tOpts">${q.opts.map((o,i)=>
+    `<button class="opt" data-i="${i}">${label(o)}</button>`).join('')}</div>
+  ${a.j&&T.picked===null?`<div class="hintwrap" style="margin-top:14px">
+    <button id="tHint" class="hintbtn"${T.hinted?' hidden':''}>Hint · Cantonese</button>
+    <div class="jyut mt" id="tJyut"${T.hinted?'':' hidden'}><span class="jlab">Cantonese</span>${esc(a.j)}</div>
+  </div>`:''}
+  <div id="tFeed"></div>
+  <div style="height:20px"></div>`;
+
+  $('#tQuit').onclick=()=>{T.stage='setup';renderTest()};
+  const play=()=>say(a.h,$('#tPlay'),q.lang);
+  if(q.type==='hear'){ $('#tPlay').onclick=play; setTimeout(play,320) }
+  const hb=$('#tHint'); if(hb) hb.onclick=()=>{T.hinted=true;
+    $('#tJyut').hidden=false; hb.hidden=true; if(hasCanto())say(a.h,null,'yue')};
+
+  $$('.opt').forEach(b=>b.onclick=()=>{
+    if(T.picked!==null) return;
+    const i=+b.dataset.i, chosen=q.opts[i], right=chosen.h===a.h;
+    T.picked=i;
+    $$('.opt').forEach((x,xi)=>{
+      const o=q.opts[xi];
+      if(o.h===a.h) x.classList.add('right');
+      else if(xi===i) x.classList.add('wrong');
+      x.disabled=true;
+    });
+    if(!right) T.wrong.push(q);
+    // record it against the same card the Review screen uses
+    if(P.cards[a.id]||right===false) grade(a.id,right?'good':'again');
+    $('#tFeed').innerHTML=`
+      <div class="feed ${right?'ok':'no'}">
+        <div class="fhead">${right?'Correct':'Not quite'}</div>
+        <div class="fbody"><span class="han" style="font-size:22px">${esc(a.h)}</span>
+          <span style="font:400 17px/1.3 var(--serif);margin-left:10px">${colorPy(a.p)}</span>
+          ${a.j?`<span class="jsmall">${esc(a.j)}</span>`:''}
+          <div style="margin-top:6px;font:400 13.5px/1.5 var(--sans);color:var(--ink2)">${esc(a.e)}</div></div>
+        <button class="btn" id="tNext" style="margin-top:14px">
+          ${T.i+1>=T.qs.length?'See results':'Next'}</button>
+      </div>`;
+    $('#tNext').onclick=()=>{
+      T.i++; T.picked=null; T.hinted=false;
+      if(T.i>=T.qs.length){
+        P.tests=[{k:T.kind,n:T.qs.length,s:T.qs.length-T.wrong.length,d:Date.now()},...(P.tests||[])].slice(0,20);
+        saveP(); T.stage='done';
+      }
+      renderTest();
+    };
+    $('#tFeed').scrollIntoView({behavior:'smooth',block:'nearest'});
   });
 }
 
@@ -656,7 +881,7 @@ function renderSettings(){
     <div class="row"><span class="k">Deck</span>
       ${sel('setDeck',[['notes','My notes'],['hsk','HSK']],S.deck)}</div>
     <div class="row"><span class="k">HSK level</span>
-      ${sel('setHsk',[1,2,3,4,5,6].map(l=>[l,'HSK 1–'+l]),S.hsk)}</div>
+      ${sel('setHsk',[1,2,3,4,5,6].map(l=>[l,l>1?'HSK 1–'+l:'HSK 1']),S.hsk)}</div>
     <div class="row"><span class="k">New cards per day</span>
       ${sel('setNew',[3,5,8,12,20,30].map(n=>[n,n]),S.newPerDay)}</div>
     <div class="row"><span class="k">Review limit</span>
@@ -700,7 +925,7 @@ function renderSettings(){
   $('#setImport').onclick=importP;
   $('#setReset').onclick=()=>{
     if(confirm('Erase all progress, streaks and review history? This cannot be undone.')){
-      P={cards:{},log:{},streak:{n:0,last:null},seen:[]};saveP();renderAll();toast('Progress reset')}};
+      P={cards:{},log:{},streak:{n:0,last:null},seen:[],tests:[]};saveP();renderAll();toast('Progress reset')}};
 }
 function exportP(){
   const text=JSON.stringify({settings:S,progress:P,exported:new Date().toISOString()},null,1);
@@ -728,7 +953,8 @@ function importP(){
 }
 
 /* ── nav / boot ────────────────────────────────────────────── */
-const TABS=['today','library','review','progress','settings'];
+const TABS=['today','library','review','test','progress','settings'];
+const TABLBL={today:'Today',library:'Library',review:'Review',test:'Test',progress:'Stats',settings:'Settings'};
 let cur='today';
 function go(t){
   cur=t;
@@ -737,6 +963,7 @@ function go(t){
   if(t==='today')renderToday();
   if(t==='library')renderLibrary();
   if(t==='review')startReview();
+  if(t==='test')renderTest();
   if(t==='progress')renderProgress();
   if(t==='settings')renderSettings();
   $('#'+t).scrollTop=0;
@@ -755,7 +982,7 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if(S.t
 async function boot(){
   applyTheme();
   $('#tabs').innerHTML=TABS.map(t=>
-    `<button data-t="${t}"${t===cur?' class="on"':''}>${svg(t,22)}<span>${t[0].toUpperCase()+t.slice(1)}</span></button>`).join('');
+    `<button data-t="${t}"${t===cur?' class="on"':''}>${svg(t,22)}<span>${TABLBL[t]}</span></button>`).join('');
   $$('#tabs button').forEach(b=>b.onclick=()=>go(b.dataset.t));
   try{
     const [n,h]=await Promise.all([

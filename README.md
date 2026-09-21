@@ -14,6 +14,8 @@ screen — no App Store, no developer account, no 7-day expiry, nothing to pay.
 | **HSK** | 5,003 words across levels 1–6, plus 2,634 characters with pinyin, meaning and stroke count |
 | **Stroke order** | Animated, with the radical picked out in vermilion, for every character |
 | **Review** | Spaced repetition (Again / Hard / Good / Easy), three directions |
+| **Test** | Multiple-choice listening and reading, drawing from every deck at once |
+| **Cantonese** | Jyutping on every word — always shown on the character sheet, behind a Hint button in Review and Test |
 | **Audio** | Built-in iOS Chinese text-to-speech — works offline |
 | **Progress** | Streak, 7-day activity, per-level coverage, hardest cards |
 | **Widget** | Optional home-screen widget via Scriptable (free) |
@@ -104,3 +106,12 @@ online. Bump the `V` constant at the top of `sw.js` to force the cache to refres
 - **HSK lists** — `hsk-words` (HSK 2.0, levels 1–6)
 - **Definitions** — CC-CEDICT, CC-BY-SA 4.0
 - **Stroke data** — Make Me a Hanzi / `hanzi-writer-data`, derived from Arphic PL fonts (Arphic Public License)
+- **Jyutping** — `to-jyutping` (CanCLID), applied to the traditional form of each word
+
+### A note on the Jyutping
+
+These are the **Cantonese readings of the Mandarin characters**, generated per word — not
+translations into spoken Cantonese. 什么 gives `sam6 mo1`, the literal reading; a Cantonese
+speaker would actually say 乜嘢 `mat1 je5`. For single characters and shared vocabulary the
+reading is exactly the bridge you want. For whole sentences, treat it as a pronunciation
+guide to the written form rather than natural Cantonese.
