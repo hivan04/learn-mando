@@ -34,9 +34,9 @@ cd ~/Documents/GitHub/hanzi-replica
 git add -A
 git commit -m "Hanzi study app"
 
-# create the repo on github.com first (name it hanzi-replica, public),
+# create the repo on github.com first (name it learn-mando, public),
 # then point this folder at it:
-git remote add origin https://github.com/YOUR-USERNAME/hanzi-replica.git
+git remote add origin https://github.com/hivan04/learn-mando.git
 git branch -M main
 git push -u origin main
 ```
@@ -47,7 +47,7 @@ Branch: `main` / `(root)` → Save.**
 After a minute or two the app is live at:
 
 ```
-https://YOUR-USERNAME.github.io/hanzi-replica/
+https://hivan04.github.io/learn-mando/
 ```
 
 > The repo must be **public** for GitHub Pages to work on a free account.
@@ -72,7 +72,7 @@ JavaScript inside a real widget.
 2. Open it, tap **+**, and paste in everything from `widget/hanzi-widget.js`.
 3. Change the first line to your Pages URL:
    ```js
-   const BASE_URL = "https://YOUR-USERNAME.github.io/hanzi-replica";
+   const BASE_URL = "https://hivan04.github.io/learn-mando";
    ```
 4. Tap the script title at the top and rename it to **Hanzi**.
 5. Long-press your home screen → **+** → **Scriptable** → pick a size → **Add Widget**.

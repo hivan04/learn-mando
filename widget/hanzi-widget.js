@@ -13,7 +13,7 @@
 // successful load it keeps rotating with no internet at all.
 // ─────────────────────────────────────────────────────────────
 
-const BASE_URL = "https://IVAN.github.io/hanzi-replica";  // ← EDIT THIS
+const BASE_URL = "https://hivan04.github.io/learn-mando";
 const ROTATE_HOURS = 3;     // must match the app's Settings → Rotate every
 const DECK = "notes";       // "notes" = your Mandarin notes, "hsk" = HSK words
 const HSK_MAX = 2;          // if DECK is "hsk", include levels 1..HSK_MAX
