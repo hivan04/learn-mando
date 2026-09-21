@@ -5,7 +5,7 @@ const el=(t,c,h)=>{const n=document.createElement(t);if(c)n.className=c;if(h!=nu
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* ── state ─────────────────────────────────────────────────── */
-const DEF={deck:'notes',hsk:1,pyIdx:'All',week:'all',kind:'vocab',rotate:3,tones:true,theme:'auto',
+const DEF={deck:'notes',hsk:1,pyIdx:'All',jyutAlways:false,week:'all',kind:'vocab',rotate:3,tones:true,theme:'auto',
            newPerDay:8,reviewLimit:60,libMode:'chars'};
 let S=load('hanzi.settings',DEF);
 let P=load('hanzi.progress',{cards:{},log:{},streak:{n:0,last:null},seen:[],tests:[]});
@@ -455,7 +455,12 @@ async function openChar(h,ctx){
     <div class="hero">
       <div class="big han">${esc(h)}</div>
       <div class="py">${colorPy(py)}</div>
-      ${jy?`<div class="jyut"><span class="jlab">Cantonese</span>${esc(jy)}</div>`:''}
+      ${jy?(S.jyutAlways
+        ? `<div class="jyut"><span class="jlab">Cantonese</span>${esc(jy)}</div>`
+        : `<div class="hintwrap" style="margin-top:11px">
+             <button id="sheetHint" class="hintbtn">Show Cantonese</button>
+             <div class="jyut" id="sheetJyut" hidden><span class="jlab">Cantonese</span>${esc(jy)}</div>
+           </div>`):''}
       <div class="metas">
         ${word?`<span class="tag">HSK ${word.lv}</span>`
           :(one&&info.lv?`<span class="tag">HSK ${info.lv}</span>`:'')}
@@ -496,6 +501,8 @@ async function openChar(h,ctx){
   $('#sheet .scrim').onclick=closeSheet;
   $('#actSay').onclick=e=>say(h,e.currentTarget);
   const yb=$('#actSayYue'); if(yb) yb.onclick=e=>say(h,e.currentTarget,'yue');
+  const shb=$('#sheetHint'); if(shb) shb.onclick=()=>{
+    $('#sheetJyut').hidden=false; shb.hidden=true; if(hasCanto())say(h,null,'yue')};
   $('#sheetAdd').onclick=()=>{card((S.deck==='hsk'?'h:':'v:')+h);saveP();toast('Added to review deck')};
   $('#sheetStudy').onclick=()=>{closeSheet();go('review')};
   $$('.jump',$('#sheet')).forEach(b=>b.onclick=()=>openChar(b.dataset.h));
@@ -574,13 +581,15 @@ function renderReview(){
       <div class="eyebrow">${MODES[R.mode]}</div>
       <div style="margin-top:22px">${front}</div>
       ${R.shown?`<div class="reveal">${back}
-        ${c.j?`<div class="jyut mt" id="revJyut" hidden><span class="jlab">Cantonese</span>${esc(c.j)}</div>`:''}
+        ${c.j?`<div class="jyut mt" id="revJyut"${(S.jyutAlways||R.hinted)?'':' hidden'}><span class="jlab">Cantonese</span>${esc(c.j)}</div>`:''}
         <div class="rowbtns">
           <button id="revSay" class="iconbtn">${svg('speak',20,'var(--ink4)')}</button>
           ${hasCanto()?`<button id="revSayYue" class="iconbtn">${svg('speak',20,'var(--ink4)')}<em class="vtag">粵</em></button>`:''}
         </div></div>`
-      :(c.j?`<div class="hintwrap"><button id="revHint" class="hintbtn">Hint · Cantonese</button>
-             <div class="jyut mt" id="revJyut" hidden><span class="jlab">Cantonese</span>${esc(c.j)}</div></div>`:'')}
+      :(c.j?(S.jyutAlways
+          ? `<div class="jyut mt"><span class="jlab">Cantonese</span>${esc(c.j)}</div>`
+          : `<div class="hintwrap"><button id="revHint" class="hintbtn">Hint · Cantonese</button>
+             <div class="jyut mt" id="revJyut" hidden><span class="jlab">Cantonese</span>${esc(c.j)}</div></div>`):'')}
     </div>
     ${R.shown?'':'<div class="tapme">tap the card to reveal</div>'}
   </div>
@@ -651,15 +660,13 @@ function distractors(pool,answer,key,n=3){
 function buildTest(){
   const pool=testPool();
   if(pool.length<6){T.qs=[];return}
-  const canto=hasCanto();
   const picks=shuffle(pool).slice(0,T.len);
   T.qs=picks.map(a=>{
     let type;
     if(T.kind==='listening') type='hear';
     else if(T.kind==='reading') type=Math.random()<.5?'read':'toHanzi';
     else type=['hear','read','toHanzi','hear'][Math.floor(Math.random()*4)];
-    // listening in both languages, labelled — Cantonese only if a voice exists
-    const lang=(type==='hear'&&canto&&Math.random()<.4)?'yue':'cmn';
+    const lang='cmn';   // listening is Mandarin only
     const key=type==='read'?'e':'h';
     const opts=shuffle([a,...distractors(pool,a,key)]);
     return {a,type,lang,opts,key};
@@ -671,7 +678,6 @@ function renderTest(){
   const s=$('#test');
   if(T.stage==='setup'){
     const pool=testPool();
-    const canto=hasCanto();
     const seg=(id,obj,val)=>`<div class="seg" id="${id}">${Object.entries(obj).map(([k,l])=>
       `<button data-v="${k}" class="${val===k?'on':''}">${l}</button>`).join('')}</div>`;
     s.innerHTML=`
@@ -687,10 +693,7 @@ function renderTest(){
     <div class="card" style="padding:15px 16px;margin-top:22px">
       <div style="font:400 13.5px/1.6 var(--sans);color:var(--ink3)">
         ${pool.length} words in the pool${T.src!=='notes'?` · HSK ${S.hsk>1?'1–'+S.hsk:'1'}`:''}.
-        ${T.kind!=='reading'
-          ? (canto?'Listening questions play in Mandarin and Cantonese, each one labelled.'
-                 :'Listening plays in Mandarin only — no Cantonese voice is installed on this device.')
-          :''}
+        ${T.kind!=='reading'?'Listening questions are played in Mandarin.':''}
       </div>
     </div>
     <button class="btn" id="tStart" style="margin-top:16px">Start test</button>
@@ -737,11 +740,11 @@ function renderTest(){
 
   const q=T.qs[T.i], a=q.a;
   const pct=Math.round(T.i/T.qs.length*100);
-  const isCanto=q.lang==='yue';
+
   const prompt =
     q.type==='hear'
       ? `<button class="playbig" id="tPlay">${svg('speak',30,'var(--onInk)')}</button>
-         <div class="eyebrow" style="margin-top:14px">${isCanto?'Cantonese 粵語':'Mandarin 普通話'} · tap to replay</div>`
+         <div class="eyebrow" style="margin-top:14px">Mandarin 普通話 · tap to replay</div>`
     : q.type==='read'
       ? `<div class="prompt han">${esc(a.h)}</div>`
       : `<div class="prompt small">${esc(firstEn(a.e))}</div>`;
@@ -764,10 +767,12 @@ function renderTest(){
   <div class="eyebrow" style="margin:18px 0 10px 2px">${ask}</div>
   <div class="opts" id="tOpts">${q.opts.map((o,i)=>
     `<button class="opt" data-i="${i}">${label(o)}</button>`).join('')}</div>
-  ${a.j&&T.picked===null?`<div class="hintwrap" style="margin-top:14px">
+  ${a.j&&T.picked===null?(S.jyutAlways
+    ? `<div class="jyut mt"><span class="jlab">Cantonese</span>${esc(a.j)}</div>`
+    : `<div class="hintwrap" style="margin-top:14px">
     <button id="tHint" class="hintbtn"${T.hinted?' hidden':''}>Hint · Cantonese</button>
     <div class="jyut mt" id="tJyut"${T.hinted?'':' hidden'}><span class="jlab">Cantonese</span>${esc(a.j)}</div>
-  </div>`:''}
+  </div>`):''}
   <div id="tFeed"></div>
   <div style="height:20px"></div>`;
 
@@ -900,6 +905,8 @@ function renderSettings(){
       ${sel('setTheme',[['auto','Match system'],['light','Light'],['dark','Dark']],S.theme)}</div>
     <div class="row"><span class="k">Tone colours</span>
       <div class="sw${S.tones?' on':''}" id="setTones"><i></i></div></div>
+    <div class="row"><span class="k">Always show Cantonese<span class="sub">off = reveal it with a button</span></span>
+      <div class="sw${S.jyutAlways?' on':''}" id="setJyut"><i></i></div></div>
   </div>
   <div class="eyebrow" style="margin:0 0 9px 2px">Data</div>
   <div class="group">
@@ -921,6 +928,7 @@ function renderSettings(){
   on('setRot',e=>{S.rotate=+e.target.value;saveS();renderToday()});
   on('setTheme',e=>{S.theme=e.target.value;saveS();applyTheme()});
   $('#setTones').onclick=()=>{S.tones=!S.tones;saveS();applyTheme();renderSettings()};
+  $('#setJyut').onclick=()=>{S.jyutAlways=!S.jyutAlways;saveS();renderSettings()};
   $('#setExport').onclick=exportP;
   $('#setImport').onclick=importP;
   $('#setReset').onclick=()=>{

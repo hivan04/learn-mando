@@ -21,6 +21,7 @@
   --t1:#E2703F; --t2:#D2AE4A; --t3:#93AC7D; --t4:#6FA0B0; --t5:#948B79;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
 html,body{margin:0;height:100%;overscroll-behavior-y:none}
 body{
   background:var(--bg);color:var(--ink);font-family:var(--sans);
@@ -263,3 +264,4 @@ input{font:inherit;color:inherit;background:none;border:0;outline:0;user-select:
 .feed.ok .fhead{color:var(--sage)} .feed.no .fhead{color:var(--red)}
 #tabs button{min-width:0}
 #tabs span{white-space:nowrap}
+.row .k .sub{display:block;margin-top:3px;font:400 11.5px/1.3 var(--sans);color:var(--ink4)}

@@ -15,7 +15,7 @@ screen — no App Store, no developer account, no 7-day expiry, nothing to pay.
 | **Stroke order** | Animated, with the radical picked out in vermilion, for every character |
 | **Review** | Spaced repetition (Again / Hard / Good / Easy), three directions |
 | **Test** | Multiple-choice listening and reading, drawing from every deck at once |
-| **Cantonese** | Jyutping on every word — always shown on the character sheet, behind a Hint button in Review and Test |
+| **Cantonese** | Jyutping on every word, revealed with a button (Settings can make it always visible). Tests are Mandarin-only; Cantonese audio is on demand |
 | **Audio** | Built-in iOS Chinese text-to-speech — works offline |
 | **Progress** | Streak, 7-day activity, per-level coverage, hardest cards |
 | **Widget** | Optional home-screen widget via Scriptable (free) |
@@ -34,9 +34,9 @@ cd ~/Documents/GitHub/hanzi-replica
 git add -A
 git commit -m "Hanzi study app"
 
-# create the repo on github.com first (name it learn-mando, public),
+# create the repo on github.com first (name it hanzi-replica, public),
 # then point this folder at it:
-git remote add origin https://github.com/hivan04/learn-mando.git
+git remote add origin https://github.com/YOUR-USERNAME/hanzi-replica.git
 git branch -M main
 git push -u origin main
 ```
@@ -47,7 +47,7 @@ Branch: `main` / `(root)` → Save.**
 After a minute or two the app is live at:
 
 ```
-https://hivan04.github.io/learn-mando/
+https://YOUR-USERNAME.github.io/hanzi-replica/
 ```
 
 > The repo must be **public** for GitHub Pages to work on a free account.
@@ -72,7 +72,7 @@ JavaScript inside a real widget.
 2. Open it, tap **+**, and paste in everything from `widget/hanzi-widget.js`.
 3. Change the first line to your Pages URL:
    ```js
-   const BASE_URL = "https://hivan04.github.io/learn-mando";
+   const BASE_URL = "https://YOUR-USERNAME.github.io/hanzi-replica";
    ```
 4. Tap the script title at the top and rename it to **Hanzi**.
 5. Long-press your home screen → **+** → **Scriptable** → pick a size → **Add Widget**.
