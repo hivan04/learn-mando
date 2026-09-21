@@ -19,8 +19,15 @@ screen — no App Store, no developer account, no 7-day expiry, nothing to pay.
 | **Audio** | Built-in iOS Chinese text-to-speech — works offline |
 | **Progress** | Streak, 7-day activity, per-level coverage, hardest cards |
 | **Widget** | Optional home-screen widget via Scriptable (free) |
+| **Profiles** | Separate progress per person on the device, with an optional PIN |
 
 Everything is stored on the device in `localStorage`. Nothing is uploaded anywhere.
+
+**On profiles and the PIN.** Profiles keep two people's streaks and review schedules
+apart on the same device. The PIN stops casual switching; it is not security. The site
+is public, the code is readable, and each profile's data sits unencrypted in the
+browser. Anyone with the device can read any profile. If you ever need real access
+control, that needs a host that checks logins server-side — GitHub Pages cannot.
 
 ---
 

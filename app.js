@@ -7,11 +7,49 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 /* ── state ─────────────────────────────────────────────────── */
 const DEF={deck:'notes',hsk:1,pyIdx:'All',jyutAlways:false,week:'all',kind:'vocab',rotate:3,tones:true,theme:'auto',
            newPerDay:8,reviewLimit:60,libMode:'chars'};
-let S=load('hanzi.settings',DEF);
-let P=load('hanzi.progress',{cards:{},log:{},streak:{n:0,last:null},seen:[],tests:[]});
+const BLANK={cards:{},log:{},streak:{n:0,last:null},seen:[],tests:[]};
 function load(k,d){try{return Object.assign(structuredClone(d),JSON.parse(localStorage.getItem(k)||'{}'))}catch(e){return structuredClone(d)}}
-function saveS(){try{localStorage.setItem('hanzi.settings',JSON.stringify(S))}catch(e){}}
-function saveP(){try{localStorage.setItem('hanzi.progress',JSON.stringify(P))}catch(e){}}
+function put(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+
+/* ── profiles ──────────────────────────────────────────────
+   Separate progress per person on this device. The PIN is a
+   convenience latch, not security: everything lives in this
+   browser's storage and anyone with the device can read it. */
+const PKEY='hanzi.profiles';
+let PROF=(()=>{try{const v=JSON.parse(localStorage.getItem(PKEY));
+  if(v&&v.list&&v.list.length) return v}catch(e){}
+  return {list:[{id:'p1',name:'Ivan',glyph:'洪',pin:''}],active:'p1'}})();
+function saveProf(){put(PKEY,PROF)}
+const slot=w=>`hanzi.${PROF.active}.${w}`;
+const me=()=>PROF.list.find(p=>p.id===PROF.active)||PROF.list[0];
+
+// one-time move of the old single-profile data into the first profile
+(function migrate(){
+  try{
+    if(localStorage.getItem('hanzi.settings')&&!localStorage.getItem('hanzi.p1.settings')){
+      localStorage.setItem('hanzi.p1.settings',localStorage.getItem('hanzi.settings'));
+      localStorage.removeItem('hanzi.settings');
+    }
+    if(localStorage.getItem('hanzi.progress')&&!localStorage.getItem('hanzi.p1.progress')){
+      localStorage.setItem('hanzi.p1.progress',localStorage.getItem('hanzi.progress'));
+      localStorage.removeItem('hanzi.progress');
+    }
+  }catch(e){}
+})();
+
+let S=load(slot('settings'),DEF);
+let P=load(slot('progress'),BLANK);
+function saveS(){put(slot('settings'),S)}
+function saveP(){put(slot('progress'),P)}
+function useProfile(id){
+  PROF.active=id; saveProf();
+  S=load(slot('settings'),DEF); P=load(slot('progress'),BLANK);
+  applyTheme(); renderAll(); toast(me().name);
+}
+function newProfileId(){
+  let n=2; while(PROF.list.some(p=>p.id==='p'+n)) n++;
+  return 'p'+n;
+}
 
 let D={notes:null,hsk:null,strokes:{}};
 let CHARIDX=new Map(), WORDIDX=new Map();
@@ -221,6 +259,60 @@ const I={
 };
 const svg=(k,s=18,st='currentColor')=>`<svg width="${s}" height="${s}" viewBox="0 0 ${k==='back'?11:k==='close'?15:k==='arrow'?12:k==='search'?15:k==='star'||k==='speak'?18:22} ${k==='back'?18:k==='close'?15:k==='arrow'?10:k==='search'?15:k==='star'||k==='speak'?18:22}" fill="none" stroke="${st}" stroke-width="1.6">${I[k]}</svg>`;
 
+
+/* ── profile switching ─────────────────────────────────────
+   A PIN here keeps a flatmate out of your streak. It is not
+   security — the data sits in this browser unencrypted. */
+function askPin(prof,then){
+  const m=el('div','modal');
+  m.innerHTML=`<div class="mscrim"></div>
+    <div class="mbox">
+      <div class="mglyph han">${esc(prof.glyph||prof.name[0]||'?')}</div>
+      <div class="mname">${esc(prof.name)}</div>
+      <div class="eyebrow" style="margin:14px 0 10px">Enter PIN</div>
+      <input id="pinIn" class="pinin" inputmode="numeric" pattern="[0-9]*"
+             maxlength="8" autocomplete="off" placeholder="••••">
+      <div class="merr" id="pinErr" hidden>That PIN doesn't match</div>
+      <div class="mrow">
+        <button class="btn ghost" id="pinCancel">Cancel</button>
+        <button class="btn" id="pinOk">Unlock</button>
+      </div>
+    </div>`;
+  document.body.appendChild(m);
+  const inp=$('#pinIn',m); setTimeout(()=>inp.focus(),80);
+  const close=()=>m.remove();
+  $('.mscrim',m).onclick=close; $('#pinCancel',m).onclick=close;
+  const go=()=>{
+    if(inp.value===prof.pin){close();then()}
+    else{$('#pinErr',m).hidden=false;inp.value='';inp.focus()}
+  };
+  $('#pinOk',m).onclick=go;
+  inp.onkeydown=e=>{if(e.key==='Enter')go()};
+}
+function switchTo(id){
+  if(id===PROF.active) return;
+  const p=PROF.list.find(x=>x.id===id); if(!p) return;
+  p.pin ? askPin(p,()=>useProfile(id)) : useProfile(id);
+}
+function profileSheet(){
+  const m=el('div','modal');
+  m.innerHTML=`<div class="mscrim"></div>
+    <div class="mbox">
+      <div class="eyebrow" style="margin-bottom:14px">Who's studying?</div>
+      <div class="plist">${PROF.list.map(p=>`
+        <button class="pcard${p.id===PROF.active?' on':''}" data-id="${p.id}">
+          <span class="pglyph han">${esc(p.glyph||p.name[0]||'?')}</span>
+          <span class="pname">${esc(p.name)}</span>
+          ${p.pin?`<span class="plock">PIN</span>`:''}
+        </button>`).join('')}</div>
+      <button class="btn ghost" id="pClose" style="margin-top:16px">Close</button>
+    </div>`;
+  document.body.appendChild(m);
+  const close=()=>m.remove();
+  $('.mscrim',m).onclick=close; $('#pClose',m).onclick=close;
+  $$('.pcard',m).forEach(b=>b.onclick=()=>{close();switchTo(b.dataset.id)});
+}
+
 /* ── TODAY ─────────────────────────────────────────────────── */
 function renderToday(){
   const s=$('#today'); const p=cotdPool();
@@ -237,7 +329,10 @@ function renderToday(){
       <div class="eyebrow" style="margin-bottom:8px">${esc(dayName)}</div>
       <div class="h1">Today</div>
     </div>
-    <div class="streak"><i></i><b>${P.streak.n}</b><em>day${P.streak.n===1?'':'s'}</em></div>
+    <div style="display:flex;align-items:center;gap:8px">
+      ${PROF.list.length>1?`<button class="whobtn" id="whoBtn"><span class="han">${esc(me().glyph||me().name[0])}</span></button>`:''}
+      <div class="streak"><i></i><b>${P.streak.n}</b><em>day${P.streak.n===1?'':'s'}</em></div>
+    </div>
   </div>
   <div class="card cotd">
     <div class="head">
@@ -275,6 +370,7 @@ function renderToday(){
   $('#cotdGlyph').onclick=()=>openChar(w.h);
   $('#cotdSay').onclick=e=>say(w.h,e.currentTarget.closest('button'));
   $('#goReview').onclick=()=>go('review');
+  const wb=$('#whoBtn'); if(wb) wb.onclick=profileSheet;
   const r=$('#recent');
   if(r){
     const all=pool();
@@ -881,7 +977,20 @@ function renderSettings(){
     `<option value="${v}"${String(v)===String(val)?' selected':''}>${l}</option>`).join('')}</select>`;
   s.innerHTML=`
   <div class="h1" style="margin-bottom:20px">Settings</div>
-  <div class="eyebrow" style="margin:0 0 9px 2px">Study</div>
+  <div class="eyebrow" style="margin:0 0 9px 2px">Profiles</div>
+  <div class="group" id="profGroup">
+    ${PROF.list.map(p=>`<div class="row prow" data-id="${p.id}">
+      <span class="pglyph sm han">${esc(p.glyph||p.name[0]||'?')}</span>
+      <span class="k">${esc(p.name)}${p.id===PROF.active?'<span class="sub">studying now</span>':''}</span>
+      ${p.pin?'<span class="tag">PIN</span>':''}
+      <button class="pedit" data-id="${p.id}">Edit</button>
+    </div>`).join('')}
+    ${PROF.list.length<6?'<div class="row" id="pAdd"><span class="k" style="color:var(--red)">Add a profile</span></div>':''}
+  </div>
+  <div class="note">Profiles keep separate progress on this device. A PIN stops casual
+    switching — it is not security, since everything is stored unencrypted in this browser.</div>
+
+  <div class="eyebrow" style="margin:22px 0 9px 2px">Study</div>
   <div class="group">
     <div class="row"><span class="k">Deck</span>
       ${sel('setDeck',[['notes','My notes'],['hsk','HSK']],S.deck)}</div>
@@ -929,6 +1038,12 @@ function renderSettings(){
   on('setTheme',e=>{S.theme=e.target.value;saveS();applyTheme()});
   $('#setTones').onclick=()=>{S.tones=!S.tones;saveS();applyTheme();renderSettings()};
   $('#setJyut').onclick=()=>{S.jyutAlways=!S.jyutAlways;saveS();renderSettings()};
+  $$('.prow').forEach(r=>r.onclick=e=>{
+    if(e.target.classList.contains('pedit')) return;
+    switchTo(r.dataset.id);
+  });
+  $$('.pedit').forEach(b=>b.onclick=e=>{e.stopPropagation();editProfile(b.dataset.id)});
+  const pa=$('#pAdd'); if(pa) pa.onclick=()=>editProfile(null);
   $('#setExport').onclick=exportP;
   $('#setImport').onclick=importP;
   $('#setReset').onclick=()=>{
@@ -958,6 +1073,53 @@ function importP(){
     }catch(e){toast('Could not read that file')}};
     r.readAsText(f)};
   i.click();
+}
+
+
+function editProfile(id){
+  const isNew=!id;
+  const p=isNew?{id:newProfileId(),name:'',glyph:'',pin:''}
+               :PROF.list.find(x=>x.id===id);
+  const m=el('div','modal');
+  m.innerHTML=`<div class="mscrim"></div>
+    <div class="mbox">
+      <div class="eyebrow" style="margin-bottom:14px">${isNew?'New profile':'Edit profile'}</div>
+      <label class="flab">Name</label>
+      <input id="pfName" class="finp" maxlength="20" value="${esc(p.name)}" placeholder="e.g. Ivan">
+      <label class="flab">Badge <span>one character, shown on the switcher</span></label>
+      <input id="pfGlyph" class="finp han" maxlength="2" value="${esc(p.glyph)}" placeholder="洪">
+      <label class="flab">PIN <span>optional, digits only — leave blank for none</span></label>
+      <input id="pfPin" class="finp" inputmode="numeric" maxlength="8" value="${esc(p.pin)}" placeholder="none">
+      <div class="merr" id="pfErr" hidden></div>
+      <div class="mrow">
+        ${(!isNew&&PROF.list.length>1)?'<button class="btn ghost danger" id="pfDel">Delete</button>':''}
+        <button class="btn ghost" id="pfCancel">Cancel</button>
+        <button class="btn" id="pfSave">Save</button>
+      </div>
+    </div>`;
+  document.body.appendChild(m);
+  const close=()=>m.remove();
+  $('.mscrim',m).onclick=close; $('#pfCancel',m).onclick=close;
+  $('#pfSave',m).onclick=()=>{
+    const name=$('#pfName',m).value.trim();
+    const pin=$('#pfPin',m).value.trim();
+    if(!name){const e=$('#pfErr',m);e.textContent='Give the profile a name';e.hidden=false;return}
+    if(pin&&!/^\d{4,8}$/.test(pin)){const e=$('#pfErr',m);e.textContent='PIN must be 4–8 digits';e.hidden=false;return}
+    p.name=name; p.glyph=($('#pfGlyph',m).value.trim()||name[0]).slice(0,2); p.pin=pin;
+    if(isNew){ PROF.list.push(p); saveProf(); close(); useProfile(p.id); }
+    else { saveProf(); close(); renderAll(); toast('Saved'); }
+  };
+  const del=$('#pfDel',m);
+  if(del) del.onclick=()=>{
+    if(!confirm(`Delete "${p.name}" and all of their progress? This cannot be undone.`)) return;
+    try{localStorage.removeItem(`hanzi.${p.id}.settings`);
+        localStorage.removeItem(`hanzi.${p.id}.progress`)}catch(e){}
+    PROF.list=PROF.list.filter(x=>x.id!==p.id);
+    close();
+    if(PROF.active===p.id){ PROF.active=PROF.list[0].id; saveProf(); useProfile(PROF.active) }
+    else { saveProf(); renderAll() }
+    toast('Profile deleted');
+  };
 }
 
 /* ── nav / boot ────────────────────────────────────────────── */

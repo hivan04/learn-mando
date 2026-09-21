@@ -210,7 +210,7 @@ input{font:inherit;color:inherit;background:none;border:0;outline:0;user-select:
 .row .k{flex:1;font:400 15px/1.3 var(--sans)}
 .row .v{font:400 15px/1 var(--sans);color:var(--ink4)}
 .row select{font:400 15px/1 var(--sans);color:var(--ink4);background:none;border:0;
-  text-align:right;direction:rtl;appearance:none;padding-right:2px}
+  text-align:right;text-align-last:right;appearance:none;padding-right:2px;max-width:62%}
 .sw{width:51px;height:31px;border-radius:999px;background:var(--wash);
   display:flex;align-items:center;padding:0 3px;transition:background .2s;flex:none}
 .sw i{width:25px;height:25px;border-radius:999px;background:#fff;
@@ -265,3 +265,42 @@ input{font:inherit;color:inherit;background:none;border:0;outline:0;user-select:
 #tabs button{min-width:0}
 #tabs span{white-space:nowrap}
 .row .k .sub{display:block;margin-top:3px;font:400 11.5px/1.3 var(--sans);color:var(--ink4)}
+
+/* ── profiles ──────────────────────────────────────────────── */
+.whobtn{width:38px;height:38px;border-radius:999px;background:var(--card);
+  border:1px solid var(--line2);display:flex;align-items:center;justify-content:center}
+.whobtn .han{font-size:19px;color:var(--red)}
+.modal{position:fixed;inset:0;z-index:90;display:flex;align-items:center;
+  justify-content:center;padding:20px}
+.mscrim{position:absolute;inset:0;background:rgba(20,18,15,.44);animation:fade .18s}
+.mbox{position:relative;width:100%;max-width:340px;background:var(--bg);
+  border:1px solid var(--line);border-radius:22px;padding:22px 20px;
+  box-shadow:0 24px 60px rgba(20,18,15,.28);animation:pop .22s cubic-bezier(.3,.9,.3,1);
+  max-height:88vh;overflow-y:auto}
+@keyframes pop{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:none}}
+.mglyph{font-size:46px;text-align:center;color:var(--red);line-height:1}
+.mname{margin-top:8px;text-align:center;font:400 19px/1.2 var(--serif)}
+.mrow{display:flex;gap:9px;margin-top:18px}
+.mrow .btn{flex:1;padding:13px}
+.merr{margin-top:10px;font:400 12.5px/1.4 var(--sans);color:var(--red);text-align:center}
+.pinin{width:100%;text-align:center;font:500 26px/1 var(--mono);letter-spacing:.3em;
+  padding:14px 10px;background:var(--card);border:1px solid var(--line2);border-radius:12px}
+.plist{display:flex;flex-direction:column;gap:9px}
+.pcard{display:flex;align-items:center;gap:14px;padding:13px 15px;border-radius:14px;
+  background:var(--card);border:1px solid var(--line2);width:100%;text-align:left}
+.pcard.on{border:1.5px solid var(--red)}
+.pglyph{width:38px;height:38px;flex:none;border-radius:999px;background:var(--wash);
+  display:flex;align-items:center;justify-content:center;font-size:19px;color:var(--red)}
+.pglyph.sm{width:30px;height:30px;font-size:16px;margin-right:2px}
+.pname{flex:1;font:400 16px/1.2 var(--sans)}
+.plock{font:500 9.5px/1 var(--mono);letter-spacing:.08em;color:var(--ink4);
+  background:var(--wash);padding:4px 7px;border-radius:4px}
+.prow{cursor:pointer}
+.pedit{font:500 12.5px/1 var(--sans);color:var(--red);padding:8px 10px;margin:-8px -6px -8px 0}
+.note{margin:-12px 2px 22px;font:400 12px/1.6 var(--sans);color:var(--ink4);text-wrap:pretty}
+.flab{display:block;margin:14px 0 7px;font:500 12px/1.3 var(--sans);color:var(--ink2)}
+.flab span{font-weight:400;color:var(--ink4)}
+.finp{width:100%;padding:12px 13px;background:var(--card);border:1px solid var(--line2);
+  border-radius:11px;font:400 15px/1.3 var(--sans)}
+.finp.han{font-family:var(--han);font-size:20px}
+.btn.ghost.danger{color:var(--red);border-color:var(--red)}
