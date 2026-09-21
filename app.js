@@ -678,7 +678,7 @@ function renderSettings(){
   </div>
   <div class="eyebrow" style="margin:0 0 9px 2px">Data</div>
   <div class="group">
-    <div class="row"><span class="k">Export progress</span><span class="v">JSON</span></div>
+    <div class="row" id="setExport"><span class="k">Export progress</span><span class="v">copy / save</span></div>
     <div class="row" id="setImport"><span class="k">Import progress</span><span class="v">JSON</span></div>
     <div class="row" id="setReset"><span class="k danger">Reset all progress</span></div>
   </div>
@@ -696,18 +696,24 @@ function renderSettings(){
   on('setRot',e=>{S.rotate=+e.target.value;saveS();renderToday()});
   on('setTheme',e=>{S.theme=e.target.value;saveS();applyTheme()});
   $('#setTones').onclick=()=>{S.tones=!S.tones;saveS();applyTheme();renderSettings()};
-  $$('.row').forEach(r=>{if(r.textContent.includes('Export'))r.onclick=exportP});
+  $('#setExport').onclick=exportP;
   $('#setImport').onclick=importP;
   $('#setReset').onclick=()=>{
     if(confirm('Erase all progress, streaks and review history? This cannot be undone.')){
       P={cards:{},log:{},streak:{n:0,last:null},seen:[]};saveP();renderAll();toast('Progress reset')}};
 }
 function exportP(){
-  const blob=new Blob([JSON.stringify({settings:S,progress:P,exported:new Date().toISOString()},null,1)],
-    {type:'application/json'});
-  const a=el('a');a.href=URL.createObjectURL(blob);
-  a.download='hanzi-progress-'+dayKey()+'.json';a.click();
-  setTimeout(()=>URL.revokeObjectURL(a.href),1000); toast('Exported');
+  const text=JSON.stringify({settings:S,progress:P,exported:new Date().toISOString()},null,1);
+  // clipboard always works; the file download only works where the host allows it
+  const copy=navigator.clipboard?navigator.clipboard.writeText(text):Promise.reject();
+  copy.then(()=>toast('Progress copied to clipboard')).catch(()=>toast('Export ready'));
+  try{
+    const blob=new Blob([text],{type:'application/json'});
+    const a=el('a');a.href=URL.createObjectURL(blob);
+    a.download='hanzi-progress-'+dayKey()+'.json';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  }catch(e){}
 }
 function importP(){
   const i=el('input');i.type='file';i.accept='.json,application/json';
