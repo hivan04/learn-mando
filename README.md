@@ -14,12 +14,12 @@ screen — no App Store, no developer account, no 7-day expiry, nothing to pay.
 | **HSK** | 5,003 words across levels 1–6, plus 2,634 characters with pinyin, meaning and stroke count |
 | **Stroke order** | Animated, with the radical picked out in vermilion, for every character |
 | **Review** | Spaced repetition (Again / Hard / Good / Easy), three directions |
-| **Test** | Multiple-choice listening and reading, drawing from every deck at once |
+| **Test** | Multiple-choice listening and reading over words or phrases, at any HSK level |
 | **Cantonese** | Jyutping on every word, revealed with a button (Settings can make it always visible). Tests are Mandarin-only; Cantonese audio is on demand |
 | **Audio** | Built-in iOS Chinese text-to-speech — works offline |
 | **Progress** | Streak, 7-day activity, per-level coverage, hardest cards |
 | **Widget** | Optional home-screen widget via Scriptable (free) |
-| **Profiles** | Separate progress per person on the device, with an optional PIN |
+| **Profiles** | Separate progress per person, chosen at launch, with an optional PIN |
 
 Everything is stored on the device in `localStorage`. Nothing is uploaded anywhere.
 

@@ -1,4 +1,4 @@
-const V='hanzi-v4';
+const V='hanzi-v5';
 const CORE=['./','./index.html','./styles.css','./app.js','./manifest.webmanifest',
   './data/notes.json','./data/hsk.json',
   './data/strokes-0.json','./data/strokes-1.json','./data/strokes-2.json','./data/strokes-3.json',

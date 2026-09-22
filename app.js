@@ -717,34 +717,47 @@ function renderReview(){
 
 /* ── TEST ──────────────────────────────────────────────────── */
 let T={stage:'setup',qs:[],i:0,picked:null,hinted:false,wrong:[],
-       kind:'mixed',len:15,src:'all'};
+       kind:'mixed',len:15,src:'all',scope:'words',hsk:null};
 const TKINDS={listening:'Listening',reading:'Reading',mixed:'Mixed'};
 const TSRC={notes:'My notes',hsk:'HSK',all:'Everything'};
+const TSCOPE={words:'Words',phrases:'Phrases',both:'Both'};
+const testLevel=()=>T.hsk||S.hsk;
 
 function testPool(){
-  const out=[];
-  if(T.src!=='hsk')
-    for(const v of D.notes.vocab)
-      if(v.h.length<=6) out.push({id:'v:'+v.id,h:v.h,p:v.p,e:v.e,j:v.j,tag:v.w?'Week '+v.w:'Notes'});
-  if(T.src!=='notes')
-    for(const w of D.hsk.words)
-      if(w.lv<=S.hsk&&w.h.length<=6) out.push({id:'h:'+w.h,h:w.h,p:w.p,e:w.e,j:w.j,tag:'HSK '+w.lv});
-  // de-duplicate on the characters, keeping the notes copy
+  const out=[], lvl=testLevel();
+  const wantWords=T.scope!=='phrases', wantPhrases=T.scope!=='words';
+  if(wantWords){
+    if(T.src!=='hsk')
+      for(const v of D.notes.vocab)
+        if(v.h.length<=6) out.push({id:'v:'+v.id,h:v.h,p:v.p,e:v.e,j:v.j,tag:v.w?'Week '+v.w:'Notes'});
+    if(T.src!=='notes')
+      for(const w of D.hsk.words)
+        if(w.lv<=lvl&&w.h.length<=6) out.push({id:'h:'+w.h,h:w.h,p:w.p,e:w.e,j:w.j,tag:'HSK '+w.lv});
+  }
+  // phrases only exist in the notes — the HSK lists are words alone
+  if(wantPhrases&&T.src!=='hsk')
+    for(const x of D.notes.sentences)
+      out.push({id:'s:'+x.id,h:x.h,p:x.p,e:x.e,j:x.j,long:1,tag:x.w?'Week '+x.w:'Notes'});
   const seen=new Set(); return out.filter(o=>seen.has(o.h)?false:(seen.add(o.h),true));
 }
+const phrasesUnavailable=()=>T.scope!=='words'&&T.src==='hsk';
 const shuffle=a=>{const b=a.slice();
   for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}
   return b};
 const firstEn=e=>(e||'').split(/[;·]/)[0].trim().slice(0,46);
+const enOf=o=>o.long?(o.e||'').trim():firstEn(o.e);
 
 function distractors(pool,answer,key,n=3){
   const want=String(answer[key]||'');
   const same=o=>String(o[key]||'');
+  // keep the four options the same shape, so length isn't a giveaway
+  const kin=pool.filter(o=>!!o.long===!!answer.long);
+  const base=kin.length>=6?kin:pool;
   // prefer words that start with the same pinyin letter — harder, fairer
   const initial=stripTone(answer.p||'')[0];
-  const near=shuffle(pool.filter(o=>o.h!==answer.h&&same(o)&&same(o)!==want
+  const near=answer.long?[]:shuffle(base.filter(o=>o.h!==answer.h&&same(o)&&same(o)!==want
     &&stripTone(o.p||'')[0]===initial));
-  const rest=shuffle(pool.filter(o=>o.h!==answer.h&&same(o)&&same(o)!==want));
+  const rest=shuffle(base.filter(o=>o.h!==answer.h&&same(o)&&same(o)!==want));
   const out=[],used=new Set([want]);
   for(const o of [...near,...rest]){
     if(out.length>=n) break;
@@ -759,11 +772,12 @@ function buildTest(){
   const picks=shuffle(pool).slice(0,T.len);
   T.qs=picks.map(a=>{
     let type;
-    if(T.kind==='listening') type='hear';
+    if(T.kind==='listening') type=Math.random()<.5?'hear':'hearEn';
     else if(T.kind==='reading') type=Math.random()<.5?'read':'toHanzi';
-    else type=['hear','read','toHanzi','hear'][Math.floor(Math.random()*4)];
+    else type=['hear','hearEn','read','toHanzi'][Math.floor(Math.random()*4)];
     const lang='cmn';   // listening is Mandarin only
-    const key=type==='read'?'e':'h';
+    // 'hear' offers the hanzi, 'hearEn' offers the translation
+    const key=(type==='read'||type==='hearEn')?'e':'h';
     const opts=shuffle([a,...distractors(pool,a,key)]);
     return {a,type,lang,opts,key};
   });
@@ -778,21 +792,29 @@ function renderTest(){
       `<button data-v="${k}" class="${val===k?'on':''}">${l}</button>`).join('')}</div>`;
     s.innerHTML=`
     <div class="h1" style="margin-bottom:8px">Test</div>
-    <p class="lede">Multiple choice, drawn from every word you have. No timer, no streak —
+    <p class="lede">Multiple choice, drawn from every word and phrase you have. No timer, no streak —
       just a score at the end and a list of what to go back over.</p>
     <div class="eyebrow" style="margin:22px 0 9px 2px">What to test</div>
     ${seg('tKind',TKINDS,T.kind)}
+    <div class="eyebrow" style="margin:20px 0 9px 2px">Test on</div>
+    ${seg('tScope',TSCOPE,T.scope)}
     <div class="eyebrow" style="margin:20px 0 9px 2px">Draw from</div>
     ${seg('tSrc',TSRC,T.src)}
+    ${T.src!=='notes'?`<div class="eyebrow" style="margin:20px 0 9px 2px">HSK level</div>
+    <div class="chips" id="tHsk">${[1,2,3,4,5,6].map(l=>
+      `<button class="chip${testLevel()===l?' on':''}" data-v="${l}">HSK ${l>1?'1–'+l:'1'}</button>`).join('')}</div>`:''}
     <div class="eyebrow" style="margin:20px 0 9px 2px">Length</div>
     ${seg('tLen',{10:'10',15:'15',25:'25',40:'40'},String(T.len))}
     <div class="card" style="padding:15px 16px;margin-top:22px">
       <div style="font:400 13.5px/1.6 var(--sans);color:var(--ink3)">
-        ${pool.length} words in the pool${T.src!=='notes'?` · HSK ${S.hsk>1?'1–'+S.hsk:'1'}`:''}.
-        ${T.kind!=='reading'?'Listening questions are played in Mandarin.':''}
+        ${phrasesUnavailable()
+          ? 'The HSK lists are words only — phrases come from your own notes. Set <b>Draw from</b> to My notes or Everything.'
+          : `${pool.length} ${T.scope==='phrases'?'phrases':T.scope==='both'?'items':'words'} in the pool${
+              T.src!=='notes'&&T.scope!=='phrases'?` · HSK ${testLevel()>1?'1–'+testLevel():'1'}`:''}.
+             ${T.kind!=='reading'?'Listening questions are played in Mandarin.':''}`}
       </div>
     </div>
-    <button class="btn" id="tStart" style="margin-top:16px">Start test</button>
+    <button class="btn" id="tStart" style="margin-top:16px"${pool.length<6?' disabled':''}>Start test</button>
     ${P.tests&&P.tests.length?`<div class="eyebrow" style="margin:26px 0 9px 2px">Recent tests</div>
       <div class="card" style="overflow:hidden">${P.tests.slice(0,5).map(t=>
         `<div class="row"><span class="k" style="font-size:14px">${TKINDS[t.k]||t.k} · ${t.n} questions</span>
@@ -801,6 +823,8 @@ function renderTest(){
     <div style="height:20px"></div>`;
     const bind=(id,fn)=>$$('#'+id+' button').forEach(b=>b.onclick=()=>{fn(b.dataset.v);renderTest()});
     bind('tKind',v=>T.kind=v); bind('tSrc',v=>T.src=v); bind('tLen',v=>T.len=+v);
+    bind('tScope',v=>T.scope=v);
+    $$('#tHsk button').forEach(b=>b.onclick=()=>{T.hsk=+b.dataset.v;renderTest()});
     $('#tStart').onclick=()=>{buildTest();
       if(!T.qs.length)return toast('Not enough words in that pool');renderTest()};
     return;
@@ -819,7 +843,7 @@ function renderTest(){
         `<button class="row jump3" data-h="${esc(w.a.h)}" style="width:100%;text-align:left">
           <span class="han" style="font-size:22px;min-width:48px">${esc(w.a.h)}</span>
           <span class="k"><span style="font:400 14px/1.3 var(--serif)">${colorPy(w.a.p)}</span>
-            <span style="display:block;font-size:12.5px;color:var(--ink3);margin-top:3px">${esc(firstEn(w.a.e))}</span></span>
+            <span style="display:block;font-size:12.5px;color:var(--ink3);margin-top:3px">${esc(enOf(w.a))}</span></span>
           <span class="tag">${esc(w.a.tag)}</span></button>`).join('')}</div>`
       :`<div class="card" style="padding:20px;text-align:center;font:400 14px/1.6 var(--sans);color:var(--ink3)">
           Everything correct. Nothing to revisit.</div>`}
@@ -837,19 +861,22 @@ function renderTest(){
   const q=T.qs[T.i], a=q.a;
   const pct=Math.round(T.i/T.qs.length*100);
 
+  const heard = q.type==='hear'||q.type==='hearEn';
   const prompt =
-    q.type==='hear'
+    heard
       ? `<button class="playbig" id="tPlay">${svg('speak',30,'var(--onInk)')}</button>
          <div class="eyebrow" style="margin-top:14px">Mandarin 普通話 · tap to replay</div>`
     : q.type==='read'
-      ? `<div class="prompt han">${esc(a.h)}</div>`
-      : `<div class="prompt small">${esc(firstEn(a.e))}</div>`;
-  const ask = q.type==='hear' ? 'Which word did you hear?'
-            : q.type==='read' ? 'What does this mean?'
-            : 'Which word is this?';
+      ? `<div class="prompt han${a.long?' ph':''}">${esc(a.h)}</div>`
+      : `<div class="prompt small">${esc(enOf(a))}</div>`;
+  const noun = a.long?'phrase':'word';
+  const ask = q.type==='hear'   ? `Which ${noun} did you hear?`
+            : q.type==='hearEn' ? 'What did that mean?'
+            : q.type==='read'   ? 'What does this mean?'
+            : `Which ${noun} is this?`;
   const label=o=>q.key==='e'
-    ? esc(firstEn(o.e))
-    : `<span class="han" style="font-size:24px">${esc(o.h)}</span>`;
+    ? esc(enOf(o))
+    : `<span class="han${o.long?' ph':''}" style="font-size:${o.long?'17px':'24px'}">${esc(o.h)}</span>`;
 
   s.innerHTML=`
   <div class="rbar" style="margin-bottom:14px">
@@ -874,7 +901,7 @@ function renderTest(){
 
   $('#tQuit').onclick=()=>{T.stage='setup';renderTest()};
   const play=()=>say(a.h,$('#tPlay'),q.lang);
-  if(q.type==='hear'){ $('#tPlay').onclick=play; setTimeout(play,320) }
+  if(heard){ $('#tPlay').onclick=play; setTimeout(play,320) }
   const hb=$('#tHint'); if(hb) hb.onclick=()=>{T.hinted=true;
     $('#tJyut').hidden=false; hb.hidden=true; if(hasCanto())say(a.h,null,'yue')};
 
@@ -894,7 +921,7 @@ function renderTest(){
     $('#tFeed').innerHTML=`
       <div class="feed ${right?'ok':'no'}">
         <div class="fhead">${right?'Correct':'Not quite'}</div>
-        <div class="fbody"><span class="han" style="font-size:22px">${esc(a.h)}</span>
+        <div class="fbody"><span class="han" style="font-size:${a.long?'17px':'22px'}">${esc(a.h)}</span>
           <span style="font:400 17px/1.3 var(--serif);margin-left:10px">${colorPy(a.p)}</span>
           ${a.j?`<span class="jsmall">${esc(a.j)}</span>`:''}
           <div style="margin-top:6px;font:400 13.5px/1.5 var(--sans);color:var(--ink2)">${esc(a.e)}</div></div>
@@ -1122,6 +1149,39 @@ function editProfile(id){
   };
 }
 
+
+/* ── launch picker ─────────────────────────────────────────
+   Shown once per app launch when more than one profile exists.
+   Choosing sticks for the whole session; it only asks again
+   the next time the app is opened fresh. */
+function launchPicker(done){
+  if(PROF.list.length<2) return done();
+  const m=el('div','modal launch');
+  m.innerHTML=`<div class="mscrim" style="background:var(--bg)"></div>
+    <div class="mbox" style="box-shadow:none;border:0;background:transparent">
+      <div class="lwrap">
+        <div class="lmark han">洪</div>
+        <div class="ltitle">Who's studying?</div>
+        <div class="plist">${PROF.list.map(p=>`
+          <button class="pcard" data-id="${p.id}">
+            <span class="pglyph han">${esc(p.glyph||p.name[0]||'?')}</span>
+            <span class="pname">${esc(p.name)}</span>
+            ${p.pin?`<span class="plock">PIN</span>`:''}
+          </button>`).join('')}</div>
+      </div>
+    </div>`;
+  document.body.appendChild(m);
+  $$('.pcard',m).forEach(b=>b.onclick=()=>{
+    const p=PROF.list.find(x=>x.id===b.dataset.id);
+    const enter=()=>{
+      PROF.active=p.id; saveProf();
+      S=load(slot('settings'),DEF); P=load(slot('progress'),BLANK);
+      m.remove(); applyTheme(); done();
+    };
+    p.pin ? askPin(p,enter) : enter();
+  });
+}
+
 /* ── nav / boot ────────────────────────────────────────────── */
 const TABS=['today','library','review','test','progress','settings'];
 const TABLBL={today:'Today',library:'Library',review:'Review',test:'Test',progress:'Stats',settings:'Settings'};
@@ -1165,7 +1225,7 @@ async function boot(){
   }
   D.hsk.chars.forEach(c=>CHARIDX.set(c.c,c));
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
-  go('today');
+  launchPicker(()=>go('today'));
   if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
   loadStrokes();
 }
