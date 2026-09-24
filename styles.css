@@ -314,3 +314,7 @@ input{font:inherit;color:inherit;background:none;border:0;outline:0;user-select:
 .lmark{font-size:40px;color:var(--red);line-height:1;margin-bottom:16px}
 .ltitle{font:400 27px/1.2 var(--serif);color:var(--ink);margin-bottom:22px}
 .modal.launch .plist{text-align:left}
+.snip{margin:0;padding:12px 13px;background:var(--wash);border-radius:10px;
+  font:400 12px/1.75 var(--mono);color:var(--ink2);white-space:pre-wrap;
+  word-break:break-word;user-select:text;-webkit-user-select:text;overflow-x:auto}
+.row .v{white-space:nowrap}
