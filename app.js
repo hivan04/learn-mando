@@ -1,11 +1,12 @@
 /* ── Hanzi · offline study app ──────────────────────────────── */
+const BUILD='2026-09-24.2249';
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const DAY=864e5;
 const el=(t,c,h)=>{const n=document.createElement(t);if(c)n.className=c;if(h!=null)n.innerHTML=h;return n};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* ── state ─────────────────────────────────────────────────── */
-const DEF={deck:'notes',hsk:1,pyIdx:'All',jyutAlways:false,week:'all',kind:'vocab',rotate:3,tones:true,theme:'auto',
+const DEF={deck:'notes',hsk:1,pyIdx:'All',jyutAlways:false,cDeck:'both',cMin:1,cMax:6,week:'all',kind:'vocab',rotate:3,tones:true,theme:'auto',
            newPerDay:8,reviewLimit:60,libMode:'chars'};
 const BLANK={cards:{},log:{},streak:{n:0,last:null},seen:[],tests:[]};
 function load(k,d){try{return Object.assign(structuredClone(d),JSON.parse(localStorage.getItem(k)||'{}'))}catch(e){return structuredClone(d)}}
@@ -120,11 +121,24 @@ function pool(){
   for(const s of D.notes.sentences) out.push({id:'s:'+s.id,h:s.h,p:s.p,e:s.e,j:s.j,meta:s.l,w:s.w,long:1});
   return out;
 }
+/* Built in exactly the order the Scriptable widget builds it —
+   notes first, then HSK filtered by level — so the same rotation
+   index lands on the same word in both places. Don't reorder this
+   without changing widget/hanzi-widget.js to match. */
 function cotdPool(){
-  return S.deck==='hsk'
-    ? D.hsk.words.filter(w=>w.lv<=S.hsk).map(w=>({h:w.h,p:w.p,e:w.e,j:w.j}))
-    : D.notes.vocab.map(v=>({h:v.h,p:v.p,e:v.e,j:v.j,w:v.w,l:v.l}));
+  const out=[];
+  if(S.cDeck!=='hsk')
+    for(const v of D.notes.vocab) out.push({h:v.h,p:v.p,e:v.e,j:v.j,lv:0,w:v.w,l:v.l});
+  if(S.cDeck!=='notes')
+    for(const w of D.hsk.words)
+      if(w.lv>=S.cMin&&w.lv<=S.cMax) out.push({h:w.h,p:w.p,e:w.e,j:w.j,lv:w.lv});
+  return out;
 }
+const widgetConfig=()=>
+`const DECK    = "${S.cDeck}";
+const HSK_MIN = ${S.cMin};
+const HSK_MAX = ${S.cMax};
+const ROTATE_HOURS = ${S.rotate};`;
 function exampleFor(h){
   const hits=D.notes.sentences.filter(x=>x.h.includes(h)).sort((a,b)=>a.h.length-b.h.length);
   const s=hits[0]; if(!s) return null;
@@ -337,6 +351,7 @@ function renderToday(){
   <div class="card cotd">
     <div class="head">
       <span class="eyebrow" style="color:var(--red)">Character of the day</span>
+      <span class="tag" style="margin-left:auto;margin-right:12px">${w.lv?'HSK '+w.lv:'MY NOTES'}</span>
       <div style="display:flex;gap:16px;align-items:center">
         <button id="cotdSay" aria-label="Pronounce">${svg('speak',17,'var(--ink4)')}</button>
       </div>
@@ -1032,8 +1047,28 @@ function renderSettings(){
   </div>
   <div class="eyebrow" style="margin:0 0 9px 2px">Character of the day</div>
   <div class="group">
+    <div class="row"><span class="k">Draws from</span>
+      ${sel('setCDeck',[['both','Notes + HSK'],['hsk','HSK only'],['notes','My notes only']],S.cDeck)}</div>
+    ${S.cDeck!=='notes'?`
+    <div class="row"><span class="k">Easiest level</span>
+      ${sel('setCMin',[1,2,3,4,5,6].map(l=>[l,'HSK '+l]),S.cMin)}</div>
+    <div class="row"><span class="k">Hardest level</span>
+      ${sel('setCMax',[1,2,3,4,5,6].map(l=>[l,'HSK '+l]),S.cMax)}</div>`:''}
     <div class="row"><span class="k">Rotate every</span>
       ${sel('setRot',[1,2,3,4,6,8,12,24].map(h=>[h,h+' hour'+(h===1?'':'s')]),S.rotate)}</div>
+    <div class="row"><span class="k">Pool size</span><span class="v">${cotdPool().length} words</span></div>
+  </div>
+
+  <div class="eyebrow" style="margin:0 0 9px 2px">Home screen widget</div>
+  <div class="group">
+    <div class="row" style="display:block">
+      <div style="font:400 13px/1.6 var(--sans);color:var(--ink3);margin-bottom:11px">
+        The widget can't read this app's settings — iOS keeps them apart. Paste these
+        four lines over the matching ones at the top of the Scriptable script and both
+        will show the same word.</div>
+      <pre class="snip" id="wCfg">${esc(widgetConfig())}</pre>
+      <button class="btn ghost" id="wCopy" style="margin-top:11px">Copy these lines</button>
+    </div>
   </div>
   <div class="eyebrow" style="margin:0 0 9px 2px">Appearance</div>
   <div class="group">
@@ -1053,7 +1088,9 @@ function renderSettings(){
   <div class="foot">
     Hanzi · ${D.notes.vocab.length+D.notes.sentences.length+D.notes.grammar.length} cards from your notes
     · ${D.hsk.words.length} HSK words · ${D.hsk.chars.length} characters<br>
-    Offline — nothing leaves this device.
+    Offline — nothing leaves this device.<br>
+    <span class="mono" style="font-size:10px">build ${BUILD}</span>
+    · <a href="#" id="chkUpd" style="color:var(--red);text-decoration:none">check for updates</a>
   </div>`;
   const on=(id,fn)=>{const e=$('#'+id);if(e)e.onchange=fn};
   on('setDeck',e=>{S.deck=e.target.value;saveS();renderAll()});
@@ -1061,7 +1098,22 @@ function renderSettings(){
   on('setNew',e=>{S.newPerDay=+e.target.value;saveS()});
   on('setLimit',e=>{S.reviewLimit=+e.target.value;saveS()});
   on('setMode',e=>{R.mode=e.target.value});
-  on('setRot',e=>{S.rotate=+e.target.value;saveS();renderToday()});
+  on('setRot',e=>{S.rotate=+e.target.value;saveS();renderSettings();renderToday()});
+  on('setCDeck',e=>{S.cDeck=e.target.value;saveS();renderSettings();renderToday()});
+  on('setCMin',e=>{S.cMin=+e.target.value;if(S.cMax<S.cMin)S.cMax=S.cMin;
+    saveS();renderSettings();renderToday()});
+  on('setCMax',e=>{S.cMax=+e.target.value;if(S.cMin>S.cMax)S.cMin=S.cMax;
+    saveS();renderSettings();renderToday()});
+  const wc=$('#wCopy'); if(wc) wc.onclick=()=>{
+    const text=widgetConfig();
+    (navigator.clipboard?navigator.clipboard.writeText(text):Promise.reject())
+      .then(()=>toast('Copied — paste into Scriptable'))
+      .catch(()=>{
+        const r=document.createRange(); r.selectNodeContents($('#wCfg'));
+        const sel=getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        toast('Selected — press Copy');
+      });
+  };
   on('setTheme',e=>{S.theme=e.target.value;saveS();applyTheme()});
   $('#setTones').onclick=()=>{S.tones=!S.tones;saveS();applyTheme();renderSettings()};
   $('#setJyut').onclick=()=>{S.jyutAlways=!S.jyutAlways;saveS();renderSettings()};
@@ -1073,6 +1125,17 @@ function renderSettings(){
   const pa=$('#pAdd'); if(pa) pa.onclick=()=>editProfile(null);
   $('#setExport').onclick=exportP;
   $('#setImport').onclick=importP;
+  const cu=$('#chkUpd'); if(cu) cu.onclick=async e=>{
+    e.preventDefault(); toast('Checking…');
+    try{
+      const rs=await navigator.serviceWorker.getRegistrations();
+      await Promise.all(rs.map(r=>r.update()));
+      const fresh=await fetch('app.js?ts='+Date.now(),{cache:'no-store'}).then(r=>r.text());
+      const m=fresh.match(/const BUILD='([^']+)'/);
+      if(m&&m[1]!==BUILD){ toast('Updating…'); setTimeout(()=>location.reload(),700) }
+      else toast('Already up to date');
+    }catch(err){ toast('Could not check — are you online?') }
+  };
   $('#setReset').onclick=()=>{
     if(confirm('Erase all progress, streaks and review history? This cannot be undone.')){
       P={cards:{},log:{},streak:{n:0,last:null},seen:[],tests:[]};saveP();renderAll();toast('Progress reset')}};
@@ -1226,6 +1289,13 @@ async function boot(){
   D.hsk.chars.forEach(c=>CHARIDX.set(c.c,c));
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
   launchPicker(()=>go('today'));
+  if('serviceWorker' in navigator){
+    // a deploy activates a new worker; take the fresh code straight away
+    let reloading=false;
+    navigator.serviceWorker.addEventListener('controllerchange',()=>{
+      if(reloading) return; reloading=true; location.reload();
+    });
+  }
   if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
   loadStrokes();
 }
