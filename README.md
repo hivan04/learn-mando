@@ -88,8 +88,23 @@ JavaScript inside a real widget.
 It shows the same rotating word as the app, in the same colours, and caches the
 list on the device so it keeps working with no signal. Tapping it opens the app.
 
-To change how often it rotates, set `ROTATE_HOURS` in the widget to match
-**Settings → Rotate every** in the app.
+### Tuning the widget's difficulty
+
+The widget has its own settings at the top of the file, separate from the app:
+
+```js
+const DECK    = "both";  // "both" | "hsk" | "notes"
+const HSK_MIN = 1;       // raise this to drop the easy words
+const HSK_MAX = 6;
+```
+
+Word counts per level: HSK 1 = 148, 2 = 147, 3 = 298, 4 = 586, 5 = 1,311,
+6 = 2,513, plus 434 from the notes. So `HSK_MIN = 4` leaves the 4,410
+hardest words and nothing below them.
+
+`ROTATE_HOURS` should match **Settings → Rotate every** in the app so the two
+show the same word. Changing any of these re-fetches on the next run — the
+cache file is keyed on the settings.
 
 ---
 

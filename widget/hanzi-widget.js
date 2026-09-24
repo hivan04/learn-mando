@@ -4,10 +4,12 @@
 // SETUP (one time, ~2 minutes, free):
 //  1. Install "Scriptable" from the App Store (free).
 //  2. Open Scriptable, tap + to make a new script, paste all of this in.
-//  3. Set BASE_URL below to your GitHub Pages address.
-//  4. Name the script  Hanzi  (tap the title at the top).
-//  5. Long-press your home screen → + → Scriptable → pick a size →
+//  3. Name the script  Hanzi  (tap the title at the top).
+//  4. Long-press your home screen → + → Scriptable → pick a size →
 //     add it → tap the new widget → Script: Hanzi → Done.
+//
+//  BASE_URL is already set to your repo. It only works once the repo is
+//  public and GitHub Pages is switched on.
 //
 // The widget caches the word list on the device, so after the first
 // successful load it keeps rotating with no internet at all.
