@@ -1,5 +1,5 @@
 /* ── Hanzi · offline study app ──────────────────────────────── */
-const BUILD='2026-09-24.2249';
+const BUILD='2026-09-26.1200';
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const DAY=864e5;
 const el=(t,c,h)=>{const n=document.createElement(t);if(c)n.className=c;if(h!=null)n.innerHTML=h;return n};
@@ -7,7 +7,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 
 /* ── state ─────────────────────────────────────────────────── */
 const DEF={deck:'notes',hsk:1,pyIdx:'All',jyutAlways:false,cDeck:'both',cMin:1,cMax:6,week:'all',kind:'vocab',rotate:3,tones:true,theme:'auto',
-           newPerDay:8,reviewLimit:60,libMode:'chars'};
+           newPerDay:8,reviewLimit:60,libMode:'chars',mineKind:'all',cMine:false};
 const BLANK={cards:{},log:{},streak:{n:0,last:null},seen:[],tests:[]};
 function load(k,d){try{return Object.assign(structuredClone(d),JSON.parse(localStorage.getItem(k)||'{}'))}catch(e){return structuredClone(d)}}
 function put(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
@@ -42,9 +42,20 @@ let S=load(slot('settings'),DEF);
 let P=load(slot('progress'),BLANK);
 function saveS(){put(slot('settings'),S)}
 function saveP(){put(slot('progress'),P)}
+/* ── my own words ──────────────────────────────────────────
+   Words and phrases added in the app, per profile. Stored apart
+   from progress so "Reset all progress" never deletes them.
+   {id,h,p,e,j,k:'word'|'phrase',t:createdMs} */
+function loadMine(){try{const v=JSON.parse(localStorage.getItem(slot('mine')));
+  return Array.isArray(v)?v:[]}catch(e){return []}}
+let M=loadMine();
+function saveM(){put(slot('mine'),M)}
+const mineCards=()=>M.map(m=>({id:'u:'+m.id,h:m.h,p:m.p,e:m.e,j:m.j,meta:'My own',
+  tag:'Mine',long:m.k==='phrase'?1:0,mine:1}));
+const allSents=()=>[...D.notes.sentences,...M.filter(m=>m.k==='phrase')];
 function useProfile(id){
   PROF.active=id; saveProf();
-  S=load(slot('settings'),DEF); P=load(slot('progress'),BLANK);
+  S=load(slot('settings'),DEF); P=load(slot('progress'),BLANK); M=loadMine();
   applyTheme(); renderAll(); toast(me().name);
 }
 function newProfileId(){
@@ -113,12 +124,14 @@ function nextRotation(hours){
 
 /* ── card pool ─────────────────────────────────────────────── */
 function pool(){
+  if(S.deck==='mine') return mineCards();
   if(S.deck==='hsk'){
     return D.hsk.words.filter(w=>w.lv<=S.hsk).map(w=>({id:'h:'+w.h,h:w.h,p:w.p,e:w.e,j:w.j,meta:'HSK '+w.lv}));
   }
   const out=[];
   for(const v of D.notes.vocab) out.push({id:'v:'+v.id,h:v.h,p:v.p,e:v.e,j:v.j,meta:v.l,w:v.w});
   for(const s of D.notes.sentences) out.push({id:'s:'+s.id,h:s.h,p:s.p,e:s.e,j:s.j,meta:s.l,w:s.w,long:1});
+  out.push(...mineCards());
   return out;
 }
 /* Built in exactly the order the Scriptable widget builds it —
@@ -132,6 +145,9 @@ function cotdPool(){
   if(S.cDeck!=='notes')
     for(const w of D.hsk.words)
       if(w.lv>=S.cMin&&w.lv<=S.cMax) out.push({h:w.h,p:w.p,e:w.e,j:w.j,lv:w.lv});
+  // appended last, and off by default: the widget can't read them, so
+  // switching this on means the app and widget stop showing the same word
+  if(S.cMine) for(const m of M) out.push({h:m.h,p:m.p,e:m.e,j:m.j,lv:0,mine:1});
   return out;
 }
 const widgetConfig=()=>
@@ -140,7 +156,7 @@ const HSK_MIN = ${S.cMin};
 const HSK_MAX = ${S.cMax};
 const ROTATE_HOURS = ${S.rotate};`;
 function exampleFor(h){
-  const hits=D.notes.sentences.filter(x=>x.h.includes(h)).sort((a,b)=>a.h.length-b.h.length);
+  const hits=allSents().filter(x=>x.h!==h&&x.h.includes(h)).sort((a,b)=>a.h.length-b.h.length);
   const s=hits[0]; if(!s) return null;
   return {zh:esc(s.h).replace(esc(h),`<span class="t1">${esc(h)}</span>`),p:s.p,e:s.e};
 }
@@ -351,7 +367,7 @@ function renderToday(){
   <div class="card cotd">
     <div class="head">
       <span class="eyebrow" style="color:var(--red)">Character of the day</span>
-      <span class="tag" style="margin-left:auto;margin-right:12px">${w.lv?'HSK '+w.lv:'MY NOTES'}</span>
+      <span class="tag" style="margin-left:auto;margin-right:12px">${w.lv?'HSK '+w.lv:w.mine?'MY OWN':'MY NOTES'}</span>
       <div style="display:flex;gap:16px;align-items:center">
         <button id="cotdSay" aria-label="Pronounce">${svg('speak',17,'var(--ink4)')}</button>
       </div>
@@ -377,12 +393,12 @@ function renderToday(){
     <div class="tile out">
       <div class="num">${learned()}</div>
       <div class="lab">characters learned</div>
-      <div class="go" style="color:var(--ink4)">${S.deck==='hsk'?'HSK '+(S.hsk>1?'1–'+S.hsk:'1'):'My notes'}</div>
+      <div class="go" style="color:var(--ink4)">${S.deck==='hsk'?'HSK '+(S.hsk>1?'1–'+S.hsk:'1'):S.deck==='mine'?'My own':'My notes'}</div>
     </div>
   </div>
   ${P.seen.length?`<div class="eyebrow" style="margin:18px 0 10px 2px">Recently seen</div>
   <div class="rowlist" id="recent"></div>`:''}`;
-  $('#cotdGlyph').onclick=()=>openChar(w.h);
+  $('#cotdGlyph').onclick=()=>openChar(w.h,w);
   $('#cotdSay').onclick=e=>say(w.h,e.currentTarget.closest('button'));
   $('#goReview').onclick=()=>go('review');
   const wb=$('#whoBtn'); if(wb) wb.onclick=profileSheet;
@@ -401,15 +417,19 @@ function renderToday(){
 let libQuery='';
 function renderLibrary(){
   const s=$('#library');
-  const isH=S.deck==='hsk';
+  const isH=S.deck==='hsk', isMine=S.deck==='mine';
   s.innerHTML=`
   <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
     <div class="h1">Library</div>
-    <div style="font:400 12px/1 var(--sans);color:var(--ink4)" id="libCount"></div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="font:400 12px/1 var(--sans);color:var(--ink4)" id="libCount"></div>
+      <button class="libadd" id="libAdd" aria-label="Add a word or phrase">+</button>
+    </div>
   </div>
   <div class="seg" id="deckSeg">
-    <button data-d="notes" class="${isH?'':'on'}">My notes</button>
+    <button data-d="notes" class="${S.deck==='notes'?'on':''}">My notes</button>
     <button data-d="hsk" class="${isH?'on':''}">HSK</button>
+    <button data-d="mine" class="${isMine?'on':''}">My own${M.length?` <span class="segn">${M.length}</span>`:''}</button>
   </div>
   <div class="search">
     ${svg('search',15,'var(--ink5)')}
@@ -421,6 +441,9 @@ function renderLibrary(){
   <div class="seg" id="libMode" style="margin-top:12px">
     ${isH?`<button data-m="chars" class="${S.libMode==='chars'?'on':''}">Characters</button>
           <button data-m="words" class="${S.libMode==='words'?'on':''}">Words</button>`
+     :isMine?`<button data-m="all" class="${S.mineKind==='all'?'on':''}">All</button>
+          <button data-m="word" class="${S.mineKind==='word'?'on':''}">Words</button>
+          <button data-m="phrase" class="${S.mineKind==='phrase'?'on':''}">Phrases</button>`
          :`<button data-m="vocab" class="${S.kind==='vocab'?'on':''}">Vocab</button>
            <button data-m="sentences" class="${S.kind==='sentences'?'on':''}">Sentences</button>
            <button data-m="grammar" class="${S.kind==='grammar'?'on':''}">Grammar</button>`}
@@ -429,13 +452,18 @@ function renderLibrary(){
 
   $$('#deckSeg button').forEach(b=>b.onclick=()=>{S.deck=b.dataset.d;saveS();libQuery='';renderLibrary()});
   $$('#libMode button').forEach(b=>b.onclick=()=>{
-    if(isH)S.libMode=b.dataset.m; else S.kind=b.dataset.m; saveS(); renderLibrary();
+    if(isH)S.libMode=b.dataset.m; else if(isMine)S.mineKind=b.dataset.m; else S.kind=b.dataset.m;
+    saveS(); renderLibrary();
   });
+  $('#libAdd').onclick=()=>editMine(null);
   const inp=$('#libSearch');
   inp.oninput=()=>{libQuery=inp.value;fillLib()};
 
   const chips=$('#libChips');
-  if(isH){
+  if(isMine){
+    chips.innerHTML=`<button class="btn ghost addwide" id="libAddWide">+ Add a word or phrase</button>`;
+    $('#libAddWide').onclick=()=>editMine(null);
+  }else if(isH){
     [1,2,3,4,5,6].forEach(l=>{
       const c=el('button','chip'+(S.hsk===l?' on':''),'HSK '+l);
       c.onclick=()=>{S.hsk=l;saveS();renderLibrary()}; chips.appendChild(c);
@@ -465,6 +493,12 @@ function renderLibrary(){
 function libItems(){
   const q=stripTone(libQuery.trim());
   const match=(o)=>!q||o.h.includes(libQuery.trim())||stripTone(o.p||'').replace(/\s/g,'').includes(q.replace(/\s/g,''))||(o.e||'').toLowerCase().includes(q);
+  if(S.deck==='mine'){
+    return M.filter(m=>S.mineKind==='all'||m.k===S.mineKind).filter(match)
+      .sort((a,b)=>(b.t||0)-(a.t||0))
+      .map(m=>({kind:m.k==='phrase'?'sent':'word',h:m.h,p:m.p,e:m.e,j:m.j,
+        tag:m.k==='phrase'?'Phrase':'Word',mine:1,id:'u:'+m.id}));
+  }
   if(S.deck==='hsk'){
     if(S.libMode==='chars'){
       const L=S.pyIdx&&S.pyIdx!=='All'?S.pyIdx.toLowerCase():null;
@@ -495,9 +529,13 @@ function fillLib(){
   $('#libN').textContent=items.length?items.length:'';
   $('#libCount').textContent=S.deck==='hsk'
     ? `HSK ${S.hsk} · ${items.length} ${S.libMode}`
+    : S.deck==='mine' ? `${items.length} saved`
     : `${items.length} ${S.kind}`;
   body.innerHTML='';
-  if(!items.length){body.appendChild(el('div','empty','Nothing matches that search.'));return}
+  if(!items.length){body.appendChild(el('div','empty',
+    S.deck==='mine'&&!M.length
+      ? 'Nothing here yet.<br>Add a word or phrase you picked up — pinyin fills itself in where the dictionary knows it.'
+      : 'Nothing matches that search.'));return}
   if(items[0].kind==='char'){
     const g=el('div','grid');
     items.forEach(it=>{
@@ -544,22 +582,26 @@ async function openChar(h,ctx){
   const single=[...h].filter(c=>c>='一'&&c<='鿿');
   const info=D.hsk.chars.find(c=>c.c===single[0])||{};
   const word=D.hsk.words.find(w=>w.h===h);
-  const py=(ctx&&ctx.p)||(word&&word.p)||info.p||'';
-  const en=(ctx&&ctx.e)||(word&&word.e)||info.e||'';
+  const mineOf=M.find(m=>m.h===h);
+  const py=(ctx&&ctx.p)||(mineOf&&mineOf.p)||(word&&word.p)||info.p||'';
+  const en=(ctx&&ctx.e)||(mineOf&&mineOf.e)||(word&&word.e)||info.e||'';
   const tone=toneOf((py||'').split(' ')[0]||'');
   const one=single.length===1&&[...h].length===1;
   const noteHit=D.notes.vocab.find(v=>v.h===h)||D.notes.sentences.find(x=>x.h===h);
-  const jy=(ctx&&ctx.j)||(word&&word.j)||(noteHit&&noteHit.j)||(one?info.j:'')||'';
+  const mineHit=mineOf;
+  const jy=(ctx&&ctx.j)||(mineHit&&mineHit.j)||(word&&word.j)||(noteHit&&noteHit.j)||(one?info.j:'')||'';
 
   const inNotes=D.notes.vocab.some(v=>v.h===h)||D.notes.sentences.some(x=>x.h===h)||(one&&info.mine);
   const appears=D.hsk.words.filter(w=>w.h!==h&&w.h.includes(single[0])).slice(0,8);
   const mine=D.notes.vocab.filter(v=>v.h!==h&&v.h.includes(single[0])).slice(0,6);
-  const exs=D.notes.sentences.filter(s=>s.h.includes(single[0])).slice(0,4);
+  const exs=allSents().filter(s=>s.h!==h&&s.h.includes(single[0])).slice(0,4);
 
   $('#sheet .panel').innerHTML=`
   <div class="sheetbar">
     <button id="sheetBack">${svg('back',17,'var(--ink)')}</button>
     <span class="t han">${esc(h)}</span>
+    ${mineHit?'<button id="sheetEdit" class="pedit" style="margin:0">Edit</button>'
+             :'<button id="sheetMine" class="pedit" style="margin:0" title="Save to My own">+ Mine</button>'}
     <button id="sheetAdd">${svg('star',18,'var(--ink4)')}</button>
   </div>
   <div class="sheetbody">
@@ -578,6 +620,7 @@ async function openChar(h,ctx){
         ${one&&info.n?`<span class="tag">${info.n} STROKES</span>`:''}
         ${one&&py?`<span class="tag">TONE ${tone===5?'NEUTRAL':tone}</span>`:''}
         ${inNotes?`<span class="tag" style="color:var(--sage)">IN MY NOTES</span>`:''}
+        ${mineHit?`<span class="tag" style="color:var(--red)">MY OWN</span>`:''}
       </div>
       <div class="acts">
         <button id="actSay" title="Mandarin">${svg('speak',20)}<em class="vtag">普</em></button>
@@ -614,7 +657,9 @@ async function openChar(h,ctx){
   const yb=$('#actSayYue'); if(yb) yb.onclick=e=>say(h,e.currentTarget,'yue');
   const shb=$('#sheetHint'); if(shb) shb.onclick=()=>{
     $('#sheetJyut').hidden=false; shb.hidden=true; if(hasCanto())say(h,null,'yue')};
-  $('#sheetAdd').onclick=()=>{card((S.deck==='hsk'?'h:':'v:')+h);saveP();toast('Added to review deck')};
+  $('#sheetAdd').onclick=()=>{card(mineHit?'u:'+mineHit.id:(S.deck==='hsk'?'h:':'v:')+h);saveP();toast('Added to review deck')};
+  const se=$('#sheetEdit'); if(se) se.onclick=()=>editMine(mineHit);
+  const sm=$('#sheetMine'); if(sm) sm.onclick=()=>editMine(null,{h,p:py,e:en,j:jy});
   $('#sheetStudy').onclick=()=>{closeSheet();go('review')};
   $$('.jump',$('#sheet')).forEach(b=>b.onclick=()=>openChar(b.dataset.h));
   if(single.length){
@@ -734,13 +779,20 @@ function renderReview(){
 let T={stage:'setup',qs:[],i:0,picked:null,hinted:false,wrong:[],
        kind:'mixed',len:15,src:'all',scope:'words',hsk:null};
 const TKINDS={listening:'Listening',reading:'Reading',mixed:'Mixed'};
-const TSRC={notes:'My notes',hsk:'HSK',all:'Everything'};
+const TSRC={notes:'My notes + own',hsk:'HSK',all:'Everything'};
 const TSCOPE={words:'Words',phrases:'Phrases',both:'Both'};
 const testLevel=()=>T.hsk||S.hsk;
 
 function testPool(){
   const out=[], lvl=testLevel();
   const wantWords=T.scope!=='phrases', wantPhrases=T.scope!=='words';
+  // your own entries go first, so their wording wins the de-duplication
+  if(T.src!=='hsk')
+    for(const m of M){
+      const ph=m.k==='phrase';
+      if(ph?wantPhrases:wantWords)
+        out.push({id:'u:'+m.id,h:m.h,p:m.p,e:m.e,j:m.j,long:ph?1:0,tag:'My own'});
+    }
   if(wantWords){
     if(T.src!=='hsk')
       for(const v of D.notes.vocab)
@@ -1035,7 +1087,7 @@ function renderSettings(){
   <div class="eyebrow" style="margin:22px 0 9px 2px">Study</div>
   <div class="group">
     <div class="row"><span class="k">Deck</span>
-      ${sel('setDeck',[['notes','My notes'],['hsk','HSK']],S.deck)}</div>
+      ${sel('setDeck',[['notes','My notes + own'],['hsk','HSK'],['mine','My own only']],S.deck)}</div>
     <div class="row"><span class="k">HSK level</span>
       ${sel('setHsk',[1,2,3,4,5,6].map(l=>[l,l>1?'HSK 1–'+l:'HSK 1']),S.hsk)}</div>
     <div class="row"><span class="k">New cards per day</span>
@@ -1054,6 +1106,8 @@ function renderSettings(){
       ${sel('setCMin',[1,2,3,4,5,6].map(l=>[l,'HSK '+l]),S.cMin)}</div>
     <div class="row"><span class="k">Hardest level</span>
       ${sel('setCMax',[1,2,3,4,5,6].map(l=>[l,'HSK '+l]),S.cMax)}</div>`:''}
+    ${S.cDeck!=='hsk'?`<div class="row"><span class="k">Include my own words<span class="sub">the widget can't see these — on means it stops matching</span></span>
+      <div class="sw${S.cMine?' on':''}" id="setCMine"><i></i></div></div>`:''}
     <div class="row"><span class="k">Rotate every</span>
       ${sel('setRot',[1,2,3,4,6,8,12,24].map(h=>[h,h+' hour'+(h===1?'':'s')]),S.rotate)}</div>
     <div class="row"><span class="k">Pool size</span><span class="v">${cotdPool().length} words</span></div>
@@ -1081,13 +1135,14 @@ function renderSettings(){
   </div>
   <div class="eyebrow" style="margin:0 0 9px 2px">Data</div>
   <div class="group">
-    <div class="row" id="setExport"><span class="k">Export progress</span><span class="v">copy / save</span></div>
+    <div class="row" id="setExport"><span class="k">Export progress<span class="sub">includes your own words</span></span><span class="v">copy / save</span></div>
     <div class="row" id="setImport"><span class="k">Import progress</span><span class="v">JSON</span></div>
     <div class="row" id="setReset"><span class="k danger">Reset all progress</span></div>
   </div>
   <div class="foot">
     Hanzi · ${D.notes.vocab.length+D.notes.sentences.length+D.notes.grammar.length} cards from your notes
-    · ${D.hsk.words.length} HSK words · ${D.hsk.chars.length} characters<br>
+    · ${D.hsk.words.length} HSK words · ${D.hsk.chars.length} characters
+    ${M.length?` · ${M.length} of your own`:''}<br>
     Offline — nothing leaves this device.<br>
     <span class="mono" style="font-size:10px">build ${BUILD}</span>
     · <a href="#" id="chkUpd" style="color:var(--red);text-decoration:none">check for updates</a>
@@ -1117,6 +1172,7 @@ function renderSettings(){
   on('setTheme',e=>{S.theme=e.target.value;saveS();applyTheme()});
   $('#setTones').onclick=()=>{S.tones=!S.tones;saveS();applyTheme();renderSettings()};
   $('#setJyut').onclick=()=>{S.jyutAlways=!S.jyutAlways;saveS();renderSettings()};
+  const scm=$('#setCMine'); if(scm) scm.onclick=()=>{S.cMine=!S.cMine;saveS();renderSettings();renderToday()};
   $$('.prow').forEach(r=>r.onclick=e=>{
     if(e.target.classList.contains('pedit')) return;
     switchTo(r.dataset.id);
@@ -1141,7 +1197,7 @@ function renderSettings(){
       P={cards:{},log:{},streak:{n:0,last:null},seen:[],tests:[]};saveP();renderAll();toast('Progress reset')}};
 }
 function exportP(){
-  const text=JSON.stringify({settings:S,progress:P,exported:new Date().toISOString()},null,1);
+  const text=JSON.stringify({settings:S,progress:P,mine:M,exported:new Date().toISOString()},null,1);
   // clipboard always works; the file download only works where the host allows it
   const copy=navigator.clipboard?navigator.clipboard.writeText(text):Promise.reject();
   copy.then(()=>toast('Progress copied to clipboard')).catch(()=>toast('Export ready'));
@@ -1159,7 +1215,8 @@ function importP(){
     r.onload=()=>{try{const d=JSON.parse(r.result);
       if(d.progress)P=Object.assign({cards:{},log:{},streak:{n:0,last:null},seen:[]},d.progress);
       if(d.settings)S=Object.assign(structuredClone(DEF),d.settings);
-      saveP();saveS();applyTheme();renderAll();toast('Progress restored');
+      if(Array.isArray(d.mine))M=d.mine;
+      saveP();saveS();saveM();applyTheme();renderAll();toast('Progress restored');
     }catch(e){toast('Could not read that file')}};
     r.readAsText(f)};
   i.click();
@@ -1203,7 +1260,8 @@ function editProfile(id){
   if(del) del.onclick=()=>{
     if(!confirm(`Delete "${p.name}" and all of their progress? This cannot be undone.`)) return;
     try{localStorage.removeItem(`hanzi.${p.id}.settings`);
-        localStorage.removeItem(`hanzi.${p.id}.progress`)}catch(e){}
+        localStorage.removeItem(`hanzi.${p.id}.progress`);
+        localStorage.removeItem(`hanzi.${p.id}.mine`)}catch(e){}
     PROF.list=PROF.list.filter(x=>x.id!==p.id);
     close();
     if(PROF.active===p.id){ PROF.active=PROF.list[0].id; saveProf(); useProfile(PROF.active) }
@@ -1212,6 +1270,149 @@ function editProfile(id){
   };
 }
 
+
+/* ── ADD / EDIT MY OWN ─────────────────────────────────────── */
+const isHan=c=>/[㐀-鿿豈-﫿]/.test(c);
+// longest dictionary match first, one character as the fallback
+function segment(h){
+  const ch=[...h], out=[]; let i=0;
+  while(i<ch.length){
+    if(!isHan(ch[i])){
+      let j=i; while(j<ch.length&&!isHan(ch[j])) j++;
+      out.push({raw:ch.slice(i,j).join('')}); i=j; continue;
+    }
+    let hit=null,len=0;
+    for(let L=Math.min(6,ch.length-i);L>=2;L--){
+      const w=WORDIDX.get(ch.slice(i,i+L).join('')); if(w){hit=w;len=L;break}
+    }
+    if(!hit){const c=CHARIDX.get(ch[i]); hit=c?{p:(c.p||'').split(/[,;\s]/)[0],j:(c.j||'').split(/[,;\s]/)[0]}:{p:'?',j:''}; len=1}
+    out.push({p:hit.p,j:hit.j||''}); i+=len;
+  }
+  return out;
+}
+const PUNC={'，':',','。':'.','？':'?','！':'!','：':':','；':';','、':',','“':'"','”':'"'};
+function autoPy(h){
+  let s='';
+  for(const t of segment(h)){
+    if(t.raw!=null){
+      const r=t.raw.trim(); if(!r) continue;
+      const mapped=[...r].map(c=>PUNC[c]||c).join('');
+      s+= /^[,.?!:;"]+$/.test(mapped) ? mapped : (s?' ':'')+mapped;
+    } else s+=(s?' ':'')+t.p;
+  }
+  return s.replace(/\s+([,.?!:;])/g,'$1').trim();
+}
+function autoJy(h){
+  const seg=segment(h).filter(t=>t.raw==null);
+  return seg.every(t=>t.j)?seg.map(t=>t.j).join(' '):'';
+}
+// ni3 hao3 / lv4 → nǐ hǎo / lǜ ; leaves already-marked pinyin alone
+function numToMarks(str){
+  if(!/[1-5]/.test(str)) return str;
+  const V={a:'āáǎà',e:'ēéěè',i:'īíǐì',o:'ōóǒò',u:'ūúǔù','ü':'ǖǘǚǜ'};
+  return str.replace(/([a-zA-ZüÜ:]+?)([1-5])/g,(m,syl,t)=>{
+    syl=syl.replace(/u:|v/g,'ü').replace(/U:|V/g,'Ü'); t=+t;
+    if(t===5) return syl;
+    const low=syl.toLowerCase();
+    let k=low.search(/[ae]/);
+    if(k<0) k=low.indexOf('ou');
+    if(k<0) for(let q=low.length-1;q>=0;q--) if('iouü'.includes(low[q])){k=q;break}
+    if(k<0) return syl;
+    const c=syl[k], r=V[c.toLowerCase()][t-1];
+    return syl.slice(0,k)+(c===c.toLowerCase()?r:r.toUpperCase())+syl.slice(k+1);
+  });
+}
+const looksPhrase=h=>[...h].filter(isHan).length>4||/[，。？！,.?!\s]/.test(h.trim());
+function whereElse(h){
+  const w=D.hsk.words.find(x=>x.h===h); if(w) return 'HSK '+w.lv;
+  if(D.notes.vocab.some(v=>v.h===h)||D.notes.sentences.some(x=>x.h===h)) return 'your notes';
+  return null;
+}
+function editMine(item,prefill){
+  const isNew=!item;
+  const m0=item||Object.assign({h:'',p:'',e:'',j:'',k:''},prefill||{});
+  // a prefilled field counts as typed, so auto-fill won't overwrite it
+  const touched={p:!!m0.p,e:!!m0.e,j:!!m0.j,k:!!m0.k};
+  let kind=m0.k||(m0.h&&looksPhrase(m0.h)?'phrase':'word');
+  const m=el('div','modal');
+  m.innerHTML=`<div class="mscrim"></div>
+    <div class="mbox mine">
+      <div class="eyebrow" style="margin-bottom:4px">${isNew?'Add to My own':'Edit'}</div>
+      <label class="flab">Hanzi</label>
+      <input id="mH" class="finp han" value="${esc(m0.h)}" placeholder="搬家" autocomplete="off" autocorrect="off" spellcheck="false">
+      <div class="finfo" id="mInfo"></div>
+      <label class="flab">Pinyin <span>fills itself in · type ni3 hao3 for tones</span></label>
+      <input id="mP" class="finp" value="${esc(m0.p)}" placeholder="bānjiā" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <div class="finfo py" id="mPy"></div>
+      <label class="flab">English</label>
+      <input id="mE" class="finp" value="${esc(m0.e)}" placeholder="to move house" autocomplete="off">
+      <label class="flab">Cantonese <span>optional Jyutping</span></label>
+      <input id="mJ" class="finp" value="${esc(m0.j||'')}" placeholder="bun1 gaa1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <label class="flab">Type</label>
+      <div class="seg" id="mK" style="margin:0">
+        <button data-k="word">Word</button><button data-k="phrase">Phrase</button>
+      </div>
+      <div class="merr" id="mErr" hidden></div>
+      <div class="mrow">
+        ${isNew?'':'<button class="btn ghost danger" id="mDel">Delete</button>'}
+        <button class="btn ghost" id="mCancel">Cancel</button>
+        <button class="btn" id="mSave">${isNew?'Add':'Save'}</button>
+      </div>
+    </div>`;
+  document.body.appendChild(m);
+  const H=$('#mH',m),Pi=$('#mP',m),E=$('#mE',m),J=$('#mJ',m);
+  const paintK=()=>$$('#mK button',m).forEach(b=>b.classList.toggle('on',b.dataset.k===kind));
+  const paintPy=()=>{$('#mPy',m).innerHTML=Pi.value.trim()?colorPy(numToMarks(Pi.value)):''};
+  const info=()=>{
+    const h=H.value.trim(), f=$('#mInfo',m);
+    const dup=h&&M.find(x=>x.h===h&&x!==item);
+    const also=h&&whereElse(h);
+    f.innerHTML=dup?'<span style="color:var(--red)">Already in My own</span>'
+      :also?`Also in ${esc(also)} — saving keeps your own wording`:'';
+    return dup;
+  };
+  const auto=()=>{
+    const h=H.value.trim();
+    if(!touched.k){kind=looksPhrase(h)?'phrase':'word'; paintK()}
+    if(!touched.p){const a=h?autoPy(h):'';
+      Pi.value=kind==='phrase'?a.charAt(0).toUpperCase()+a.slice(1):a}
+    if(!touched.j) J.value=h?autoJy(h):'';
+    if(!touched.e){const w=WORDIDX.get(h); E.value=w?firstEn(w.e):''}
+    paintPy(); info();
+  };
+  paintK(); paintPy(); info();
+  H.oninput=auto;
+  Pi.oninput=()=>{touched.p=!!Pi.value.trim();paintPy()};
+  Pi.onblur=()=>{Pi.value=numToMarks(Pi.value);paintPy()};
+  E.oninput=()=>{touched.e=!!E.value.trim()};
+  J.oninput=()=>{touched.j=!!J.value.trim()};
+  $$('#mK button',m).forEach(b=>b.onclick=()=>{kind=b.dataset.k;touched.k=true;paintK()});
+  if(isNew) setTimeout(()=>(m0.h?E:H).focus(),80);
+  const close=()=>m.remove();
+  $('.mscrim',m).onclick=close; $('#mCancel',m).onclick=close;
+  const err=t=>{const e=$('#mErr',m);e.textContent=t;e.hidden=false};
+  $('#mSave',m).onclick=()=>{
+    const h=H.value.trim(), p=numToMarks(Pi.value.trim()).replace(/\s+/g,' '), e=E.value.trim();
+    if(![...h].some(isHan)) return err('Add the hanzi — at least one Chinese character');
+    if(info()) return err('That one is already in My own');
+    if(!p||p.includes('?')) return err('Check the pinyin — replace any ? with the reading');
+    if(!e) return err('Add an English meaning so it can be tested');
+    const rec={h,p,e,j:J.value.trim(),k:kind};
+    if(isNew){
+      M.push(Object.assign({id:Date.now().toString(36),t:Date.now()},rec));
+    } else Object.assign(item,rec);
+    saveM(); close();
+    if(sheetChar) closeSheet();
+    renderAll(); toast(isNew?'Added to My own':'Saved');
+  };
+  const del=$('#mDel',m);
+  if(del) del.onclick=()=>{
+    if(!confirm(`Delete ${item.h} from My own? Its review history goes too.`)) return;
+    M=M.filter(x=>x!==item); saveM();
+    delete P.cards['u:'+item.id]; P.seen=P.seen.filter(x=>x!=='u:'+item.id); saveP();
+    close(); if(sheetChar) closeSheet(); renderAll(); toast('Deleted');
+  };
+}
 
 /* ── launch picker ─────────────────────────────────────────
    Shown once per app launch when more than one profile exists.
@@ -1238,7 +1439,7 @@ function launchPicker(done){
     const p=PROF.list.find(x=>x.id===b.dataset.id);
     const enter=()=>{
       PROF.active=p.id; saveProf();
-      S=load(slot('settings'),DEF); P=load(slot('progress'),BLANK);
+      S=load(slot('settings'),DEF); P=load(slot('progress'),BLANK); M=loadMine();
       m.remove(); applyTheme(); done();
     };
     p.pin ? askPin(p,enter) : enter();
@@ -1287,6 +1488,8 @@ async function boot(){
     return;
   }
   D.hsk.chars.forEach(c=>CHARIDX.set(c.c,c));
+  D.hsk.words.forEach(w=>{if(!WORDIDX.has(w.h))WORDIDX.set(w.h,w)});
+  D.notes.vocab.forEach(v=>{if(!WORDIDX.has(v.h))WORDIDX.set(v.h,v)});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
   launchPicker(()=>go('today'));
   if('serviceWorker' in navigator){

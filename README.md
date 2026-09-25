@@ -20,6 +20,7 @@ screen — no App Store, no developer account, no 7-day expiry, nothing to pay.
 | **Progress** | Streak, 7-day activity, per-level coverage, hardest cards |
 | **Widget** | Optional home-screen widget via Scriptable (free) |
 | **Profiles** | Separate progress per person, chosen at launch, with an optional PIN |
+| **My own** | Add your own words and phrases from the Library (+). Pinyin and Jyutping fill in from the dictionary; type `ni3 hao3` for tone marks. They join Review, Test and search, per profile, and travel with Export/Import |
 
 Everything is stored on the device in `localStorage`. Nothing is uploaded anywhere.
 
