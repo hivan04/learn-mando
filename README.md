@@ -15,6 +15,8 @@ screen — no App Store, no developer account, no 7-day expiry, nothing to pay.
 | **Stroke order** | Animated, with the radical picked out in vermilion, for every character |
 | **Review** | Spaced repetition (Again / Hard / Good / Easy), three directions |
 | **Test** | Multiple-choice listening and reading over words or phrases, at any HSK level |
+| **Speaking** | Practice tab: read aloud, echo, or say it from the English. Your phone's speech recogniser (needs a connection) marks each character right / right sound / missed; without one you record yourself and compare by ear |
+| **Handwriting** | Practice tab: trace over the outline N times then write from memory, write from memory only, or free-draw and overlay the real character. Every stroke is checked for shape, direction and order |
 | **Cantonese** | Jyutping on every word, revealed with a button (Settings can make it always visible). Tests are Mandarin-only; Cantonese audio is on demand |
 | **Audio** | Built-in iOS Chinese text-to-speech — works offline |
 | **Progress** | Streak, 7-day activity, per-level coverage, hardest cards |

@@ -1,5 +1,5 @@
 /* ── Hanzi · offline study app ──────────────────────────────── */
-const BUILD='2026-09-26.1200';
+const BUILD='2026-10-03.1200';
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const DAY=864e5;
 const el=(t,c,h)=>{const n=document.createElement(t);if(c)n.className=c;if(h!=null)n.innerHTML=h;return n};
@@ -278,6 +278,8 @@ const I={
   review:'<rect x="3.5" y="5.5" width="15" height="11" rx="2.5"/><path d="M7.5 11h7" stroke-linecap="round"/>',
   progress:'<rect x="4" y="12" width="3.4" height="6" rx="1"/><rect x="9.3" y="8" width="3.4" height="10" rx="1"/><rect x="14.6" y="4.5" width="3.4" height="13.5" rx="1"/>',
   settings:'<circle cx="11" cy="11" r="3"/><circle cx="11" cy="11" r="7.5" stroke-dasharray="3 3"/>',
+  practice:'<path d="M14.5 3.8l3.7 3.7L8.4 17.3l-4.6.9.9-4.6z" stroke-linejoin="round"/><path d="M12.4 5.9l3.7 3.7"/>',
+  mic:'<rect x="8" y="2.5" width="6" height="11" rx="3"/><path d="M5 10.5a6 6 0 0012 0M11 16.5v3" stroke-linecap="round"/>',
   test:'<path d="M5 3.5h12v15H5z"/><path d="M8 8h6M8 11.5h6M8 15h3.5" stroke-linecap="round"/>',
   speak:'<path d="M3 7h3.5L11 3v13L6.5 12H3V7z" fill="currentColor" stroke="none"/><path d="M14 6a5 5 0 010 7" stroke-linecap="round"/>',
   star:'<path d="M9 1.6l2.1 4.4 4.8.7-3.5 3.4.8 4.8L9 12.6 4.8 14.9l.8-4.8L2.1 6.7l4.8-.7L9 1.6z" stroke-linejoin="round"/>',
@@ -783,26 +785,27 @@ const TSRC={notes:'My notes + own',hsk:'HSK',all:'Everything'};
 const TSCOPE={words:'Words',phrases:'Phrases',both:'Both'};
 const testLevel=()=>T.hsk||S.hsk;
 
-function testPool(){
-  const out=[], lvl=testLevel();
-  const wantWords=T.scope!=='phrases', wantPhrases=T.scope!=='words';
+const testPool=()=>itemPool(T.src,testLevel(),T.scope);
+function itemPool(src,lvl,scope){
+  const out=[];
+  const wantWords=scope!=='phrases', wantPhrases=scope!=='words';
   // your own entries go first, so their wording wins the de-duplication
-  if(T.src!=='hsk')
+  if(src!=='hsk')
     for(const m of M){
       const ph=m.k==='phrase';
       if(ph?wantPhrases:wantWords)
         out.push({id:'u:'+m.id,h:m.h,p:m.p,e:m.e,j:m.j,long:ph?1:0,tag:'My own'});
     }
   if(wantWords){
-    if(T.src!=='hsk')
+    if(src!=='hsk')
       for(const v of D.notes.vocab)
         if(v.h.length<=6) out.push({id:'v:'+v.id,h:v.h,p:v.p,e:v.e,j:v.j,tag:v.w?'Week '+v.w:'Notes'});
-    if(T.src!=='notes')
+    if(src!=='notes')
       for(const w of D.hsk.words)
         if(w.lv<=lvl&&w.h.length<=6) out.push({id:'h:'+w.h,h:w.h,p:w.p,e:w.e,j:w.j,tag:'HSK '+w.lv});
   }
   // phrases only exist in the notes — the HSK lists are words alone
-  if(wantPhrases&&T.src!=='hsk')
+  if(wantPhrases&&src!=='hsk')
     for(const x of D.notes.sentences)
       out.push({id:'s:'+x.id,h:x.h,p:x.p,e:x.e,j:x.j,long:1,tag:x.w?'Week '+x.w:'Notes'});
   const seen=new Set(); return out.filter(o=>seen.has(o.h)?false:(seen.add(o.h),true));
@@ -1005,6 +1008,586 @@ function renderTest(){
     };
     $('#tFeed').scrollIntoView({behavior:'smooth',block:'nearest'});
   });
+}
+
+/* ── PRACTICE · speaking + handwriting ─────────────────────────
+   Speaking uses the browser's speech recogniser (on iPhone that is
+   Apple's dictation, which needs a connection). Where there is no
+   recogniser it falls back to recording yourself and comparing by
+   ear. Handwriting checks each stroke against the stroke medians in
+   data/strokes-*.json, the same data the stroke-order animation uses. */
+let PR={mode:'speak',stage:'setup',src:'all',hsk:null,scope:'words',len:10,
+        sk:'read',wk:'guided',reps:3,qs:[],i:0};
+const SKINDS={read:'Read aloud',echo:'Echo',recall:'From English'};
+const WKINDS={guided:'Trace, then recall',test:'From memory',free:'Free draw'};
+const prLevel=()=>PR.hsk||S.hsk;
+const SRec=window.SpeechRecognition||window.webkitSpeechRecognition;
+const canRecord=()=>!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder);
+let prSpeech=SRec?'sr':canRecord()?'rec':'self';   // can drop down a level if the mic is refused
+
+function practiced(){ const k=dayKey(); P.log[k]=(P.log[k]||0)+1; bumpStreak(); saveP() }
+
+/* ── per-character pinyin, for scoring speech ── */
+const toneless=p=>stripTone(p||'').replace(/v/g,'ü').replace(/[^a-zü]/g,'');
+function perCharPy(h){
+  const ch=[...h].filter(isHan), out=[]; let i=0;
+  while(i<ch.length){
+    let len=1, py=null;
+    for(let L=Math.min(6,ch.length-i);L>=2;L--){
+      const w=WORDIDX.get(ch.slice(i,i+L).join(''));
+      if(w&&w.p){ const sy=splitPinyin(w.p.replace(/['’·]/g,' ')); if(sy.length===L){len=L;py=sy;break} }
+    }
+    if(!py){ const c=CHARIDX.get(ch[i]); const w=WORDIDX.get(ch[i]);
+      py=[(c&&c.p?c.p:w&&w.p?w.p:'').split(/[,;\s]/)[0]] }
+    for(let k=0;k<len;k++) out.push({c:ch[i+k],p:py[k]||''});
+    i+=len;
+  }
+  return out;
+}
+// the item's own pinyin wins when it lines up one syllable per character
+function targetSyls(a){
+  const ch=[...a.h].filter(isHan);
+  const sy=splitPinyin((a.p||'').replace(/[,.?!;:"“”'’()（）·—-]/g,' ').trim());
+  if(sy.length===ch.length) return ch.map((c,i)=>({c,p:sy[i]}));
+  return perCharPy(a.h);
+}
+/* align what was heard against the target: same character = ok,
+   same sound but a different character = near (usually a tone or a
+   homophone the recogniser guessed), otherwise missed */
+function scoreSpeech(target,heard){
+  const t=target, h=perCharPy(heard), n=t.length, m=h.length;
+  const sub=(a,b)=>a.c===b.c?0:(toneless(a.p)&&toneless(a.p)===toneless(b.p))?.35:1;
+  const D2=[...Array(n+1)].map(()=>new Array(m+1).fill(0));
+  for(let i=1;i<=n;i++) D2[i][0]=i;
+  for(let j=1;j<=m;j++) D2[0][j]=j*.5;
+  for(let i=1;i<=n;i++) for(let j=1;j<=m;j++)
+    D2[i][j]=Math.min(D2[i-1][j-1]+sub(t[i-1],h[j-1]), D2[i-1][j]+1, D2[i][j-1]+.5);
+  const st=new Array(n).fill('miss'); let i=n,j=m,extra=0;
+  while(i>0||j>0){
+    if(i>0&&j>0&&D2[i][j]===D2[i-1][j-1]+sub(t[i-1],h[j-1])){
+      const c=sub(t[i-1],h[j-1]); st[i-1]=c===0?'ok':c<1?'near':'miss'; i--;j--;
+    } else if(i>0&&D2[i][j]===D2[i-1][j]+1){ i--; }
+    else { extra++; j--; }
+  }
+  const credit=st.reduce((s,x)=>s+(x==='ok'?1:x==='near'?.6:0),0);
+  const score=n?Math.max(0,Math.min(1,(credit-.15*extra)/n)):0;
+  return {st,score,heard};
+}
+
+/* ── speech recognition / recording ── */
+let prRec=null, prMedia=null, prTimer=null;
+function stopPractice(){
+  try{prRec&&prRec.abort()}catch(e){} prRec=null;
+  try{prMedia&&prMedia.state!=='inactive'&&prMedia.stop()}catch(e){}
+  clearTimeout(prTimer);
+}
+function listen({onInterim,onDone,onFail}){
+  const r=new SRec(); prRec=r;
+  r.lang='zh-CN'; r.interimResults=true; r.maxAlternatives=5; r.continuous=false;
+  let alts=[], finished=false;
+  r.onresult=e=>{
+    const res=[...e.results];
+    // keep every alternative of the newest result; earlier ones joined in front
+    const head=res.slice(0,-1).map(x=>x[0].transcript).join('');
+    const last=res[res.length-1];
+    alts=[...last].map(a=>head+a.transcript).filter(Boolean);
+    onInterim(alts[0]||'');
+  };
+  r.onerror=e=>{ if(finished) return; finished=true; prRec=null; clearTimeout(prTimer); onFail(e.error||'error') };
+  r.onend=()=>{ if(finished) return; finished=true; prRec=null; clearTimeout(prTimer); onDone(alts) };
+  try{ r.start() }catch(e){ finished=true; onFail('start') }
+  clearTimeout(prTimer); prTimer=setTimeout(()=>{try{r.stop()}catch(e){}},9000);
+  return r;
+}
+async function recordClip(onReady){
+  let stream;
+  try{ stream=await navigator.mediaDevices.getUserMedia({audio:true}) }
+  catch(e){ prSpeech='self'; toast('Microphone not available'); renderPractice(); return null }
+  const chunks=[], mr=new MediaRecorder(stream); prMedia=mr;
+  mr.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+  mr.onstop=()=>{ stream.getTracks().forEach(t=>t.stop()); prMedia=null; clearTimeout(prTimer);
+    onReady(URL.createObjectURL(new Blob(chunks,{type:mr.mimeType||'audio/mp4'}))) };
+  mr.start(); clearTimeout(prTimer); prTimer=setTimeout(()=>{try{mr.stop()}catch(e){}},12000);
+  return mr;
+}
+
+/* ── pools ── */
+function speakPool(){ return itemPool(PR.src,prLevel(),PR.scope).filter(a=>[...a.h].some(isHan)) }
+function writePool(){
+  const out=[], seen=new Set();
+  for(const w of itemPool(PR.src,prLevel(),'words')){
+    const sy=targetSyls(w);
+    sy.forEach(({c,p},k)=>{
+      if(seen.has(c)||!D.strokes[c]||!(D.strokes[c].m||[]).length) return; seen.add(c);
+      const ci=CHARIDX.get(c);
+      out.push({id:'c:'+c,h:c,p:(ci&&ci.p?ci.p.split(/[,;\s]/)[0]:p)||p,
+        e:ci&&ci.e?firstEn(ci.e):'', w:[...w.h].length>1?w:null, k:[...w.h].indexOf(c), tag:w.tag});
+    });
+  }
+  return out;
+}
+
+/* ── stroke matching ── */
+const pdist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+function segDist(p,a,b){const dx=b[0]-a[0],dy=b[1]-a[1],l=dx*dx+dy*dy;
+  let t=l?((p[0]-a[0])*dx+(p[1]-a[1])*dy)/l:0; t=Math.max(0,Math.min(1,t));
+  return Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dy)}
+function lineDist(p,m){ if(m.length<2) return pdist(p,m[0]);
+  let d=1e9; for(let i=0;i<m.length-1;i++) d=Math.min(d,segDist(p,m[i],m[i+1])); return d }
+const plen=pts=>pts.reduce((s,p,i)=>i?s+pdist(p,pts[i-1]):0,0);
+function resample(pts,step=18){
+  if(pts.length<2) return pts.length?[pts[0],pts[0]]:[];
+  const out=[pts[0]]; let prev=pts[0], acc=0;
+  for(let i=1;i<pts.length;i++){
+    let cur=pts[i], d=pdist(prev,cur);
+    while(acc+d>=step){
+      const t=(step-acc)/d, q=[prev[0]+t*(cur[0]-prev[0]),prev[1]+t*(cur[1]-prev[1])];
+      out.push(q); prev=q; d=pdist(prev,cur); acc=0;
+    }
+    acc+=d; prev=cur;
+  }
+  if(pdist(out[out.length-1],pts[pts.length-1])>1) out.push(pts[pts.length-1]);
+  return out.length>1?out:[out[0],out[0]];
+}
+function strokeFit(u,m,len=1){
+  const avg=u.reduce((s,p)=>s+lineDist(p,m),0)/u.length;
+  const cov=m.reduce((s,p)=>s+lineDist(p,u),0)/m.length;
+  const sd=pdist(u[0],m[0]), ed=pdist(u[u.length-1],m[m.length-1]);
+  const ul=plen(u), ml=plen(m);
+  // direction: each piece of your stroke against the nearest piece of the median
+  let cs=0,cn=0;
+  for(let i=0;i<u.length-1;i++){
+    const v=[u[i+1][0]-u[i][0],u[i+1][1]-u[i][1]], vl=Math.hypot(...v); if(vl<1) continue;
+    const mid=[(u[i][0]+u[i+1][0])/2,(u[i][1]+u[i+1][1])/2];
+    let best=1e9,bv=null;
+    for(let k=0;k<m.length-1;k++){const d=segDist(mid,m[k],m[k+1]); if(d<best){best=d;bv=[m[k+1][0]-m[k][0],m[k+1][1]-m[k][1]]}}
+    if(!bv) continue; const bl=Math.hypot(...bv); if(bl<1) continue;
+    cs+=(v[0]*bv[0]+v[1]*bv[1])/(vl*bl); cn++;
+  }
+  const dir=cn?cs/cn:1;
+  const ok=avg<190*len&&cov<210*len&&sd<250*len&&ed<250*len&&ul>=ml*.3-30&&dir>0;
+  return {ok,cost:avg+cov+.5*(sd+ed),dir};
+}
+
+/* ── the writing pad ──────────────────────────────────────────
+   check:true  → strokes are judged one at a time, in order
+   check:false → free ink; reveal() lays the real character over it */
+function makePad(host,ch,{check=true,outline=false,lenient=1,autoHint=3,onStroke,onMiss,onDone}={}){
+  const d=D.strokes[ch], NS='http://www.w3.org/2000/svg';
+  const size=Math.min(310,Math.max(220,(host.clientWidth||320)-10));
+  host.innerHTML=''; const wrap=el('div','wpad'); host.appendChild(wrap);
+  const svgE=document.createElementNS(NS,'svg');
+  svgE.setAttribute('viewBox','0 0 1024 1024'); svgE.setAttribute('width',size); svgE.setAttribute('height',size);
+  wrap.appendChild(svgE);
+  const mk=(t,a={},parent=svgE)=>{const n=document.createElementNS(NS,t);for(const k in a)n.setAttribute(k,a[k]);parent.appendChild(n);return n};
+  const grid=mk('g',{class:'grid'});
+  [[512,0,512,1024],[0,512,1024,512]].forEach(([a,b,c,e])=>mk('line',{x1:a,y1:b,x2:c,y2:e},grid));
+  [[0,0,1024,1024],[1024,0,0,1024]].forEach(([a,b,c,e])=>mk('line',{x1:a,y1:b,x2:c,y2:e,class:'diag'},grid));
+  const tf={transform:'translate(0,900) scale(1,-1)'};
+  const gOut=mk('g',tf), gDone=mk('g',tf), gHint=mk('g',tf), gInk=mk('g'), gShow=mk('g',tf);
+  const outP=d.s.map(p=>mk('path',{d:p,class:'po'},gOut));
+  const doneP=d.s.map(p=>mk('path',{d:p,class:'pd'},gDone));
+  const hintP=d.s.map(p=>mk('path',{d:p,class:'ph'},gHint));
+  const showP=d.s.map(p=>mk('path',{d:p,class:'ps'},gShow));
+  gOut.style.display=outline?'':'none';
+  const st={i:0,miss:0,missHere:0,hints:0,done:false,strokes:[]};
+  const toData=e=>{const r=svgE.getBoundingClientRect();
+    const vx=(e.clientX-r.left)/r.width*1024, vy=(e.clientY-r.top)/r.height*1024; return [vx,vy]};
+  let pts=null, ink=null;
+  const pathD=a=>a.map((p,i)=>(i?'L':'M')+p[0].toFixed(0)+' '+p[1].toFixed(0)).join('');
+  svgE.addEventListener('pointerdown',e=>{
+    if(st.done&&check) return;
+    e.preventDefault(); try{svgE.setPointerCapture(e.pointerId)}catch(_){}
+    pts=[toData(e)]; ink=mk('path',{class:'ink',d:pathD([pts[0],pts[0]])},gInk);
+  });
+  svgE.addEventListener('pointermove',e=>{
+    if(!pts) return; e.preventDefault();
+    const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e];
+    for(const x of (evs.length?evs:[e])) pts.push(toData(x));
+    ink.setAttribute('d',pathD(pts));
+  });
+  const end=()=>{
+    if(!pts) return; const raw=pts, path=ink; pts=null; ink=null;
+    if(!check){ st.strokes.push(path); onStroke&&onStroke(st); return }
+    judge(raw.map(p=>[p[0],900-p[1]]),path);
+  };
+  svgE.addEventListener('pointerup',end); svgE.addEventListener('pointercancel',end);
+  function flash(i,cls='on'){ const p=hintP[i]; if(!p) return; p.classList.remove('on');
+    requestAnimationFrame(()=>p.classList.add(cls)); setTimeout(()=>p.classList.remove(cls),1100) }
+  function judge(u,path){
+    u=resample(u);
+    const m=d.m[st.i], f=strokeFit(u,m,lenient);
+    // a better fit to a later stroke means the order is off
+    let better=null;
+    for(let j=st.i+1;j<d.m.length;j++){ const g=strokeFit(u,d.m[j],lenient);
+      if(g.ok&&(!f.ok||g.cost<f.cost*.6)){better=j;break} }
+    if(f.ok&&better===null){
+      path.remove(); doneP[st.i].classList.add('on'); st.i++; st.missHere=0;
+      onStroke&&onStroke(st);
+      if(st.i>=d.m.length){ st.done=true; onDone&&onDone(st) }
+    } else {
+      path.classList.add('bad'); setTimeout(()=>path.remove(),380);
+      st.miss++; st.missHere++;
+      wrap.classList.remove('shake'); void wrap.offsetWidth; wrap.classList.add('shake');
+      onMiss&&onMiss(st,better!==null?'order':f.dir<=0?'direction':'shape');
+      if(autoHint&&st.missHere>=autoHint){ st.hints++; st.missHere=0; flash(st.i) }
+    }
+  }
+  return {
+    st,
+    hint(){ if(st.done) return; st.hints++; flash(st.i) },
+    showMe(done){ // animate the whole character once, then return to where you were
+      st.hints++; gShow.style.display='';
+      showP.forEach(p=>p.classList.remove('on'));
+      showP.forEach((p,i)=>setTimeout(()=>p.classList.add('on'),120+i*260));
+      setTimeout(()=>{ showP.forEach(p=>p.classList.remove('on')); done&&done() },420+showP.length*260+700);
+    },
+    reveal(){ showP.forEach((p,i)=>setTimeout(()=>p.classList.add('on','soft'),i*200)) },
+    undo(){ const s=st.strokes.pop(); s&&s.remove(); onStroke&&onStroke(st) },
+    clear(){ st.strokes.forEach(s=>s.remove()); st.strokes=[]; onStroke&&onStroke(st) },
+    finishFlourish(){ doneP.forEach(p=>p.classList.add('fin')) }
+  };
+}
+
+/* ── build a session ── */
+function buildPractice(){
+  const pool=PR.mode==='speak'?speakPool():writePool();
+  PR.qs=shuffle(pool).slice(0,PR.len).map(a=>({a,best:null,tries:0,res:null}));
+  PR.i=0; PR.stage=PR.qs.length?'run':'setup';
+  PR.q=null;
+}
+
+function renderPractice(){
+  const s=$('#practice');
+  stopPractice();
+  if(!D.notes) return;
+  if(PR.mode==='write'&&!strokeLoaded){
+    s.innerHTML=`<div class="h1" style="margin-bottom:8px">Practice</div><div class="empty">Loading stroke data…</div>`;
+    loadStrokes().then(()=>{ if(cur==='practice') renderPractice() });
+    return;
+  }
+  if(PR.stage==='setup') return practiceSetup(s);
+  if(PR.stage==='done') return practiceDone(s);
+  return PR.mode==='speak'?speakRun(s):writeRun(s);
+}
+
+function practiceSetup(s){
+  const pool=PR.mode==='speak'?speakPool():writePool();
+  const seg=(id,obj,val)=>`<div class="seg" id="${id}">${Object.entries(obj).map(([k,l])=>
+    `<button data-v="${k}" class="${String(val)===k?'on':''}">${l}</button>`).join('')}</div>`;
+  const speak=PR.mode==='speak';
+  const hist=(P.prac||[]).filter(t=>t.m===PR.mode).slice(0,5);
+  const how=speak
+    ? {read:'The hanzi is shown — read it aloud.',echo:'Hear it, then say it back.',recall:'Only the English is shown — say it in Mandarin.'}[PR.sk]
+    : {guided:`Trace over the outline ${PR.reps}× with stroke-by-stroke checking, then write it once from memory.`,
+       test:'Pinyin and meaning only. Each stroke is checked as you write; a hint shows after three misses.',
+       free:'Write the whole character your way, then lay the real one over it and mark yourself.'}[PR.wk];
+  const micNote=!speak?'':prSpeech==='sr'
+    ? 'Uses your phone’s speech recogniser (needs a connection). Characters it hears are matched to the target; same sound with a different character counts as close.'
+    : prSpeech==='rec'
+    ? 'Speech recognition isn’t available here, so you’ll record yourself, play it back against the native audio and mark yourself.'
+    : 'No microphone access, so say it aloud, then check against the audio and mark yourself.';
+  const noun=speak?(PR.scope==='phrases'?'phrases':PR.scope==='both'?'items':'words'):'characters';
+  const phrasesNone=speak&&PR.scope!=='words'&&PR.src==='hsk';
+  s.innerHTML=`
+  <div class="h1" style="margin-bottom:8px">Practice</div>
+  <p class="lede">Say it out loud, or write it by hand. Pick a mode and a pool — the same sources as Test.</p>
+  <div class="seg big" id="pMode" style="margin-top:20px">
+    <button data-v="speak" class="${speak?'on':''}">${svg('mic',16)} Speaking</button>
+    <button data-v="write" class="${!speak?'on':''}">${svg('practice',16)} Handwriting</button></div>
+  <div class="eyebrow" style="margin:20px 0 9px 2px">How</div>
+  ${speak?seg('pSk',SKINDS,PR.sk):seg('pWk',WKINDS,PR.wk)}
+  <div style="font:400 13px/1.55 var(--sans);color:var(--ink3);margin:-2px 2px 0">${how}</div>
+  ${!speak&&PR.wk==='guided'?`<div class="eyebrow" style="margin:20px 0 9px 2px">Times to trace</div>
+    ${seg('pReps',{1:'1×',3:'3×',5:'5×'},PR.reps)}`:''}
+  ${speak?`<div class="eyebrow" style="margin:20px 0 9px 2px">Practise on</div>${seg('pScope',TSCOPE,PR.scope)}`:''}
+  <div class="eyebrow" style="margin:20px 0 9px 2px">Draw from</div>
+  ${seg('pSrc',TSRC,PR.src)}
+  ${PR.src!=='notes'?`<div class="eyebrow" style="margin:20px 0 9px 2px">HSK level</div>
+  <div class="chips" id="pHsk">${[1,2,3,4,5,6].map(l=>
+    `<button class="chip${prLevel()===l?' on':''}" data-v="${l}">HSK ${l>1?'1–'+l:'1'}</button>`).join('')}</div>`:''}
+  <div class="eyebrow" style="margin:20px 0 9px 2px">Length</div>
+  ${seg('pLen',{5:'5',10:'10',20:'20',30:'30'},PR.len)}
+  <div class="card" style="padding:15px 16px;margin-top:22px">
+    <div style="font:400 13.5px/1.6 var(--sans);color:var(--ink3)">
+      ${phrasesNone?'The HSK lists are words only — phrases come from your own notes.':`${pool.length} ${noun} in the pool.`}
+      ${micNote?`<div style="margin-top:8px">${micNote}</div>`:''}</div>
+  </div>
+  <button class="btn" id="pStart" style="margin-top:16px"${pool.length?'':' disabled'}>Start</button>
+  ${hist.length?`<div class="eyebrow" style="margin:26px 0 9px 2px">Recent</div>
+    <div class="card" style="overflow:hidden">${hist.map(t=>
+      `<div class="row"><span class="k" style="font-size:14px">${(speak?SKINDS:WKINDS)[t.k]||t.k} · ${t.n}</span>
+       <span class="tag" style="color:${t.s/t.n>=.8?'var(--sage)':t.s/t.n>=.6?'var(--ink3)':'var(--red)'}">${t.s}/${t.n}</span></div>`).join('')}</div>`:''}
+  <div style="height:20px"></div>`;
+  const bind=(id,fn)=>$$('#'+id+' button').forEach(b=>b.onclick=()=>{fn(b.dataset.v);renderPractice()});
+  bind('pMode',v=>PR.mode=v); bind('pSk',v=>PR.sk=v); bind('pWk',v=>PR.wk=v);
+  bind('pReps',v=>PR.reps=+v); bind('pScope',v=>PR.scope=v); bind('pSrc',v=>PR.src=v);
+  bind('pLen',v=>PR.len=+v); bind('pHsk',v=>PR.hsk=+v);
+  $('#pStart').onclick=()=>{ buildPractice(); if(!PR.qs.length) return toast('Nothing in that pool'); renderPractice() };
+}
+
+function practiceTop(){
+  const pct=Math.round(PR.i/PR.qs.length*100);
+  return `<div class="rbar" style="margin-bottom:14px">
+    <button id="pQuit">${svg('close',15,'var(--ink)')}</button>
+    <div class="track"><i style="width:${pct}%"></i></div>
+    <span class="mono" style="font-size:12px;color:var(--ink3)">${PR.i+1}/${PR.qs.length}</span></div>`;
+}
+function practiceNext(){
+  PR.i++; PR.q=null;
+  if(PR.i>=PR.qs.length){
+    const pass=PR.qs.filter(q=>q.pass).length;
+    const k=PR.mode==='speak'?PR.sk:PR.wk;
+    P.prac=[{m:PR.mode,k,n:PR.qs.length,s:pass,d:Date.now()},...(P.prac||[])].slice(0,30);
+    if(PR.mode==='write'){
+      P.wr=P.wr||{};
+      for(const q of PR.qs){const r=P.wr[q.a.h]||(P.wr[q.a.h]={ok:0,no:0});
+        q.pass?r.ok++:r.no++; r.t=Date.now()}
+    }
+    practiced(); PR.stage='done';
+  }
+  renderPractice();
+}
+
+/* ── speaking run ── */
+function speakRun(s){
+  const q=PR.qs[PR.i], a=q.a, sy=targetSyls(a);
+  const ui=PR.q||(PR.q={showPy:false,showText:false,state:'idle',heard:'',clip:null});
+  const big=[...a.h].length>5;
+  const prompt =
+    PR.sk==='read' ? `<div class="prompt han${big?' ph':''}">${esc(a.h)}</div>
+        ${ui.showPy||q.res?`<div class="ppy">${colorPy(a.p)}</div>`:`<button class="hintbtn" id="sPy" style="margin-top:14px">Show pinyin</button>`}
+        <div class="pen">${esc(enOf(a))}</div>`
+  : PR.sk==='echo' ? `<button class="playbig" id="sPlay">${svg('speak',30,'var(--onInk)')}</button>
+        <div class="eyebrow" style="margin-top:14px">Listen, then say it back</div>
+        ${ui.showText||q.res?`<div class="prompt han ph" style="margin-top:14px">${esc(a.h)}</div><div class="ppy">${colorPy(a.p)}</div>`
+          :`<button class="hintbtn" id="sText" style="margin-top:14px">Show text</button>`}`
+  : `<div class="prompt small">${esc(enOf(a))}</div>
+        ${q.res?`<div class="prompt han ph" style="margin-top:14px">${esc(a.h)}</div><div class="ppy">${colorPy(a.p)}</div>`
+          :ui.showPy?`<div class="ppy">${colorPy(a.p)}</div>`:`<button class="hintbtn" id="sPy" style="margin-top:14px">Hint · pinyin</button>`}`;
+  const micLbl = prSpeech==='self' ? 'Say it aloud, then check'
+    : ui.state==='live' ? (prSpeech==='sr'?'Listening… tap to stop':'Recording… tap to stop')
+    : q.res ? 'Tap to try again' : 'Tap and speak';
+  s.innerHTML=`${practiceTop()}
+  <div class="card" style="padding:26px 20px;text-align:center">${prompt}</div>
+  <div style="margin-top:22px;text-align:center">
+    ${prSpeech==='self'
+      ? (q.res?'':`<button class="btn ghost" id="sCheck" style="max-width:220px;margin:0 auto">Check</button>`)
+      : `<button class="micbtn${ui.state==='live'?' live':''}" id="sMic" aria-label="Speak">${svg('mic',32,'#fff')}</button>
+         <div class="eyebrow" style="margin-top:12px">${micLbl}</div>`}
+    <div class="heard han" id="sHeard">${esc(ui.heard||'')}</div>
+  </div>
+  <div id="sFeed"></div>
+  <div style="height:20px"></div>`;
+  $('#pQuit').onclick=()=>{PR.stage='setup';renderPractice()};
+  const play=b=>say(a.h,b);
+  const pb=$('#sPlay'); if(pb){ pb.onclick=()=>play(pb); if(!q.tries&&!ui.played){ui.played=1;setTimeout(()=>play(pb),320)} }
+  const py=$('#sPy'); if(py) py.onclick=()=>{ui.showPy=true;q.hinted=true;renderPractice()};
+  const tx=$('#sText'); if(tx) tx.onclick=()=>{ui.showText=true;q.hinted=true;renderPractice()};
+  const feed=$('#sFeed');
+
+  const showResult=()=>{
+    const r=q.res; if(!r) return;
+    const self=r.self!=null;
+    const pctv=Math.round((q.best||0)*100);
+    feed.innerHTML=`
+      <div class="feed ${q.pass?'ok':'no'}" style="text-align:center">
+        <div class="fhead">${self?(q.pass?'Marked as got it':'Marked to go back over')
+          :q.pass?(r.score>=.99?'Spot on':'Good')+' · '+Math.round(r.score*100)+'%':'Not quite · '+Math.round(r.score*100)+'%'}</div>
+        ${!self?`<div class="sylrow" style="margin-top:12px">${sy.map((x,i)=>
+          `<div class="syl ${r.st[i]}"><span class="c">${esc(x.c)}</span><span class="p">${esc(x.p)}</span></div>`).join('')}</div>
+          <div style="margin-top:10px;font:400 12.5px/1.5 var(--sans);color:var(--ink3)">
+            Heard: <span class="han" style="font-size:16px;color:var(--ink2)">${esc(r.heard||'—')}</span>
+            ${r.heard?`<span style="font-family:var(--serif)"> · ${esc(autoPy(r.heard))}</span>`:''}</div>
+          <div class="legend"><i class="ok"></i>right <i class="near"></i>right sound, other character/tone <i class="miss"></i>missed</div>`:''}
+        ${q.tries>1&&!self?`<div class="eyebrow" style="margin-top:10px">best ${pctv}% · ${q.tries} tries</div>`:''}
+        <div class="sbtns">
+          <button class="btn ghost" id="sHear">${svg('speak',15)} Hear it</button>
+          ${r.clip?`<button class="btn ghost" id="sMine">Play mine</button>`:''}
+          <button class="btn" id="sNext">${PR.i+1>=PR.qs.length?'Results':'Next'}</button>
+        </div>
+      </div>`;
+    $('#sHear').onclick=e=>say(a.h,e.currentTarget);
+    const mine=$('#sMine'); if(mine) mine.onclick=()=>{ try{new Audio(r.clip).play()}catch(e){} };
+    $('#sNext').onclick=practiceNext;
+  };
+  const selfGrade=clip=>{
+    feed.innerHTML=`<div class="feed" style="text-align:center">
+      <div class="fhead" style="color:var(--ink2)">How did that sound?</div>
+      <div style="margin-top:10px"><span class="han" style="font-size:22px">${esc(a.h)}</span>
+        <span style="font:400 16px/1.3 var(--serif);margin-left:8px">${colorPy(a.p)}</span></div>
+      <div class="sbtns">
+        <button class="btn ghost" id="sHear">${svg('speak',15)} Native</button>
+        ${clip?`<button class="btn ghost" id="sMine">Mine</button>`:''}
+      </div>
+      <div class="sbtns">
+        <button class="btn ghost" id="sNo" style="color:var(--red)">Not yet</button>
+        <button class="btn" id="sYes">Got it</button>
+      </div></div>`;
+    $('#sHear').onclick=e=>say(a.h,e.currentTarget);
+    const mine=$('#sMine'); if(mine) mine.onclick=()=>{ try{new Audio(clip).play()}catch(e){} };
+    say(a.h);
+    const mark=ok=>{ q.tries++; q.best=Math.max(q.best||0,ok?1:0); q.pass=q.pass||ok;
+      q.res={self:ok,clip}; renderPractice() };
+    $('#sYes').onclick=()=>mark(true); $('#sNo').onclick=()=>mark(false);
+  };
+  if(q.res) showResult();
+
+  const ck=$('#sCheck'); if(ck) ck.onclick=()=>{ ck.remove(); selfGrade(null) };
+  const mic=$('#sMic'); if(!mic) return;
+  mic.onclick=async()=>{
+    if(ui.state==='live'){ try{prRec&&prRec.stop()}catch(e){} try{prMedia&&prMedia.stop()}catch(e){} return }
+    speechSynthesis&&speechSynthesis.cancel();
+    if(prSpeech==='rec'){
+      ui.state='live'; ui.heard=''; q.res=null; renderPractice();
+      const mr=await recordClip(url=>{ ui.state='idle'; ui.clip=url; renderPractice(); selfGrade(url) });
+      if(!mr){ ui.state='idle' }
+      return;
+    }
+    ui.state='live'; ui.heard=''; renderPractice();
+    listen({
+      onInterim:t=>{ ui.heard=t; const h=$('#sHeard'); if(h) h.textContent=t },
+      onDone:alts=>{
+        ui.state='idle';
+        if(!alts.length){ toast('Didn’t catch anything — try again'); return renderPractice() }
+        let best=null;
+        for(const t of alts){ const r=scoreSpeech(sy,t); if(!best||r.score>best.score) best=r }
+        q.tries++; q.best=Math.max(q.best||0,best.score);
+        q.pass=q.pass||best.score>=.8; q.res=best; ui.heard='';
+        renderPractice();
+      },
+      onFail:err=>{
+        ui.state='idle';
+        if(err==='not-allowed'||err==='service-not-allowed'||err==='start'){
+          prSpeech=canRecord()?'rec':'self';
+          toast(prSpeech==='rec'?'Recognition blocked — recording instead':'Microphone blocked');
+        } else if(err==='network') toast('Speech recognition needs a connection');
+        else if(err==='no-speech') toast('Didn’t hear anything');
+        else if(err!=='aborted') toast('Speech error: '+err);
+        if(cur==='practice') renderPractice();
+      }
+    });
+  };
+}
+
+/* ── handwriting run ── */
+function writeRun(s){
+  const q=PR.qs[PR.i], a=q.a, nS=D.strokes[a.h].m.length;
+  const ui=PR.q||(PR.q={rep:1,checked:false});
+  const guided=PR.wk==='guided', free=PR.wk==='free';
+  const tracing=guided&&ui.rep<=PR.reps;
+  const stage=free?'Free draw':tracing?`Trace ${ui.rep} of ${PR.reps}`:'From memory';
+  const ctx=a.w?`<div class="wctx"><span class="han">${[...a.w.h].map((c,i)=>i===a.k?'<b>□</b>':esc(c)).join('')}</span>
+      <span class="wp">${colorPy(a.w.p)}</span><span class="we">${esc(enOf(a.w))}</span></div>`:'';
+  s.innerHTML=`${practiceTop()}
+  <div class="card wq">
+    <div class="eyebrow" style="color:var(--red)">${stage}</div>
+    <div class="wpy">${colorPy(a.p)}</div>
+    ${a.e?`<div class="wen">${esc(a.e)}</div>`:''}
+    ${ctx}
+    <button class="iconbtn wsay" id="wSay" aria-label="Pronounce">${svg('speak',17)}</button>
+  </div>
+  <div id="wPad"></div>
+  <div class="wstat" id="wStat"></div>
+  <div class="wtools" id="wTools"></div>
+  <div id="wFeed"></div>
+  <div style="height:20px"></div>`;
+  $('#pQuit').onclick=()=>{PR.stage='setup';renderPractice()};
+  $('#wSay').onclick=e=>say(a.h,e.currentTarget);
+  const stat=$('#wStat'), tools=$('#wTools'), feed=$('#wFeed');
+
+  if(free){
+    const pad=makePad($('#wPad'),a.h,{check:false,
+      onStroke:st=>{ stat.textContent=`${st.strokes.length} stroke${st.strokes.length===1?'':'s'} · the character has ${nS}` }});
+    stat.textContent=`${nS} strokes`;
+    tools.innerHTML=`<button id="wUndo">Undo</button><button id="wClear">Clear</button><button id="wCheck" class="solid">Check</button>`;
+    $('#wUndo').onclick=()=>pad.undo(); $('#wClear').onclick=()=>pad.clear();
+    $('#wCheck').onclick=()=>{
+      pad.reveal(); tools.innerHTML='';
+      feed.innerHTML=`<div class="feed" style="text-align:center">
+        <div class="fhead" style="color:var(--ink2)">The real one is laid over yours</div>
+        <div class="wfin"><div id="wAnim"></div>
+          <div><span class="han" style="font-size:30px">${esc(a.h)}</span>
+          <div style="font:400 12px/1.4 var(--sans);color:var(--ink3);margin-top:4px">${nS} strokes · tap to replay order</div></div></div>
+        <div class="sbtns"><button class="btn ghost" id="wNo" style="color:var(--red)">Not quite</button>
+          <button class="btn" id="wYes">Got it</button></div>
+        <button class="hintbtn" id="wRedo" style="margin-top:12px">Write it again</button></div>`;
+      const ah=$('#wAnim'); const re=drawChar(ah,a.h); ah.onclick=()=>re&&re();
+      const mark=ok=>{ q.pass=ok; practiceNext() };
+      $('#wYes').onclick=()=>mark(true); $('#wNo').onclick=()=>mark(false);
+      $('#wRedo').onclick=()=>renderPractice();
+      feed.scrollIntoView({behavior:'smooth',block:'nearest'});
+    };
+    return;
+  }
+
+  const setStat=(st,msg)=>{
+    stat.innerHTML=`Stroke ${Math.min(st.i+1,nS)} of ${nS}`+(st.miss?` · ${st.miss} slip${st.miss===1?'':'s'}`:'')
+      +(st.hints?` · ${st.hints} hint${st.hints===1?'':'s'}`:'')+(msg?` · <span style="color:var(--red)">${msg}</span>`:'');
+  };
+  const pad=makePad($('#wPad'),a.h,{
+    check:true, outline:tracing, lenient:tracing?1.25:1, autoHint:tracing?1:3,
+    onStroke:st=>setStat(st),
+    onMiss:(st,why)=>setStat(st,why==='order'?'wrong order':why==='direction'?'wrong direction':'try again'),
+    onDone:st=>{
+      setStat(st); pad.finishFlourish(); tools.innerHTML='';
+      if(tracing){
+        stat.innerHTML=`Traced ${ui.rep} of ${PR.reps}`+(st.miss?` · ${st.miss} slip${st.miss===1?'':'s'}`:'');
+        setTimeout(()=>{ if(PR.q===ui&&cur==='practice'){ ui.rep++; renderPractice() } },650);
+        return;
+      }
+      const clean=!st.miss&&!st.hints, pass=!st.hints;
+      q.tries++; q.pass=q.pass||pass;
+      say(a.h);
+      feed.innerHTML=`<div class="feed ${pass?'ok':'no'}" style="text-align:center">
+        <div class="fhead">${clean?'Perfect':pass?`Got it · ${st.miss} slip${st.miss===1?'':'s'}`:`Needed ${st.hints} hint${st.hints===1?'':'s'}`}</div>
+        <div style="margin-top:8px"><span class="han" style="font-size:24px">${esc(a.h)}</span>
+          <span style="font:400 16px/1.3 var(--serif);margin-left:8px">${colorPy(a.p)}</span></div>
+        <div class="sbtns">
+          <button class="btn ghost" id="wAgain">Write again</button>
+          <button class="btn" id="wNext">${PR.i+1>=PR.qs.length?'Results':'Next'}</button></div></div>`;
+      $('#wAgain').onclick=()=>{ PR.q={rep:guided?PR.reps+1:1}; renderPractice() };
+      $('#wNext').onclick=practiceNext;
+      feed.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+  });
+  setStat(pad.st);
+  tools.innerHTML=`<button id="wHint">Hint</button><button id="wShow">Show me</button><button id="wRestart">Restart</button>`;
+  $('#wHint').onclick=()=>{pad.hint();setStat(pad.st)};
+  $('#wShow').onclick=()=>{pad.showMe();setStat(pad.st)};
+  $('#wRestart').onclick=()=>renderPractice();
+}
+
+function practiceDone(s){
+  const n=PR.qs.length, pass=PR.qs.filter(q=>q.pass).length, pct=Math.round(pass/n*100);
+  const miss=PR.qs.filter(q=>!q.pass);
+  const speak=PR.mode==='speak';
+  s.innerHTML=`
+  <div class="h1" style="margin-bottom:6px">Results</div>
+  <div class="card" style="padding:26px 20px;text-align:center;margin:14px 0 18px">
+    <div style="font:400 54px/1 var(--serif);color:${pct>=80?'var(--sage)':pct>=60?'var(--ink)':'var(--red)'}">${pass}<span style="color:var(--ink4);font-size:26px">/${n}</span></div>
+    <div class="eyebrow" style="margin-top:12px">${pct}% · ${speak?'Speaking · '+SKINDS[PR.sk]:'Handwriting · '+WKINDS[PR.wk]}</div>
+  </div>
+  ${miss.length?`<div class="eyebrow" style="margin:0 0 10px 2px">Go back over these</div>
+    <div class="card" style="overflow:hidden">${miss.map(q=>
+      `<button class="row jumpP" data-h="${esc(q.a.h)}" style="width:100%;text-align:left">
+        <span class="han" style="font-size:22px;min-width:48px">${esc(q.a.h)}</span>
+        <span class="k"><span style="font:400 14px/1.3 var(--serif)">${colorPy(q.a.p)}</span>
+          <span style="display:block;font-size:12.5px;color:var(--ink3);margin-top:3px">${esc(q.a.e?enOf(q.a):q.a.w?enOf(q.a.w):'')}</span></span>
+        ${speak&&q.best!=null&&q.res&&q.res.self==null?`<span class="tag">${Math.round(q.best*100)}%</span>`:''}</button>`).join('')}</div>
+    <button class="btn ghost" id="pRedo" style="margin-top:12px">Practise just these again</button>`
+    :`<div class="card" style="padding:20px;text-align:center;font:400 14px/1.6 var(--sans);color:var(--ink3)">
+        All of them. Nothing to revisit.</div>`}
+  <div style="display:flex;gap:10px;margin-top:18px">
+    <button class="btn ghost" id="pAgain">New set</button>
+    <button class="btn" id="pBack">Done</button>
+  </div>
+  <div style="height:20px"></div>`;
+  $$('.jumpP').forEach(b=>b.onclick=()=>openChar(b.dataset.h));
+  const rd=$('#pRedo'); if(rd) rd.onclick=()=>{
+    PR.qs=shuffle(miss.map(q=>({a:q.a,best:null,tries:0,res:null}))); PR.i=0; PR.q=null; PR.stage='run'; renderPractice() };
+  $('#pAgain').onclick=()=>{buildPractice();renderPractice()};
+  $('#pBack').onclick=()=>{PR.stage='setup';renderPractice()};
 }
 
 /* ── PROGRESS ──────────────────────────────────────────────── */
@@ -1447,8 +2030,8 @@ function launchPicker(done){
 }
 
 /* ── nav / boot ────────────────────────────────────────────── */
-const TABS=['today','library','review','test','progress','settings'];
-const TABLBL={today:'Today',library:'Library',review:'Review',test:'Test',progress:'Stats',settings:'Settings'};
+const TABS=['today','library','review','test','practice','progress','settings'];
+const TABLBL={today:'Today',library:'Library',review:'Review',test:'Test',practice:'Practice',progress:'Stats',settings:'Settings'};
 let cur='today';
 function go(t){
   cur=t;
@@ -1458,6 +2041,8 @@ function go(t){
   if(t==='library')renderLibrary();
   if(t==='review')startReview();
   if(t==='test')renderTest();
+  if(t!=='practice')stopPractice();
+  if(t==='practice')renderPractice();
   if(t==='progress')renderProgress();
   if(t==='settings')renderSettings();
   $('#'+t).scrollTop=0;

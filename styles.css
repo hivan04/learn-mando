@@ -328,3 +328,65 @@ input{font:inherit;color:inherit;background:none;border:0;outline:0;user-select:
 .finfo:empty{display:none}
 .finfo.py{font:400 15px/1.4 var(--sans)}
 .mbox.mine{max-width:380px}
+
+/* ── practice: speaking + handwriting ─────────────────────── */
+.seg.big button{padding:11px 0;font-size:13.5px;display:flex;align-items:center;justify-content:center;gap:7px}
+.seg.big svg{stroke:currentColor}
+#practice .prompt{font:500 54px/1.15 var(--han);word-break:break-all}
+#practice .prompt.small{font:400 22px/1.45 var(--sans)}
+#practice .prompt.ph{font-size:26px;line-height:1.5}
+.ppy{margin-top:10px;font:400 20px/1.35 var(--serif)}
+.pen{margin-top:10px;font:400 14px/1.5 var(--sans);color:var(--ink3)}
+.micbtn{width:84px;height:84px;border-radius:999px;background:var(--red);display:inline-flex;
+  align-items:center;justify-content:center;transition:transform .15s}
+.micbtn svg{stroke:#fff}
+.micbtn:active{transform:scale(.95)}
+.micbtn.live{animation:micpulse 1.2s ease-out infinite}
+@keyframes micpulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--red) 45%,transparent)}
+  100%{box-shadow:0 0 0 24px transparent}}
+.heard{min-height:30px;margin-top:14px;font-size:21px;line-height:1.4;color:var(--ink3);text-align:center}
+.sylrow{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 5px}
+.syl{display:flex;flex-direction:column;align-items:center;padding:7px 7px 6px;border-radius:10px;min-width:36px}
+.syl .c{font:500 26px/1.1 var(--han)}
+.syl .p{margin-top:4px;font:400 11.5px/1 var(--serif);color:var(--ink3)}
+.syl.ok{background:color-mix(in srgb,var(--sage) 16%,transparent)} .syl.ok .c{color:var(--sage)}
+.syl.near{background:color-mix(in srgb,var(--gold) 20%,transparent)} .syl.near .c{color:var(--gold)}
+.syl.miss{background:color-mix(in srgb,var(--red) 12%,transparent)} .syl.miss .c{color:var(--red)}
+.legend{margin-top:10px;display:flex;justify-content:center;align-items:center;gap:5px;flex-wrap:wrap;
+  font:400 10.5px/1.4 var(--sans);color:var(--ink4)}
+.legend i{width:8px;height:8px;border-radius:2px;display:inline-block;margin-left:6px}
+.legend i.ok{background:var(--sage)} .legend i.near{background:var(--gold)} .legend i.miss{background:var(--red)}
+.sbtns{display:flex;gap:8px;margin-top:14px}
+.sbtns .btn{display:flex;align-items:center;justify-content:center;gap:6px}
+.wq{position:relative;padding:18px 20px 16px;text-align:center}
+.wpy{margin-top:10px;font:400 30px/1.2 var(--serif)}
+.wen{margin-top:6px;font:400 14px/1.5 var(--sans);color:var(--ink2)}
+.wctx{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;
+  justify-content:center;align-items:baseline;gap:4px 10px;font:400 12.5px/1.4 var(--sans);color:var(--ink3)}
+.wctx .han{font-size:20px;color:var(--ink)} .wctx b{color:var(--red);font-weight:400}
+.wctx .wp{font-family:var(--serif);font-size:14px}
+.wsay{position:absolute;top:14px;right:14px}
+.wpad{display:flex;justify-content:center;margin:14px 0 10px}
+.wpad svg{background:var(--card);border:1px solid var(--line);border-radius:18px;touch-action:none;display:block;cursor:crosshair}
+.wpad .grid line{stroke:var(--line2);stroke-width:3;stroke-dasharray:16 14}
+.wpad .grid line.diag{stroke:var(--wash)}
+.wpad .po{fill:color-mix(in srgb,var(--ink) 11%,transparent)}
+.wpad .pd{fill:var(--ink);opacity:0;transition:opacity .2s}
+.wpad .pd.on{opacity:1}
+.wpad .pd.fin{fill:var(--red);transition:fill .5s}
+.wpad .ph{fill:var(--gold);opacity:0;transition:opacity .25s}
+.wpad .ph.on{opacity:.75}
+.wpad .ps{fill:var(--red);opacity:0;transition:opacity .2s}
+.wpad .ps.on{opacity:.55}
+.wpad .ps.on.soft{opacity:.32}
+.wpad .ink{fill:none;stroke:var(--ink2);stroke-width:30;stroke-linecap:round;stroke-linejoin:round}
+.wpad .ink.bad{stroke:var(--red);opacity:0;transition:opacity .35s}
+.wpad.shake svg{animation:shake .3s}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.wstat{text-align:center;font:400 11px/1.4 var(--mono);color:var(--ink4);letter-spacing:.04em;min-height:16px}
+.wtools{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.wtools button{padding:10px 15px;border-radius:11px;background:var(--card);border:1px solid var(--line2);
+  font:500 12.5px/1 var(--sans);color:var(--ink2)}
+.wtools button.solid{background:var(--ink);color:var(--onInk);border-color:var(--ink)}
+.wfin{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;text-align:left}
+.wfin .wbox{cursor:pointer}
