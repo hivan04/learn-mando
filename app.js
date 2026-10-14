@@ -1,5 +1,5 @@
 /* ── Hanzi · offline study app ──────────────────────────────── */
-const BUILD='2026-10-03.1200';
+const BUILD='2026-10-14.2300';
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const DAY=864e5;
 const el=(t,c,h)=>{const n=document.createElement(t);if(c)n.className=c;if(h!=null)n.innerHTML=h;return n};
@@ -52,10 +52,29 @@ let M=loadMine();
 function saveM(){put(slot('mine'),M)}
 const mineCards=()=>M.map(m=>({id:'u:'+m.id,h:m.h,p:m.p,e:m.e,j:m.j,meta:'My own',
   tag:'Mine',long:m.k==='phrase'?1:0,mine:1}));
+/* Bundled notes (data/my-own.js) merge into the first profile's My own,
+   once per entry: anything already there is skipped, and the merged list is
+   remembered so a word deleted in the app stays deleted. */
+function seedMine(){
+  const seed=window.MY_OWN_SEED; if(!Array.isArray(seed)||!PROF.list.length) return 0;
+  if(PROF.active!==PROF.list[0].id) return 0;
+  let done; try{done=new Set(JSON.parse(localStorage.getItem(slot('seeded')))||[])}catch(e){done=new Set()}
+  const have=new Set(M.map(m=>m.h)); let n=0, t=Date.now();
+  for(const s of seed){
+    if(done.has(s.h)) continue; done.add(s.h);
+    if(have.has(s.h)) continue; have.add(s.h);
+    let j=''; try{j=autoJy(s.h)}catch(e){}
+    M.push({id:(t+n).toString(36)+'s',t:t+n,h:s.h,p:s.p,e:s.e,j,k:s.k}); n++;
+  }
+  if(n) saveM();
+  put(slot('seeded'),[...done]);
+  return n;
+}
 const allSents=()=>[...D.notes.sentences,...M.filter(m=>m.k==='phrase')];
 function useProfile(id){
   PROF.active=id; saveProf();
   S=load(slot('settings'),DEF); P=load(slot('progress'),BLANK); M=loadMine();
+  if(D.notes){const n=seedMine(); if(n) setTimeout(()=>toast(n+' notes added to My own'),900)}
   applyTheme(); renderAll(); toast(me().name);
 }
 function newProfileId(){
@@ -2076,7 +2095,7 @@ async function boot(){
   D.hsk.words.forEach(w=>{if(!WORDIDX.has(w.h))WORDIDX.set(w.h,w)});
   D.notes.vocab.forEach(v=>{if(!WORDIDX.has(v.h))WORDIDX.set(v.h,v)});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
-  launchPicker(()=>go('today'));
+  launchPicker(()=>{const n=seedMine(); go('today'); if(n) toast(n+' notes added to My own')});
   if('serviceWorker' in navigator){
     // a deploy activates a new worker; take the fresh code straight away
     let reloading=false;

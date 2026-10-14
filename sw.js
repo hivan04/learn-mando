@@ -4,8 +4,8 @@
    - the dictionary and stroke data are CACHE FIRST, since they're 7MB
      and change rarely
    Bump V whenever the precache list changes. */
-const V = 'hanzi-v7';
-const SHELL = ['./','./index.html','./styles.css','./app.js','./manifest.webmanifest'];
+const V = 'hanzi-v8';
+const SHELL = ['./','./index.html','./styles.css','./app.js','./data/my-own.js','./manifest.webmanifest'];
 const DATA  = ['./data/notes.json','./data/hsk.json',
   './data/strokes-0.json','./data/strokes-1.json','./data/strokes-2.json','./data/strokes-3.json',
   './icons/icon-192.png','./icons/icon-512.png','./icons/icon-180.png'];
