@@ -1,5 +1,5 @@
 /* ── Hanzi · offline study app ──────────────────────────────── */
-const BUILD='2026-10-14.2300';
+const BUILD='2026-10-20.2300';
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const DAY=864e5;
 const el=(t,c,h)=>{const n=document.createElement(t);if(c)n.className=c;if(h!=null)n.innerHTML=h;return n};
@@ -7,10 +7,15 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 
 /* ── state ─────────────────────────────────────────────────── */
 const DEF={deck:'notes',hsk:1,pyIdx:'All',jyutAlways:false,cDeck:'both',cMin:1,cMax:6,week:'all',kind:'vocab',rotate:3,tones:true,theme:'auto',
-           newPerDay:8,reviewLimit:60,libMode:'chars',mineKind:'all',cMine:false};
+           newPerDay:8,reviewLimit:60,libMode:'chars',mineKind:'all',cMine:false,
+           songScript:'s',lyPy:true,lyEn:true,lyLinks:true,lySize:2};
 const BLANK={cards:{},log:{},streak:{n:0,last:null},seen:[],tests:[]};
 function load(k,d){try{return Object.assign(structuredClone(d),JSON.parse(localStorage.getItem(k)||'{}'))}catch(e){return structuredClone(d)}}
-function put(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+// returns false when the browser refuses the write (storage full), and says so once
+let fullWarned=0;
+function put(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){
+  if(Date.now()-fullWarned>5000){fullWarned=Date.now();setTimeout(()=>toast('Storage is full — that change wasn\'t saved. Export a backup in Settings.'),0)}
+  return false}}
 
 /* ── profiles ──────────────────────────────────────────────
    Separate progress per person on this device. The PIN is a
@@ -73,7 +78,7 @@ function seedMine(){
 const allSents=()=>[...D.notes.sentences,...M.filter(m=>m.k==='phrase')];
 function useProfile(id){
   PROF.active=id; saveProf();
-  S=load(slot('settings'),DEF); P=load(slot('progress'),BLANK); M=loadMine();
+  S=load(slot('settings'),DEF); P=load(slot('progress'),BLANK); M=loadMine(); reloadSongs(); IDX=null;
   if(D.notes){const n=seedMine(); if(n) setTimeout(()=>toast(n+' notes added to My own'),900)}
   applyTheme(); renderAll(); toast(me().name);
 }
@@ -199,7 +204,7 @@ function grade(id,g){
   P.seen=[id,...P.seen.filter(x=>x!==id)].slice(0,24);
   saveP();
 }
-const dayKey=(d=new Date())=>d.toISOString().slice(0,10);
+const dayKey=(d=new Date())=>new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
 function bumpStreak(){
   const t=dayKey(), y=dayKey(new Date(Date.now()-DAY));
   if(P.streak.last===t) return;
@@ -294,6 +299,7 @@ function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');
 const I={
   today:'<circle cx="11" cy="11" r="8"/><path d="M11 6.5V11l3 2" stroke-linecap="round"/>',
   library:'<rect x="3.5" y="4" width="15" height="14" rx="2"/><path d="M11 4v14"/>',
+  songs:'<path d="M8.5 16V5.2l9.5-2.2v10.8" stroke-linejoin="round"/><circle cx="6.4" cy="16" r="2.3"/><circle cx="15.9" cy="13.8" r="2.3"/>',
   review:'<rect x="3.5" y="5.5" width="15" height="11" rx="2.5"/><path d="M7.5 11h7" stroke-linecap="round"/>',
   progress:'<rect x="4" y="12" width="3.4" height="6" rx="1"/><rect x="9.3" y="8" width="3.4" height="10" rx="1"/><rect x="14.6" y="4.5" width="3.4" height="13.5" rx="1"/>',
   settings:'<circle cx="11" cy="11" r="3"/><circle cx="11" cy="11" r="7.5" stroke-dasharray="3 3"/>',
@@ -1799,7 +1805,7 @@ function renderSettings(){
       P={cards:{},log:{},streak:{n:0,last:null},seen:[],tests:[]};saveP();renderAll();toast('Progress reset')}};
 }
 function exportP(){
-  const text=JSON.stringify({settings:S,progress:P,mine:M,exported:new Date().toISOString()},null,1);
+  const text=JSON.stringify({settings:S,progress:P,mine:M,songs:SG,exported:new Date().toISOString()},null,1);
   // clipboard always works; the file download only works where the host allows it
   const copy=navigator.clipboard?navigator.clipboard.writeText(text):Promise.reject();
   copy.then(()=>toast('Progress copied to clipboard')).catch(()=>toast('Export ready'));
@@ -1818,7 +1824,8 @@ function importP(){
       if(d.progress)P=Object.assign({cards:{},log:{},streak:{n:0,last:null},seen:[]},d.progress);
       if(d.settings)S=Object.assign(structuredClone(DEF),d.settings);
       if(Array.isArray(d.mine))M=d.mine;
-      saveP();saveS();saveM();applyTheme();renderAll();toast('Progress restored');
+      if(Array.isArray(d.songs)){SG=d.songs;saveSongs()}
+      saveP();saveS();saveM();notesChanged();applyTheme();renderAll();toast('Progress restored');
     }catch(e){toast('Could not read that file')}};
     r.readAsText(f)};
   i.click();
@@ -1863,7 +1870,9 @@ function editProfile(id){
     if(!confirm(`Delete "${p.name}" and all of their progress? This cannot be undone.`)) return;
     try{localStorage.removeItem(`hanzi.${p.id}.settings`);
         localStorage.removeItem(`hanzi.${p.id}.progress`);
-        localStorage.removeItem(`hanzi.${p.id}.mine`)}catch(e){}
+        localStorage.removeItem(`hanzi.${p.id}.mine`);
+        localStorage.removeItem(`hanzi.${p.id}.songs`);localStorage.removeItem(`hanzi.${p.id}.songsig`);
+        localStorage.removeItem(`hanzi.${p.id}.seeded`)}catch(e){}
     PROF.list=PROF.list.filter(x=>x.id!==p.id);
     close();
     if(PROF.active===p.id){ PROF.active=PROF.list[0].id; saveProf(); useProfile(PROF.active) }
@@ -2003,14 +2012,14 @@ function editMine(item,prefill){
     if(isNew){
       M.push(Object.assign({id:Date.now().toString(36),t:Date.now()},rec));
     } else Object.assign(item,rec);
-    saveM(); close();
+    saveM(); close(); notesChanged();
     if(sheetChar) closeSheet();
     renderAll(); toast(isNew?'Added to My own':'Saved');
   };
   const del=$('#mDel',m);
   if(del) del.onclick=()=>{
     if(!confirm(`Delete ${item.h} from My own? Its review history goes too.`)) return;
-    M=M.filter(x=>x!==item); saveM();
+    M=M.filter(x=>x!==item); saveM(); notesChanged();
     delete P.cards['u:'+item.id]; P.seen=P.seen.filter(x=>x!=='u:'+item.id); saveP();
     close(); if(sheetChar) closeSheet(); renderAll(); toast('Deleted');
   };
@@ -2041,7 +2050,7 @@ function launchPicker(done){
     const p=PROF.list.find(x=>x.id===b.dataset.id);
     const enter=()=>{
       PROF.active=p.id; saveProf();
-      S=load(slot('settings'),DEF); P=load(slot('progress'),BLANK); M=loadMine();
+      S=load(slot('settings'),DEF); P=load(slot('progress'),BLANK); M=loadMine(); reloadSongs(); IDX=null;
       m.remove(); applyTheme(); done();
     };
     p.pin ? askPin(p,enter) : enter();
@@ -2049,15 +2058,19 @@ function launchPicker(done){
 }
 
 /* ── nav / boot ────────────────────────────────────────────── */
-const TABS=['today','library','review','test','practice','progress','settings'];
-const TABLBL={today:'Today',library:'Library',review:'Review',test:'Test',practice:'Practice',progress:'Stats',settings:'Settings'};
+// Songs takes Review's place in the bar; Review is still reached from Today
+const TABS=['today','library','songs','test','practice','progress','settings'];
+const SCREENS=[...TABS,'review'];
+const TABLBL={today:'Today',library:'Library',songs:'Songs',review:'Review',test:'Test',practice:'Practice',progress:'Stats',settings:'Settings'};
 let cur='today';
 function go(t){
   cur=t;
-  TABS.forEach(x=>$('#'+x).classList.toggle('on',x===t));
-  $$('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+  SCREENS.forEach(x=>$('#'+x).classList.toggle('on',x===t));
+  $$('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===(t==='review'?'today':t)));
+  if(t!=='songs'&&typeof closeLyrics==='function'&&LY) closeLyrics();
   if(t==='today')renderToday();
   if(t==='library')renderLibrary();
+  if(t==='songs')renderSongs();
   if(t==='review')startReview();
   if(t==='test')renderTest();
   if(t!=='practice')stopPractice();
@@ -2094,7 +2107,8 @@ async function boot(){
   D.hsk.chars.forEach(c=>CHARIDX.set(c.c,c));
   D.hsk.words.forEach(w=>{if(!WORDIDX.has(w.h))WORDIDX.set(w.h,w)});
   D.notes.vocab.forEach(v=>{if(!WORDIDX.has(v.h))WORDIDX.set(v.h,v)});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+  document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;
+    if($('#sheet.on'))closeSheet(); else if($('#phrase.on'))closePhrase(); else if($('#songflow.on'))closeFlow(); else if(LY)closeLyrics()});
   launchPicker(()=>{const n=seedMine(); go('today'); if(n) toast(n+' notes added to My own')});
   if('serviceWorker' in navigator){
     // a deploy activates a new worker; take the fresh code straight away

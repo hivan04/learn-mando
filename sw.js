@@ -4,9 +4,9 @@
    - the dictionary and stroke data are CACHE FIRST, since they're 7MB
      and change rarely
    Bump V whenever the precache list changes. */
-const V = 'hanzi-v8';
-const SHELL = ['./','./index.html','./styles.css','./app.js','./data/my-own.js','./manifest.webmanifest'];
-const DATA  = ['./data/notes.json','./data/hsk.json',
+const V = 'hanzi-v9';
+const SHELL = ['./','./index.html','./styles.css','./app.js','./data/my-own.js','./songs.js','./manifest.webmanifest'];
+const DATA  = ['./data/notes.json','./data/hsk.json','./data/cedict.txt','./vendor/opencc.js',
   './data/strokes-0.json','./data/strokes-1.json','./data/strokes-2.json','./data/strokes-3.json',
   './icons/icon-192.png','./icons/icon-512.png','./icons/icon-180.png'];
 
@@ -25,8 +25,10 @@ self.addEventListener('activate', e => {
   })());
 });
 
+// vendor/ and data/ hold big libraries — cache-first, never re-fetched on every launch
 const isShell = url =>
   url.origin === location.origin &&
+  !/\/(vendor|data)\//.test(url.pathname) &&
   /\.(html|js|css|webmanifest)$|\/$/.test(url.pathname);
 
 self.addEventListener('fetch', e => {
@@ -66,7 +68,9 @@ self.addEventListener('fetch', e => {
       }
       return res;
     } catch (err) {
-      return (await caches.match('./index.html')) || Response.error();
+      // only a page load should fall back to the app; a failed data or
+      // library fetch must fail, not come back as HTML
+      return Response.error();
     }
   })());
 });

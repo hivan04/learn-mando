@@ -22,9 +22,16 @@ screen — no App Store, no developer account, no 7-day expiry, nothing to pay.
 | **Progress** | Streak, 7-day activity, per-level coverage, hardest cards |
 | **Widget** | Optional home-screen widget via Scriptable (free) |
 | **Profiles** | Separate progress per person, chosen at launch, with an optional PIN |
+| **Songs** | Add lyrics by pasting, opening a TXT / LRC / SRT / PDF, or photographing printed lyrics. The app strips timestamps and section labels, then gives every word its pinyin (不 and 一 tone changes shown) and every line an English gloss you check and correct. Words in the HSK lists are underlined; words in your notes or My own are filled gold — tap either for the note, the dictionary entry, and other songs that use it. 简 / 繁 switches script everywhere. No lyrics ship with the app |
 | **My own** | Add your own words and phrases from the Library (+). Pinyin and Jyutping fill in from the dictionary; type `ni3 hao3` for tone marks. They join Review, Test and search, per profile, and travel with Export/Import |
 
 Everything is stored on the device in `localStorage`. Nothing is uploaded anywhere.
+
+**On the English lines in Songs.** Safari has no on-device translator, so each line's
+English starts as a word-by-word dictionary gloss, marked CHECK in the review step for
+you to fix. (If a browser ever offers an installed on-device translator, the app uses it.)
+The PDF reader and photo reader download the first time you use them online (~1.7MB and
+~11MB), then work offline.
 
 **On profiles and the PIN.** Profiles keep two people's streaks and review schedules
 apart on the same device. The PIN stops casual switching; it is not security. The site
@@ -132,6 +139,8 @@ online. Bump the `V` constant at the top of `sw.js` to force the cache to refres
 - **Definitions** — CC-CEDICT, CC-BY-SA 4.0
 - **Stroke data** — Make Me a Hanzi / `hanzi-writer-data`, derived from Arphic PL fonts (Arphic Public License)
 - **Jyutping** — `to-jyutping` (CanCLID), applied to the traditional form of each word
+- **Songs** — CC-CEDICT (CC-BY-SA 4.0) for segmentation, pinyin and glosses (`data/cedict.txt`);
+  OpenCC via `opencc-js`, pdf.js and Tesseract.js with the `chi_sim` / `chi_tra` models, all Apache-2.0 (`vendor/licenses/`)
 
 ### A note on the Jyutping
 
